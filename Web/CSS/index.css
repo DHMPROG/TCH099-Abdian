@@ -1,0 +1,39 @@
+/* Style for the header */
+header {
+    position: fixed; /* Makes the header fixed */
+    top: 0;
+    left: 0;
+    width: 100%; /* Makes the header span the full width of the screen */
+    background: linear-gradient(90deg, #90F4FF 10.1%, #0F4B5A 71.6%); /* Background gradient for the header */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+    display: flex; /* Flexbox for layout */
+    align-items: center; /* Vertically centers items */
+    justify-content: space-between; /* Space between logo and navigation */
+    padding: 10px 20px; /* Adds padding */
+    z-index: 1000; /* Ensures the header is above other elements */
+}
+
+/* Style for the logo */
+header .abdian-logo-2-icon {
+    flex-shrink: 0; /* Prevents the logo from shrinking */
+    width: 100px; /* Sets the width of the logo */
+    height: auto; /* Maintains aspect ratio */
+    font-size: 1rem; /* Adjust font size for the logo */
+    font-weight: bold; /* Makes the logo text bold */
+}
+
+/* Style for the navigation */
+header .navigation {
+    display: flex; /* Flexbox for navigation items */
+    gap: 15px; /* Adds space between navigation items */
+    flex-grow: 1; /* Allows the navigation to grow and shrink */
+    justify-content: flex-end; /* Aligns navigation items to the right */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    header .navigation {
+        flex-wrap: wrap; /* Allows navigation items to wrap */
+        justify-content: center; /* Centers navigation items */
+    }
+}
