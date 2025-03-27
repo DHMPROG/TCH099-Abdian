@@ -415,3 +415,66 @@ FodyWeavers.xsd
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+# Ignore le répertoire vendor (dépendances installées via Composer)
+vendor/
+
+# Ignore les fichiers de configuration locaux
+.env
+.env.local
+.env.*.local
+.phpunit.result.cache
+.phpunit.cache
+phpunit.xml
+phpunit.xml.dist
+
+# Ignore les fichiers de logs
+*.log
+
+# Ignore les fichiers de cache
+cache/
+*.cache
+
+# Ignore les fichiers de configuration IDE
+.idea/
+.vscode/
+
+# Ignore les fichiers de build
+/build/
+
+# Ignore les fichiers générés
+public/assets/
+public/build/
+
+# Ignore les rapports de couverture de code
+coverage/
+coverage-html/
+
+# Ignore les fichiers de session
+*.session
+
+# Ignore les fichiers temporaires
+tmp/
+temp/
+
+# Ignore les fichiers de backup
+*.bak
+*.swp
+
+# Ignore les fichiers générés par le serveur web local
+*.log
+*.pid
+*.seed
+*.sqlite
+
+# Ignore les fichiers spécifiques à Windows
+Thumbs.db
+Desktop.ini
+
+# Ignore les fichiers spécifiques à macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Ignorer les répertoires spécifiques à Symfony
+var/
