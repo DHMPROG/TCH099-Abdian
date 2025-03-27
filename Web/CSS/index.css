@@ -1,39 +1,133 @@
-/* Style for the header */
-header {
-    position: fixed; /* Makes the header fixed */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap');
+body {
+    margin: 0;
+    font-family: "Montserrat-ExtraBold", Helvetica;
+}
+
+
+/* Barre de navigation sticky */
+.barre-du-haut {
+    position: sticky;
     top: 0;
-    left: 0;
-    width: 100%; /* Makes the header span the full width of the screen */
-    background: linear-gradient(90deg, #90F4FF 10.1%, #0F4B5A 71.6%); /* Background gradient for the header */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
-    display: flex; /* Flexbox for layout */
-    align-items: center; /* Vertically centers items */
-    justify-content: space-between; /* Space between logo and navigation */
-    padding: 10px 20px; /* Adds padding */
-    z-index: 1000; /* Ensures the header is above other elements */
+    width: 100%;
+    background: linear-gradient(90deg, #90F4FF 10.1%, #0F4B5A 71.6%);;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
 }
 
-/* Style for the logo */
-header .abdian-logo-2-icon {
-    flex-shrink: 0; /* Prevents the logo from shrinking */
-    width: 100px; /* Sets the width of the logo */
-    height: auto; /* Maintains aspect ratio */
-    font-size: 1rem; /* Adjust font size for the logo */
-    font-weight: bold; /* Makes the logo text bold */
+/* Logo */
+.abdian-logo-2-icon {
+    position: relative;
+    height: 100px;
 }
 
-/* Style for the navigation */
-header .navigation {
-    display: flex; /* Flexbox for navigation items */
-    gap: 15px; /* Adds space between navigation items */
-    flex-grow: 1; /* Allows the navigation to grow and shrink */
-    justify-content: flex-end; /* Aligns navigation items to the right */
+/* Navigation */
+.navigation {
+    position: inherit;
+    display: flex;
+    list-style: none;
+    gap: 20px;
 }
 
-/* Responsive design for smaller screens */
-@media (max-width: 768px) {
-    header .navigation {
-        flex-wrap: wrap; /* Allows navigation items to wrap */
-        justify-content: center; /* Centers navigation items */
+.navigation .bouton {
+    padding: 10px 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 18px;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.navigation .bouton:hover {
+    background-color: darkblue 50%;
+}
+
+/* Style du bouton Se connecter */
+.se-connecter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.generic-avatar-icon {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+/* Contenu pour voir l'effet sticky */
+.content {
+    height: 1500px;
+    padding: 20px;
+    background: #f4f4f4;
+}
+
+.popover-increment{
+    display: flex;
+    flex-direction: column;
+    width: 232px;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 16px;
+    position: relative;
+    background-color: #183c5a;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid;
+    border-color: #1111b3;
+    color: #fff;
+    font-size: 14px;
+}
+
+.popover-increment .row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 50px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+
+}
+.popover-increment .incrementer {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    flex: 0 0 auto;
+}    
+
+.popover-increment .bouton{
+    padding: 8px 16px;
+    background: skyblue;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+.popover-increment .bouton:hover {
+    background-color: darkblue 50%;
+}
+.popover-increment .value {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    margin-top: -1.00px;
+    font-family: "Nunito Sans-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 18px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 16px;
     }
 }
