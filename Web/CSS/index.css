@@ -37,3 +37,11 @@ header .navigation {
         justify-content: center; /* Centers navigation items */
     }
 }
+
+/* Style for navigation links */
+header .navigation a {
+    color: #fff; /* Sets text color to white */
+    text-decoration: none; /* Removes underline */
+    font-weight: bold; /* Makes text bold */
+    transition: color 0.3s; /* Adds smooth color transition */
+}
