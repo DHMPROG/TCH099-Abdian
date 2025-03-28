@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap');
+body {
+    margin: 0;
+    font-family: "Montserrat-ExtraBold", Helvetica;
+    gap: 20px;
+    background: url("../assets/img/Fond\ d\'écran\ inscription.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 400px;
+    padding: 20px;
+    background: linear-gradient(90deg, rgba(15, 75, 90, 0.4) 10.1%, rgba(144, 244, 255, 0.4) 71.6%);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+form input{
+    padding: 10px;
+    border: 0.5px groove #90F4FF;
+    color: white;
+    border-radius: 50px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+    transition: color 0.3s;
+    transition: background 0.3s;
+    background: transparent ;
+}
+form input::placeholder {
+    color: white;
+    opacity: 0.5; /* Opacité du texte de l'espace réservé */
+}
+form input:focus {
+    outline: white;
+    border-color:white;
+}
+
+main{
+    color: #fff;
+    display: flex;
+    align-items: center;
+    align-content: space-around;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+
+
+form input[type="submit"]:hover {
+    color: rgba(15, 75, 90);
+    background: #1cf992dd;
+}
