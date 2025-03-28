@@ -130,5 +130,174 @@ body {
     letter-spacing: 0;
     line-height: 16px;
     }
+
+.aller{
+    background-color: #183c5a;
+    color: white;
+    padding: 20px 20px;
+    border-radius: 8px 0 0 8px;
+
+}
+.arrive{
+    background-color: #183c5a;
+    color: white;
+    padding: 20px 20px;
+    border-radius: 0 0 0 0;
+
+}
+.depart{
+    background-color: #183c5a;
+    color: white;
+    padding: 20px 20px;
+}
+.retour{
+    background-color: #183c5a;
+    color: white;
+    padding: 20px 20px;
+    border-radius: 0 8px 8px 0;
+}
+.recherche1{
+    display: flex;
+    align-items: center;
+    background-color: lightseagreen;
+    padding: 20px 20px;
+    border-radius: 8px;
+    color:white;
+
+}
+.recherche{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background:url('https://ibb.co/BHnBSGwr') no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+
+}
+.recherche input{
+    padding: 10px 20px;
+    background-color: transparent;
+    color: white;
+    border-radius: 8px;
+    border: none;
+}
+.image-destinations{
+    color:white;
+    font-family: "Montserrat-ExtraBold", Helvetica;
+}
+.bora-bora-child {
+    position: absolute;
+    top: 0rem;
+    left: 0rem;
+    border-radius: 15px;
+    width: 26.5rem;
+    height: 20.875rem;
+    object-fit: cover;
+}
+.bora-bora1 {
+    position: absolute;
+    top: 16.313rem;
+    left: 2.063rem;
+    font-weight: 800;
+    text-shadow: 0px 4px 7.5px rgba(0, 0, 0, 0.67);
+    color:white;
+    font-family: "Montserrat-ExtraBold", Helvetica;
+   
+}
+.bora-bora {
+    position: absolute;
+    top: 0rem;
+    left: 0rem;
+    width: 26.5rem;
+    height: 20.875rem;
+    border-radius: 5px;
+}
+.paris1 {
+    position: absolute;
+    top: 16.375rem;
+    left: 2.438rem;
+    font-weight: 800;
+    text-shadow: 0px 4px 7.5px rgba(0, 0, 0, 0.67);
+    color:white;
+    font-family: "Montserrat-ExtraBold", Helvetica;
+}
+.paris {
+    position: absolute;
+    top: 0rem;
+    left: 28.063rem;
+    width: 26.5rem;
+    height: 20.875rem;
+}
+.berne1 {
+    position: absolute;
+    top: 16.313rem;
+    left: 2.438rem;
+    font-weight: 800;
+    text-shadow: 0px 4px 7.5px rgba(0, 0, 0, 0.67);
+    color:white;
+    font-family: "Montserrat-ExtraBold", Helvetica;
+}
+.berne {
+    position: absolute;
+    top: 0rem;
+    left: 56.125rem;
+    width: 26.5rem;
+    height: 20.875rem;
+}
+.alger2 {
+    margin: 0;
+}
+.alger1 {
+    position: absolute;
+    top: 16.375rem;
+    left: 2.313rem;
+    font-weight: 800;
+    display: inline-block;
+    width: 8.938rem;
+    height: 3rem;
+    text-shadow: 0px 4px 7.5px rgba(0, 0, 0, 0.67);
+    color:white;
+    font-family: "Montserrat-ExtraBold", Helvetica;
+}
+.alger {
+    position: absolute;
+    top: 0rem;
+    left: 84.875rem;
+    width: 26.5rem;
+    height: 20.875rem;
+}
+.tokyo1 {
+    position: absolute;
+    top: 16.375rem;
+    left: 2.313rem;
+    font-weight: 800;
+    display: inline-block;
+    width: 9.875rem;
+    height: 3rem;
+    text-shadow: 0px 4px 7.5px rgba(0, 0, 0, 0.67);
+    color:white;
+    font-family: "Montserrat-ExtraBold", Helvetica;
+}
+.tokyo {
+    position: absolute;
+    top: 0rem;
+    left: 113.625rem;
+    width: 26.5rem;
+    height: 20.875rem;
+}
+.image-destinations {
+    width: 100%;
+    position: relative;
+    height: 20.875rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    text-align: left;
+    font-size: var(--font-size-21xl);
+    color: var(--color-white);
+    font-family: var(--font-montserrat);
 }
 
