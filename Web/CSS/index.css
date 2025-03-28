@@ -2,6 +2,9 @@
 body {
     margin: 0;
     font-family: "Montserrat-ExtraBold", Helvetica;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -9,7 +12,6 @@ body {
 .barre-du-haut {
     position: sticky;
     top: 0;
-    width: 100%;
     background: linear-gradient(90deg, #90F4FF 10.1%, #0F4B5A 71.6%);;
     color: white;
     display: flex;
@@ -32,6 +34,7 @@ body {
     display: flex;
     list-style: none;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 .navigation .bouton {
@@ -120,8 +123,6 @@ body {
 .popover-increment .value {
     position: relative;
     width: 32px;
-    height: 32px;
-    margin-top: -1.00px;
     font-family: "Nunito Sans-Regular", Helvetica;
     font-weight: 400;
     color: #ffffff;
@@ -169,12 +170,13 @@ body {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: flex-end;
     gap: 10px;
     padding: 10px 20px;
-    background:url('https://ibb.co/BHnBSGwr') no-repeat;
+    background:url(../assets/img/Rectangle\ 2.png);
     background-size: cover;
-    background-position: center;
-    border-radius: 8px;
+    background-position: top 40%;
+    border-radius: 0 0 8px 8px;
 
 }
 .recherche input{
@@ -289,7 +291,6 @@ body {
     height: 20.875rem;
 }
 .image-destinations {
-    width: 100%;
     position: relative;
     height: 20.875rem;
     overflow-x: auto;
@@ -300,4 +301,52 @@ body {
     color: var(--color-white);
     font-family: var(--font-montserrat);
 }
+.nombre-de-passagers{
+    color: white;
+    text-shadow: 0px 4px 7.5px rgba(0, 0, 0, 0.98); 
+    font-family: "Montserrat-ExtraBold", Helvetica;
+    font-size: 16px;
+    font-weight: 40;
+}
 
+main{
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: flex-end;
+    align-items: stretch;
+}
+.nb-passagers{
+    display: flex;
+     align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+}
+
+footer{
+    background: linear-gradient(90deg, #0F4B5A 10.1% ,#90F4FF 71.6% );
+    color:white;
+    padding: 20px 20px;
+    border-radius: 8px;
+    display: flex;
+}
+
+footer .group{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   padding: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.67);
+}
+footer .abdian-logo-1-icon{
+    position: relative;
+    height: 75px;
+    margin-right: 20px;
+}
