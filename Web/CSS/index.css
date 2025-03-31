@@ -2,6 +2,37 @@
 body {
     margin: 0;
     font-family: "Montserrat-ExtraBold", Helvetica;
+<<<<<<< HEAD
+=======
+}
+
+
+/* Barre de navigation sticky */
+.barre-du-haut {
+    position: sticky;
+    top: 0;
+    background: linear-gradient(90deg, #90F4FF 10.1%, #0F4B5A 71.6%);;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+/* Logo */
+.abdian-logo-2-icon {
+    position: relative;
+    height: 80px;
+}
+
+/* Navigation */
+.navigation {
+    position: inherit;
+    display: flex;
+    list-style: none;
+>>>>>>> 242f936 (test)
     gap: 20px;
     display: flex;
     flex-direction: column;
@@ -251,6 +282,7 @@ body {
     font-weight: 40;
 }
 
+<<<<<<< HEAD
 main{
     display: flex;
     gap: 20px;
@@ -267,3 +299,142 @@ main{
     flex-wrap: nowrap;
     align-content: center;
 }
+=======
+
+/*Footer*/
+
+
+.footer {
+    background: linear-gradient(90deg, #98e3ec, #114554);
+    color: white;
+    padding: 40px 80px;
+    font-family: 'Poppins', sans-serif;
+    height: 100px;
+  }
+  
+  .footer .rectangle-parent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  
+  .footer .abdian-logo-1-icon {
+    width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .abdian-les-meilleures-destina-wrapper {
+    max-width: 300px;
+    font-size: 14px;
+    color: white;
+    margin-top: 10px;
+    line-height: 1.6;
+  }
+  
+  .group {
+    display: flex;
+    gap: 80px;
+  }
+  
+  .legal-terms-container,
+  .company-about-us-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14px;
+  }
+  
+  .legal-terms-container p,
+  .company-about-us-container p {
+    margin: 0;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .legal-terms-container b,
+  .company-about-us-container b {
+    font-size: 16px;
+    color: white;
+  }
+  
+  .group1 {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .group1 img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .group1 img:hover {
+    transform: scale(1.2);
+  }
+
+  /*footer merci*/
+
+  .coordonnees {
+    background: linear-gradient(90deg, #98e3ec, #114554);
+    color: white;
+    padding: 40px 80px;
+    font-family: 'Poppins', sans-serif;
+    position: sticky;
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .merci-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+  }
+
+  .carte-merci {
+    background: rgba(255, 255, 255, 0.30); /* blanc avec 85% d'opacité */
+    padding: 40px;
+    max-width: 600px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+
+  .coordonnees {
+    background: linear-gradient(90deg, #98e3ec, #114554);
+    text-align: center;
+    font-weight: 700;
+    color: white;
+    font-size: 16px;
+    padding: 30px 20px;
+  }
+
+  .coordonnees a {
+    color: white;
+    text-decoration: underline;
+  }
+
+  /* body */
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  main {
+    flex: 1;
+  }
+  
+  
+
+>>>>>>> 242f936 (test)
