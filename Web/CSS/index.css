@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap');
 body {
     margin: 0;
-    font-family: "Montserrat-ExtraBold", Helvetica;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     gap: 20px;
     display: flex;
     flex-direction: column;
@@ -9,7 +9,6 @@ body {
 
 
 .popover-increment{
-    display: flex;
     flex-direction: column;
     width: 232px;
     align-items: flex-start;
@@ -266,4 +265,8 @@ main{
     flex-direction: column;
     flex-wrap: nowrap;
     align-content: center;
+}
+
+@media screen {
+    
 }
