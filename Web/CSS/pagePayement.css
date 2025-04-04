@@ -1,0 +1,212 @@
+
+.container {
+    display: flex;
+    max-width: 1200px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: 20px;
+}
+
+.payment-section {
+    flex: 1;
+    padding: 40px;
+    border-right: 1px solid #eee;
+}
+
+h2 {
+    color: #2d3748;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.subtitle {
+    color: #718096;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.payment-methods {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.payment-method {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    color: #4a5568;
+}
+
+.payment-method:hover {
+    border-color: #667eea;
+}
+
+.payment-method.active {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-checkbox {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.cvv-tooltip {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    color: #4a5568;
+    font-size: 12px;
+    margin-left: 8px;
+    cursor: help;
+}
+
+.summary-section {
+    width: 400px;
+    padding: 40px;
+    background: #f8fafc;
+}
+
+.flight-details {
+    margin-bottom: 30px;
+}
+
+.flight-item {
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.airline-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.airline-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.flight-text h3 {
+    font-size: 16px;
+    color: #2d3748;
+    margin-bottom: 4px;
+}
+
+.flight-text p {
+    font-size: 14px;
+    color: #718096;
+}
+
+.flight-time {
+    font-size: 14px;
+    color: #4a5568;
+}
+
+.duration {
+    color: #718096;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.price-summary {
+    margin-bottom: 30px;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #4a5568;
+}
+
+.price-row.total {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #e2e8f0;
+    font-weight: 600;
+    font-size: 16px;
+    color: #2d3748;
+}
+
+.confirm-button {
+    width: 100%;
+    padding: 15px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.confirm-button:hover {
+    background: #5a67d8;
+}
+
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    .payment-section {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .summary-section {
+        width: 100%;
+    }
+} 

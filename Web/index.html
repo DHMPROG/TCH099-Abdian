@@ -17,13 +17,12 @@
 
 
 
-
 </head>
 
 <body>
 	<header>
 		<nav class="barre-du-haut">
-		<img class="abdian-logo-2-icon" src="assets/img/Abidan_logo.png" alt="Logo">
+		<img class="abdian-logo-2-icon" src="assets/img/Abidan_logo.png" alt="Logo" href="index.html">
 
 		<div class="navigation">
 			<a href="index.html" class="bouton">Accueil</a>
@@ -38,7 +37,7 @@
   </header>
 
 	<main>
-		<form class="recherche" action="recherche-vols.html" method="GET">
+		<form class="recherche" action="pageRechercheVols.html" method="GET">
 			<div class="aller">
 				<div class="aller-child"></div>
 				<div class="tab">
@@ -71,25 +70,25 @@
 					<div class="row">
 						<div class="label2">Adultes:</div>
 						<div class="incrementer">
-							<button type="button" class="bouton">-</button>
-							<div class="value">1</div>
-							<button type="button" class="bouton">+</button>
+							<button type="button" class="bouton minus-btn" onclick="updateValue(false,'#adulte', 0)">-</button>
+							<div class="value" id="adulte">1</div>
+							<button type="button" class="bouton plus-btn" onclick="updateValue(true,'#adulte', 0)">+</button>
 						</div>
 					</div>
 					<div class="row">
 						<div class="label2">Enfants:</div>
 						<div class="incrementer">
-							<button type="button" class="bouton">-</button>
-							<div class="value">1</div>
-							<button type="button" class="bouton">+</button>
+							<button type="button" class="bouton minus-btn" onclick="updateValue(false, '#enfant', 1)">-</button>
+							<div class="value", id="enfant">1</div>
+							<button type="button" class="bouton plus-btn"onclick="updateValue(true,'#enfant', 1)">+</button>
 						</div>
 					</div>
 					<div class="row">
 						<div class="label2">Bébés:</div>
 						<div class="incrementer">
-							<button type="button" class="bouton">-</button>
-							<div class="value">1</div>
-							<button type="button" class="bouton">+</button>
+							<button type="button" class="bouton minus-btn" onclick="updateValue(false,'#bebe', 2)">-</button>
+							<div class="value" id="bebe">1</div>
+							<button type="button" class="bouton plus-btn" onclick="updateValue(true,'#bebe', 2)">+</button>
 						</div>
 					</div>
 				</div>
@@ -168,6 +167,25 @@
 		</div>
 </footer>
 
+<script>
+function updateValue(isIncrement, idName, indexButton) {
+    const valueElement = document.querySelector(idName);
+	let currentValue = parseInt(valueElement.textContent, 10) || 0;
+	 // Use the idName directly
+	if (!valueElement) return console.log('Id non trouvé'); // Ensure the element exists
+    if (valueElement) {
+        currentValue += isIncrement ? 1 : -1;
+        valueElement.textContent = currentValue;
+		document.getElementsByClassName('minus-btn')[indexButton].disabled = false;
+    }
+	if (currentValue <= 0) {
+		document.getElementsByClassName('minus-btn')[indexButton].disabled = true;
+		currentValue += isIncrement ? 1 : 0; // Prevent negative values
+		valueElement.textContent = currentValue;
+	}
+}
+
+</script>
 </body>
 
 </html>

@@ -9,6 +9,7 @@ body {
 
 
 .popover-increment{
+    display: flex;
     flex-direction: column;
     width: 232px;
     align-items: flex-start;
@@ -57,6 +58,10 @@ body {
 }
 .popover-increment .bouton:active {
     background-color: #90F4FF;
+}
+.popover-increment .bouton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }
 .popover-increment .value {
     position: relative;
@@ -270,3 +275,4 @@ main{
 @media screen {
     
 }
+

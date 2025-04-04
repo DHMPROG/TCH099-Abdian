@@ -11,16 +11,12 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
-    <script type="module" src="./Scripts/PageVols.js"></script>
+    
   </head>
   <body>
     <header>
       <nav class="barre-du-haut">
-        <img
-          class="abdian-logo-2-icon"
-          src="assets/img/Abidan_logo.png"
-          alt="Logo"
-        />
+        <img class="abdian-logo-2-icon" src="assets/img/Abidan_logo.png" alt="Logo" href="index.html">
 
         <div class="navigation">
           <a href="index.html" class="bouton">Accueil</a>
@@ -41,8 +37,8 @@
     <main class="main">
       <div class="container">
         <div class="page-header">
-          <h1>Flight Results</h1>
-          <p>New York (JFK) to London (LHR) • Oct 12, 2023</p>
+          <h1>Résultats des vols</h1>
+          <p>New York (JFK) vers Londres (LHR) • 12 Octobre 2023</p>
         </div>
 
         <div class="search-bar">
@@ -53,7 +49,7 @@
                   <i class="fas fa-map-marker-alt"></i>
                 </div>
                 <div>
-                  <div class="label">From</div>
+                  <div class="label">De</div>
                   <div class="value">New York (JFK)</div>
                 </div>
               </div>
@@ -67,8 +63,8 @@
                   <i class="fas fa-map-marker-alt"></i>
                 </div>
                 <div>
-                  <div class="label">To</div>
-                  <div class="value">London (LHR)</div>
+                  <div class="label">Vers</div>
+                  <div class="value">Londres (LHR)</div>
                 </div>
               </div>
 
@@ -77,8 +73,8 @@
                   <i class="fas fa-calendar"></i>
                 </div>
                 <div>
-                  <div class="label">Departure</div>
-                  <div class="value">Oct 12, 2023</div>
+                  <div class="label">Départ</div>
+                  <div class="value">12 Octobre 2023</div>
                 </div>
               </div>
 
@@ -87,19 +83,19 @@
                   <i class="fas fa-users"></i>
                 </div>
                 <div>
-                  <div class="label">Passengers</div>
-                  <div class="value">1 Adult</div>
+                  <div class="label">Passagers</div>
+                  <div class="value">1 Adulte</div>
                 </div>
               </div>
             </div>
-            <button class="btn btn-accent">Modify Search</button>
+            <button class="btn btn-accent">Modifier la recherche</button>
           </div>
         </div>
 
         <div class="content-wrapper">
           <aside class="filter-panel">
             <div class="filter-section">
-              <h3>Sort by</h3>
+              <h3>Trier par</h3>
               <div class="radio-group">
                 <div class="radio-item">
                   <input
@@ -109,7 +105,7 @@
                     value="price"
                     checked
                   />
-                  <label for="price">Price (Lowest)</label>
+                  <label for="price">Prix (le plus bas)</label>
                 </div>
                 <div class="radio-item">
                   <input
@@ -118,7 +114,7 @@
                     name="sort"
                     value="duration"
                   />
-                  <label for="duration">Duration (Shortest)</label>
+                  <label for="duration">Durée (la plus courte)</label>
                 </div>
                 <div class="radio-item">
                   <input
@@ -127,7 +123,7 @@
                     name="sort"
                     value="departure"
                   />
-                  <label for="departure">Departure (Earliest)</label>
+                  <label for="departure">Départ (le plus tôt)</label>
                 </div>
                 <div class="radio-item">
                   <input
@@ -136,7 +132,7 @@
                     name="sort"
                     value="arrival"
                   />
-                  <label for="arrival">Arrival (Earliest)</label>
+                  <label for="arrival">Arrivée (la plus tôt)</label>
                 </div>
               </div>
             </div>
@@ -144,7 +140,7 @@
             <div class="separator"></div>
 
             <div class="filter-section">
-              <h3>Price range</h3>
+              <h3>Plage de prix</h3>
               <div class="slider-container">
                 <input
                   type="range"
@@ -155,9 +151,9 @@
                   id="priceRange"
                 />
                 <div class="slider-labels">
-                  <span>$0</span>
-                  <span id="priceValue">$750</span>
-                  <span>$2,000+</span>
+                  <span>0 €</span>
+                  <span id="priceValue">750 €</span>
+                  <span>2 000 €+</span>
                 </div>
               </div>
             </div>
@@ -165,7 +161,7 @@
             <div class="separator"></div>
 
             <div class="filter-section">
-              <h3>Stops</h3>
+              <h3>Escales</h3>
               <div class="checkbox-group">
                 <div class="checkbox-item">
                   <input
@@ -174,7 +170,7 @@
                     name="stops"
                     value="nonstop"
                   />
-                  <label for="nonstop">Nonstop (10)</label>
+                  <label for="nonstop">Sans escale (10)</label>
                 </div>
                 <div class="checkbox-item">
                   <input
@@ -184,7 +180,7 @@
                     value="1"
                     checked
                   />
-                  <label for="1stop">1 Stop (24)</label>
+                  <label for="1stop">1 Escale (24)</label>
                 </div>
                 <div class="checkbox-item">
                   <input
@@ -194,7 +190,7 @@
                     value="2"
                     checked
                   />
-                  <label for="2stops">2+ Stops (5)</label>
+                  <label for="2stops">2+ Escales (5)</label>
                 </div>
               </div>
             </div>
@@ -202,7 +198,7 @@
             <div class="separator"></div>
 
             <div class="filter-section">
-              <h3>Airlines</h3>
+              <h3>Compagnies aériennes</h3>
               <div class="checkbox-group">
                 <div class="checkbox-item">
                   <input
@@ -249,22 +245,22 @@
             <div class="separator"></div>
 
             <div class="filter-section">
-              <h3>Departure time</h3>
+              <h3>Heure de départ</h3>
               <div class="time-filters">
                 <div class="time-filter-item" data-time="6-12">
-                  <div class="time-label">Morning</div>
+                  <div class="time-label">Matin</div>
                   <div class="time-range">6:00 - 12:00</div>
                 </div>
                 <div class="time-filter-item" data-time="12-18">
-                  <div class="time-label">Afternoon</div>
+                  <div class="time-label">Après-midi</div>
                   <div class="time-range">12:00 - 18:00</div>
                 </div>
                 <div class="time-filter-item" data-time="18-24">
-                  <div class="time-label">Evening</div>
+                  <div class="time-label">Soir</div>
                   <div class="time-range">18:00 - 24:00</div>
                 </div>
                 <div class="time-filter-item" data-time="0-6">
-                  <div class="time-label">Night</div>
+                  <div class="time-label">Nuit</div>
                   <div class="time-range">00:00 - 6:00</div>
                 </div>
               </div>
@@ -274,11 +270,11 @@
           <div class="results-container">
             <div class="results-header">
               <div class="results-summary">
-                <span class="results-count">39 flights found</span> • Oct 12,
-                2023 • 1 adult
+                <span class="results-count">39 vols trouvés</span> • 12 Octobre
+                2023 • 1 adulte
               </div>
               <div class="currency-selector">
-                <span>Currency:</span>
+                <span>Devise :</span>
                 <select>
                   <option>USD</option>
                   <option>EUR</option>
@@ -289,16 +285,16 @@
 
             <div class="flights-list-wrapper">
               <div class="flights-list" id="flightsList">
-                <!-- Flight cards will be dynamically inserted here -->
+                <!-- Les cartes de vol seront insérées dynamiquement ici -->
               </div>
 
               <div id="flightSummary" class="flight-summary">
-                <!-- Flight summary will be populated dynamically -->
+                <!-- Le résumé du vol sera rempli dynamiquement -->
               </div>
             </div>
 
             <div class="load-more">
-              <button class="btn btn-load-more">Load more flights</button>
+              <button class="btn btn-load-more">Charger plus de vols</button>
             </div>
           </div>
         </div>
@@ -345,5 +341,6 @@
         </div>
       </div>
     </footer>
+    <script type="module" src="./Scripts/PageVols.js"></script>
   </body>
 </html>
