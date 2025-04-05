@@ -11,6 +11,10 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito Sans:wght@400&display=swap" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Satoshi:wght@400;700&display=swap" />
+	<link
+	rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
 	<link rel="stylesheet" href="./CSS/index.css" />
 	<link rel="stylesheet" href="./CSS/header.css"/>
 	<link rel="stylesheet" href="./CSS/footer.css" />
@@ -22,7 +26,7 @@
 <body>
 	<header>
 		<nav class="barre-du-haut">
-		<img class="abdian-logo-2-icon" src="assets/img/Abidan_logo.png" alt="Logo" href="index.html">
+		<a href="index.html"><img class="abdian-logo-2-icon" src="assets/img/Abidan_logo.png" alt="Logo"></a>
 
 		<div class="navigation">
 			<a href="index.html" class="bouton">Accueil</a>
@@ -127,6 +131,10 @@
 					<div class="tokyo1">TOKYO</div>
 				</div>
 			</div>
+			<div class="scroll-buttons">
+				<div class="scroll-left fa-solid fa-arrow-left" onclick="allerAGauche()"></div>
+				<div class="scroll-right fa-solid fa-arrow-right" onclick="scrollRight()"></div>
+			</div>
 
 	</main>
 	<footer>
@@ -184,7 +192,20 @@ function updateValue(isIncrement, idName, indexButton) {
 		valueElement.textContent = currentValue;
 	}
 }
-
+function allerAGauche() {
+    const container = document.querySelector('.image-destinations');
+    container.scrollBy({
+      left: -300, // distance à défiler en px
+      behavior: 'smooth'
+    });
+  }
+function scrollRight() {
+    const container = document.querySelector('.image-destinations');
+    container.scrollBy({
+      left: 300, // distance à défiler en px
+      behavior: 'smooth'
+    });
+  }
 </script>
 </body>
 

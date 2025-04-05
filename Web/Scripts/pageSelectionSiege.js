@@ -1,194 +1,185 @@
-$(document).ready(function() {
-    // Initial setup
-    let selectedSeat = "4A"; // Starting with pre-selected seat 4A
-    let selectedCabinClass = "economy"; // Starting with economy class
-    let upgradeRequested = false;
-    
-    // Update the UI to reflect initial state
+$(document).ready(function () {
+  let selectedSeat = "4A";
+  let selectedCabinClass = "economy";
+  let upgradeRequested = false;
+
+  updateSelectedSeatDisplay();
+  updateCabinClassDisplay();
+
+  $(".seat").on("click", function () {
+    const $seat = $(this);
+
+    if ($seat.hasClass("occupied") || $seat.hasClass("unavailable")) {
+      return;
+    }
+
+    if ($seat.hasClass("premium") && !upgradeRequested) {
+      showUpgradeModal();
+      return;
+    }
+
+    $(".seat.selected").removeClass("selected").html("");
+
+    $seat.addClass("selected").html('<i class="fas fa-check"></i>');
+    selectedSeat = $seat.data("seat");
+
     updateSelectedSeatDisplay();
-    updateCabinClassDisplay();
-    
-    // Select a seat
-    $(".seat").on("click", function() {
-      const $seat = $(this);
-      
-      // Don't allow selection of occupied or unavailable seats
-      if ($seat.hasClass("occupied") || $seat.hasClass("unavailable")) {
-        return;
-      }
-      
-      // If it's a premium seat and user hasn't upgraded
-      if ($seat.hasClass("premium") && !upgradeRequested) {
-        showUpgradeModal();
-        return;
-      }
-      
-      // Deselect previously selected seat
-      $(".seat.selected").removeClass("selected").html("");
-      
-      // Select the new seat
-      $seat.addClass("selected").html('<i class="fas fa-check"></i>');
-      selectedSeat = $seat.data("seat");
-      
-      // Update the display
-      updateSelectedSeatDisplay();
-      
-      // Simulate AJAX call to update seat selection on server
-      simulateAjaxRequest({
-        action: "selectSeat",
-        seat: selectedSeat,
-        cabin: selectedCabinClass
-      });
+
+    AjaxRequest({
+      action: "selectSeat",
+      seat: selectedSeat,
+      cabin: selectedCabinClass
     });
-    
-    // Toggle cabin class
-    $(".cabin-option").on("click", function() {
-      const $cabin = $(this);
-      const cabinType = $cabin.attr("id");
-      
-      // If the same cabin is clicked again, do nothing
-      if (cabinType === selectedCabinClass) {
-        return;
-      }
-      
-      // Update selected cabin
-      $(".cabin-option").removeClass("active");
-      $cabin.addClass("active");
-      selectedCabinClass = cabinType;
-      
-      // If switching to business, auto-upgrade
-      if (cabinType === "business" && !upgradeRequested) {
-        upgradeRequested = true;
-      }
-      
-      updateCabinClassDisplay();
-      
-      // Simulate AJAX call to update cabin selection on server
-      simulateAjaxRequest({
-        action: "selectCabin",
-        cabin: selectedCabinClass
-      });
-    });
-    
-    // Handle upgrade modal
-    $("#cancelUpgradeBtn").on("click", function() {
-      hideUpgradeModal();
-    });
-    
-    $("#confirmUpgradeBtn").on("click", function() {
-      // Apply upgrade
+  });
+
+  $(".cabin-option").on("click", function () {
+    const $cabin = $(this);
+    const cabinType = $cabin.attr("id");
+
+    if (cabinType === selectedCabinClass) {
+      return;
+    }
+
+    $(".cabin-option").removeClass("active");
+    $cabin.addClass("active");
+    selectedCabinClass = cabinType;
+
+    if (cabinType === "business" && !upgradeRequested) {
       upgradeRequested = true;
-      hideUpgradeModal();
-      
-      // Switch to business class
-      $(".cabin-option").removeClass("active");
-      $("#business").addClass("active");
-      selectedCabinClass = "business";
-      updateCabinClassDisplay();
-      
-      // Simulate AJAX call to process upgrade
-      simulateAjaxRequest({
-        action: "upgradeClass",
-        cabin: "business",
-        payment: "199"
-      });
+    }
+
+    updateCabinClassDisplay();
+
+    AjaxRequest({
+      action: "selectCabin",
+      cabin: selectedCabinClass
     });
-    
-    // Action buttons
-    $("#saveBtn").on("click", function() {
-      // Simulate saving and redirect
-      simulateAjaxRequest({
+
+    if (selectedCabinClass === "economy") {
+      $(".seat.business-seat").removeClass("available").addClass("unavailable");
+      $(".seat.economy-seat").removeClass("unavailable").addClass("available");
+    } else if (selectedCabinClass === "business") {
+      $(".seat.business-seat").removeClass("unavailable").addClass("available");
+      $(".seat.economy-seat").removeClass("available").addClass("unavailable");
+    }
+
+    // Deselect the seat if it becomes unavailable
+    const $selectedSeat = $(".seat.selected");
+    if ($selectedSeat.hasClass("unavailable")) {
+      $selectedSeat.removeClass("selected").html("");
+      selectedSeat = null;
+      updateSelectedSeatDisplay();
+    }
+  });
+
+  $("#cancelUpgradeBtn").on("click", function () {
+    hideUpgradeModal();
+  });
+
+  $("#confirmUpgradeBtn").on("click", function () {
+    upgradeRequested = true;
+    hideUpgradeModal();
+
+    $(".cabin-option").removeClass("active");
+    $("#business").addClass("active");
+    selectedCabinClass = "business";
+    updateCabinClassDisplay();
+
+    AjaxRequest({
+      action: "upgradeClass",
+      cabin: "business",
+      payment: "199"
+    });
+  });
+
+  $("#saveBtn").on("click", function () {
+    AjaxRequest(
+      {
         action: "saveSeatSelection",
         seat: selectedSeat,
         cabin: selectedCabinClass
-      }, function() {
-        alert("Your seat selection has been saved!");
-      });
-    });
-    
-    $("#nextBtn").on("click", function() {
-      // Simulate proceed to next step
-      simulateAjaxRequest({
+      },
+      function () {
+        alert("Votre sélection de siège a été enregistrée !");
+      }
+    );
+  });
+
+  $("#nextBtn").on("click", function () {
+    AjaxRequest(
+      {
         action: "proceedToPayment",
         seat: selectedSeat,
         cabin: selectedCabinClass
-      }, function() {
-        // Change button text based on selected cabin
-        if (selectedCabinClass === "business") {
-          $("#nextBtn").text("Payment method");
-        } else {
-          $("#nextBtn").text("Next flight");
-        }
-        alert("Proceeding to the next step!");
-      });
-    });
-    
-    // Helper functions
-    function updateSelectedSeatDisplay() {
-      $("#selected-seat").text(selectedSeat);
-    }
-    
-    function updateCabinClassDisplay() {
-      // Update the UI based on cabin class
-      if (selectedCabinClass === "business") {
-        // Show premium seats as available if upgraded
-        $(".premium").addClass("available").removeClass("unavailable");
-        $("#nextBtn").text("Payment method");
-      } else {
-        // Show premium seats as unavailable if not upgraded
-        if (!upgradeRequested) {
-          $(".premium:not(.selected)").removeClass("available").addClass("unavailable");
-        }
-        $("#nextBtn").text("Next flight");
-      }
-    }
-    
-    function showUpgradeModal() {
-      $("#upgradeModal").css("display", "block");
-      $("#overlay").css("display", "block");
-    }
-    
-    function hideUpgradeModal() {
-      $("#upgradeModal").css("display", "none");
-      $("#overlay").css("display", "none");
-    }
-    
-    // Simulate AJAX request
-    function AjaxRequest(data, callback) {
-      $.ajax({
-        url: "/api/seats",
-        type: "POST",
-        data: JSON.stringify(data),
-        contentType: "application/json",
-        success: function(response) {
-          console.log("Server response:", response);
-          if (callback) callback(response);
-        },
-        error: function(error) {
-          console.error("Error:", error);
-        }
-      });
-
-    }
-    
-    // Add hover effects for better UX
-    $(".seat.available").hover(
-      function() {
-        const seatId = $(this).data("seat");
-        $(this).append('<div class="seat-tooltip">' + seatId + '</div>');
       },
-      function() {
-        $(this).find(".seat-tooltip").remove();
+      function () {
+        if (selectedCabinClass === "business") {
+          $("#nextBtn").text("Méthode de paiement");
+        } else {
+          $("#nextBtn").text("Vol suivant");
+        }
+        alert("Passage à l'étape suivante !");
       }
     );
-    
-    // Initialize additional rows dynamically (for demo purpose)
-    initializeMoreRows();
-    
-    function initializeMoreRows() {
-      // This would populate the remaining rows of the airplane
-      // For a real application, this data would come from an API
-      console.log("Additional rows would be initialized here");
-    }
   });
+
+  function updateSelectedSeatDisplay() {
+    $("#selected-seat").text(selectedSeat);
+  }
+
+  function updateCabinClassDisplay() {
+    if (selectedCabinClass === "business") {
+      $(".premium").addClass("available").removeClass("unavailable");
+      $("#nextBtn").text("Méthode de paiement");
+    } else {
+      if (!upgradeRequested) {
+        $(".premium:not(.selected)").removeClass("available").addClass("unavailable");
+      }
+      $("#nextBtn").text("Vol suivant");
+    }
+  }
+
+  function showUpgradeModal() {
+    $("#upgradeModal").css("display", "block");
+    $("#overlay").css("display", "block");
+  }
+
+  function hideUpgradeModal() {
+    $("#upgradeModal").css("display", "none");
+    $("#overlay").css("display", "none");
+  }
+
+  function AjaxRequest(data, callback) {
+    $.ajax({
+      url: "/api/seats",
+      type: "POST",
+      data: JSON.stringify(data),
+      contentType: "application/json",
+      success: function (response) {
+        console.log("Réponse du serveur :", response);
+        if (callback) callback(response);
+      },
+      error: function (error) {
+        console.error("Erreur :", error);
+      }
+    });
+  }
+
+  $(".seat.available").hover(
+    function () {
+      const seatId = $(this).data("seat");
+      $(this).append('<div class="seat-tooltip">' + seatId + '</div>');
+    },
+    function () {
+      $(this).find(".seat-tooltip").remove();
+    }
+  );
+
+  initializeMoreRows();
+
+  function initializeMoreRows() {
+    console.log("Les rangées supplémentaires seraient initialisées ici");
+  }
+});
+
   
