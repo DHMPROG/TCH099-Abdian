@@ -328,8 +328,19 @@ function setupPriceRangeSlider() {
 
 // Configurer les écouteurs d'événements pour le tri
 function setupSorting() {
-  // ... garder le code existant (écouteurs d'événements pour le tri)
+  sortBySelectors.forEach(selector => {
+    selector.addEventListener('change', function() {
+      currentSortBy = this.value;
+      sortFlights(currentSortBy);
+    });
+  });
+  // Appliquer le tri initial
+  sortFlights(currentSortBy);
+
 }
+
+
+
 
 // Configurer les écouteurs d'événements
 function setupEventListeners() {

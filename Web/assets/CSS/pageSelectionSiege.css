@@ -170,7 +170,7 @@
   
   .exit-row-label {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   font-size: 0.75rem;
@@ -226,7 +226,6 @@
   }
   
   .premium {
-  background-color: var(--premium-seat);
   border: 2px solid var(--secondary-dark);
   color: var(--white);
   }
