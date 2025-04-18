@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Satoshi:wght@400;700&display=swap" />
 		<link rel="stylesheet" href="./CSS/index.css"/>
 
+<<<<<<< Updated upstream
 		
         
         
@@ -35,27 +36,83 @@
   
 	<main>
 		<div class="recherche">
+=======
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1, width=device-width">
+	<title>Accueil - Abdian</title>
+
+
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito Sans:wght@400&display=swap" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Satoshi:wght@400;700&display=swap" />
+	<link
+	rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+	<link rel="stylesheet" href="./assets/CSS/index.css" />
+	<link rel="stylesheet" href="./assets/CSS/header.css"/>
+	<link rel="stylesheet" href="./assets/CSS/footer.css" />
+
+
+
+</head>
+
+<body>
+	<header>
+		<nav class="barre-du-haut">
+		<a href="index.html"><img class="abdian-logo-2-icon" src="assets/img/Abidan_logo.png" alt="Logo"></a>
+  
+	
+		<div class="navigation">
+		  <a href="index.html" class="bouton">Accueil</a>
+		  <a href="destinations.html" class="bouton">Destinations</a>
+		  <a href="contact.html" class="bouton">Contact</a>
+		  <a href="Page de Connexion.html" class="bouton se-connecter">
+			<img class="generic-avatar-icon" src="assets/img/Generic avatar.png" alt="Avatar">
+			Se connecter
+		  </a>
+		</div>
+	  </nav>
+	</header>
+
+
+	<main>
+		<form class="recherche" id="searchForm" action="pageRechercheVols.html" method="GET">
+>>>>>>> Stashed changes
 			<div class="aller">
 				  <div class="aller-child">
 				  </div>
 				  <div class="tab">
 					<b class="de">De</b>
+<<<<<<< Updated upstream
 					  <input type="text" class="text_area" placeholder="Ville de Départ">
 				  </div>
 				  
+=======
+					<input type="text" id="departure" name="depart" class="text_area" placeholder="Ville de Départ" required>
+				</div>
+>>>>>>> Stashed changes
 			</div>
 			<div class="arrive">
 				  <div class="arrive-child">
 				  </div>
 				  <div class="tab1">
 					<b class="b">À</b>
+<<<<<<< Updated upstream
 					  <input type="text" class="text_area" placeholder="Ville d'Arrivée">
 				  </div>
 				  
+=======
+					<input type="text" id="arrival" name="arrivee" class="text_area" placeholder="Ville d'Arrivée" required>
+				</div>
+>>>>>>> Stashed changes
 			</div>
 			<div class="depart">
 				  <div class="depart-child">
 					<b class="dpart">Départ</b>
+<<<<<<< Updated upstream
 				    <input type="date" class="date-picker" />
 				  </div>
 				  
@@ -65,6 +122,15 @@
 				  </div>
 				  <b class="retour1">Retour</b>
 				  <input type="date" class="date-picker" />
+=======
+					<input type="date" name="date_depart" class="date-picker" id="departureDate" required>
+				</div>
+			</div>
+			<div class="retour">
+				<div class="retour-child"></div>
+				<b class="retour1">Retour</b>
+				<input type="date" name="date_retour" class="date-picker" id="returnDate">
+>>>>>>> Stashed changes
 			</div>
 			<div class="bouton-recherche" id="boutonRechercheContainer">
 
@@ -114,6 +180,7 @@
 						  
 						  <div class="bora-bora1">BORA BORA</div>
 					</div>
+<<<<<<< Updated upstream
 					<div class="paris">
 						  <img class="bora-bora-child" alt="" src="assets/img/Rectangle 14.jpg">
 						  
@@ -123,6 +190,23 @@
 						  <img class="bora-bora-child" alt="" src="assets/img/Rectangle 13.png">
 						  
 						  <div class="berne1">BERNE</div>
+=======
+					<div class="row">
+						<div class="label2">Enfants:</div>
+						<div class="incrementer">
+							<button type="button" class="bouton minus-btn" onclick="updateValue(false, '#enfant', 1)">-</button>
+							<div class="value", id="enfant">0</div>
+							<button type="button" class="bouton plus-btn"onclick="updateValue(true,'#enfant', 1)">+</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="label2">Bébés:</div>
+						<div class="incrementer">
+							<button type="button" class="bouton minus-btn" onclick="updateValue(false,'#bebe', 2)">-</button>
+							<div class="value" id="bebe">0</div>
+							<button type="button" class="bouton plus-btn" onclick="updateValue(true,'#bebe', 2)">+</button>
+						</div>
+>>>>>>> Stashed changes
 					</div>
 					<div class="alger">
 						  <img class="bora-bora-child" alt="" src="assets/img/Rectangle 12.png">
@@ -187,6 +271,7 @@
 			  </div>
 =======
 	<footer>
+<<<<<<< Updated upstream
 				<div class="group">
 					<div class="abdian-les-meilleures-destina-wrapper">
 						<img class="abdian-logo-1-icon" alt="" src="./assets/img/Abidan_logo.png">
@@ -229,5 +314,138 @@
 	</footer>
     		
   	
+=======
+		<div class="group">
+			<div class="abdian-les-meilleures-destina-wrapper">
+				<img class="abdian-logo-1-icon" alt="" src="./assets/img/Abidan_logo.png">
+
+				<div class="abdian-les-meilleures">Abdian, les meilleures destinations au meilleur prix</div>
+			</div>
+			<div class="legal-terms-container">
+				<p class="legal">
+					<b>Legal</b>
+				</p>
+				<p class="legal">
+					<b>&nbsp;</b>
+				</p>
+				<p class="legal">Terms & Conditions</p>
+				<p class="legal">Privacy Policy</p>
+				<p class="sitemap">Sitemap</p>
+			</div>
+			<div class="company-about-us-container">
+				<p class="legal">
+					<b>Company</b>
+				</p>
+				<p class="legal">
+					<b>&nbsp;</b>
+				</p>
+				<p class="legal">About Us</p>
+				<p class="legal">Blog</p>
+				<p class="legal">Careers</p>
+				<p class="sitemap">Contact Us</p>
+			</div>
+			<div class="group1">
+
+				<img class="group-icon" alt="" src="../Web/assets/img/Group.png">
+
+			</div>
+		</div>
+</footer>
+
+<script>
+function updateValue(isIncrement, idName, indexButton) {
+    const valueElement = document.querySelector(idName);
+	let currentValue = parseInt(valueElement.textContent, 10) || 0;
+	 // Use the idName directly
+	if (!valueElement) return console.log('Id non trouvé'); // Ensure the element exists
+    if (valueElement) {
+        currentValue += isIncrement ? 1 : -1;
+        valueElement.textContent = currentValue;
+		document.getElementsByClassName('minus-btn')[indexButton].disabled = false;
+    }
+	if (currentValue <= 0) {
+		document.getElementsByClassName('minus-btn')[indexButton].disabled = true;
+		currentValue += isIncrement ? 1 : 0; // Prevent negative values
+		valueElement.textContent = currentValue;
+	}
+}
+function allerAGauche() {
+    const container = document.querySelector('.image-destinations');
+    container.scrollBy({
+      left: -300, // distance à défiler en px
+      behavior: 'smooth'
+    });
+  }
+function scrollRight() {
+    const container = document.querySelector('.image-destinations');
+    container.scrollBy({
+      left: 300, // distance à défiler en px
+      behavior: 'smooth'
+    });
+  }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const searchForm = document.getElementById('searchForm');
+    const departureDate = document.getElementById('departureDate');
+    const returnDate = document.getElementById('returnDate');
+
+    // Validation des dates
+    departureDate.addEventListener('change', function() {
+        if (returnDate.value && new Date(departureDate.value) > new Date(returnDate.value)) {
+            returnDate.value = '';
+            alert('La date de retour doit être après la date de départ');
+        }
+    });
+
+    returnDate.addEventListener('change', function() {
+        if (new Date(departureDate.value) > new Date(returnDate.value)) {
+            returnDate.value = '';
+            alert('La date de retour doit être après la date de départ');
+        }
+    });
+
+    searchForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = {
+            departure: document.getElementById('departure').value,
+            arrival: document.getElementById('arrival').value,
+            departureDate: departureDate.value,
+            returnDate: returnDate.value,
+            passengers: {
+                adults: parseInt(document.getElementById('adulte').textContent),
+                children: parseInt(document.getElementById('enfant').textContent),
+                infants: parseInt(document.getElementById('bebe').textContent)
+            }
+        };
+
+        try {
+            const response = await fetch('/api/vols/recherche', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                const flights = await response.json();
+                // Stocker les vols dans le localStorage pour les utiliser dans la page de résultats
+                localStorage.setItem('searchResults', JSON.stringify(flights));
+                localStorage.setItem('searchCriteria', JSON.stringify(formData));
+                // Rediriger vers la page de résultats
+                window.location.href = 'pageRechercheVols.html';
+            } else {
+                const error = await response.json();
+                alert(error.message || 'Erreur lors de la recherche de vols');
+            }
+        } catch (error) {
+            console.error('Erreur:', error);
+            alert('Une erreur est survenue lors de la recherche de vols');
+        }
+    });
+});
+</script>
+>>>>>>> Stashed changes
 </body>
 </html>
