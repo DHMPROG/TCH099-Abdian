@@ -1,16 +1,17 @@
 <?php
 // Inclusion des classes nécessaires pour la gestion des produits
-include_once "../modele/DAO/ProductDAO.class.php";
-include_once "../modele/Product.class.php";
+include_once "../modele/dao/VolDAO.class.php";
+include_once "../modele/Vol.class.php";
 
-class RestControllerVols 
-{
-
+class RestControllerVols {
     // attributs privés
     private $requestMethod;
+    private $idVol;
+
     // Constructeur de la classe
-    public function __construct($requestMethod, $productId) {
-    
+    public function __construct($requestMethod, $idVol) {
+        $this->requestMethod = $requestMethod;
+        $this->idVol = $idVol;
     }
     
   
