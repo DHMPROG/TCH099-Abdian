@@ -6,6 +6,7 @@ class Vol {
     private int $id;
     private string $airline;
     private string $flightNumber;
+    private string $aircraftModele;
     private string $departureDate;
     private string $departureTime;
     private string $departureAirport;
@@ -24,6 +25,7 @@ class Vol {
         int $id,
         string $airline,
         string $flightNumber,
+        string $aircraftModele,
         string $departureDate,
         string $departureTime,
         string $departureAirport,
@@ -40,6 +42,7 @@ class Vol {
         $this->id = $id;
         $this->airline = $airline;
         $this->flightNumber = $flightNumber;
+        $this->aircraftModele = $aircraftModele;
         $this->departureDate = $departureDate;
         $this->departureTime = $departureTime;
         $this->departureAirport = $departureAirport;
@@ -55,7 +58,7 @@ class Vol {
     }
 
     public static function getVolsByDepartureAndArrival(PDO $pdo, string $departureCode, string $arrivalCode): array {
-        $sql = "SELECT * FROM vols WHERE departure_code = ? AND arrival_code = ?";
+        $sql = "SELECT * FROM Vol WHERE departure_code = ? AND arrival_code = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$departureCode, $arrivalCode]);
     
@@ -65,6 +68,7 @@ class Vol {
                 $row['id'],
                 $row['airline'],
                 $row['flight_number'],
+                $row['aircraftModele'],
                 $row['departure_date'],
                 $row['departure_time'],
                 $row['departure_airport'],
@@ -84,7 +88,7 @@ class Vol {
     }
 
     public static function getVolsByDepartureArrivalAndDate(PDO $pdo, string $departureCode, string $arrivalCode, string $date): array {
-        $sql = "SELECT * FROM vols WHERE departure_code = ? AND arrival_code = ? AND departure_date = ?";
+        $sql = "SELECT * FROM Vol WHERE departure_code = ? AND arrival_code = ? AND departure_date = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$departureCode, $arrivalCode, $date]);
     
@@ -94,6 +98,7 @@ class Vol {
                 $row['id'],
                 $row['airline'],
                 $row['flight_number'],
+                $row['aircraftModele'],
                 $row['departure_date'],
                 $row['departure_time'],
                 $row['departure_airport'],
@@ -118,6 +123,7 @@ class Vol {
     public function getId(): int { return $this->id; }
     public function getAirline(): string { return $this->airline; }
     public function getFlightNumber(): string { return $this->flightNumber; }
+    public function getAircraftModel(): string {return $this->aircraftModele;}
     public function getDepartureDate(): string { return $this->departureDate; }
     public function getDepartureTime(): string { return $this->departureTime; }
     public function getDepartureAirport(): string { return $this->departureAirport; }

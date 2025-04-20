@@ -1,7 +1,7 @@
 CREATE DATABASE abdian_db;
 USE abdian_db;
 
-CREATE TABLE utilisateurs (
+CREATE TABLE Utilisateur (
   id INT AUTO_INCREMENT PRIMARY KEY,
   prenom VARCHAR(50),
   nom VARCHAR(50),
@@ -13,7 +13,7 @@ CREATE TABLE utilisateurs (
 );
 
 
-CREATE TABLE vols (
+CREATE TABLE Vol (
   id INT AUTO_INCREMENT PRIMARY KEY,
   airline VARCHAR(100),             
   flightNumber VARCHAR(20),
@@ -33,7 +33,7 @@ CREATE TABLE vols (
 );
 
 
-CREATE TABLE passagers (
+CREATE TABLE Ppassager (
   id INT AUTO_INCREMENT PRIMARY KEY,
   id_utilisateur INT,
   prenom VARCHAR(50),
@@ -49,7 +49,7 @@ CREATE TABLE passagers (
   FOREIGN KEY (id_utilisateur) REFERENCES utilisateurs(id)
 );
 
-CREATE TABLE sieges (
+CREATE TABLE Siege (
   id INT AUTO_INCREMENT PRIMARY KEY,
   id_vol INT,
   id_passager INT,
@@ -58,7 +58,7 @@ CREATE TABLE sieges (
   statut ENUM('libre', 'réservé') DEFAULT 'libre'
 );
 
-CREATE TABLE paiements (
+CREATE TABLE Paiement (
   id INT AUTO_INCREMENT PRIMARY KEY,
   id_passager INT,
   montant DECIMAL(10,2),
@@ -68,7 +68,7 @@ CREATE TABLE paiements (
   FOREIGN KEY (id_passager) REFERENCES passagers(id)
 );
 
-CREATE TABLE messages_contact (
+CREATE TABLE Messages_contact (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nom VARCHAR(100),
   email VARCHAR(100),

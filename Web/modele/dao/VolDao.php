@@ -2,7 +2,7 @@
 
 // DAO pour la classe Vol de la BD (a developper)
 // Import de l'interface DAO et la classe Vol
-include_once("DAO.interface.php");
+include_once "DAO.interface.php";
 include_once __DIR__ . "/../VolClass.php";
 // __DIR__ retourne le chemin absolu du dossier contenant ce fichier, évitant les erreurs de chemins relatifs.
  
@@ -25,6 +25,88 @@ class VolDAO implements DAO {
 
         $unVol = null;
 
-        $requete = $connexion->prepare("SELECT * FROM ")
+        $requete = $connexion->prepare("SELECT * FROM Vol where id = ?");
+        $requete->execute(array($cles));
+
+        if ($requete->rowCount() != 0) {
+            $enr = $requete->fetch();
+            // à l'intérieur de enr, nom des colonnes SQL
+            $unVol = new Vol($enr["id"], $enr["airline"], 
+            $enr["flightNumber"], $enr["aircraftModele"], 
+            $enr["departureDate"], $enr["departureTime"], 
+            $enr["departureAirport"], $enr["departureCode"], 
+            $enr["arrivalDate"], $enr["arrivalTime"], 
+            $enr["arrivalAirport"], $enr["arrivalCode"], 
+            $enr["duration"], $enr["stops"], 
+            $enr["stopDetails"], $enr["price"]
+            );
+        }
+
+        $requete->closeCursor();
+        ConnexionBD::close();
+        return $unVol;
+    }
+
+    public static function chercherTous(): array {
+        return self::chercherAvecFiltre("");
+    }
+
+    public static function chercherAvecFiltre(string $filtre): array {
+        try {
+            $connexion = ConnexionBD::getInstance();
+        } catch (Exception $e) {
+            throw new Exception("Impossible d'obtenir la connexion à la BD");
+        }
+
+        $tableau = [];
+
+        $requete = $connexion->prepare("SELECT * FROM Vol" . $filtre);
+        $requete->execute();
+
+        foreach($requete as $enr) {
+            $unVol = new Vol($enr["id"], $enr["airline"], 
+            $enr["flightNumber"], $enr["aircraftModele"], 
+            $enr["departureDate"], $enr["departureTime"], 
+            $enr["departureAirport"], $enr["departureCode"], 
+            $enr["arrivalDate"], $enr["arrivalTime"], 
+            $enr["arrivalAirport"], $enr["arrivalCode"], 
+            $enr["duration"], $enr["stops"], 
+            $enr["stopDetails"], $enr["price"]
+            );
+
+            array_push($tableau, $unVol);
+        }
+
+        $requete->closeCursor();
+        ConnexionBD::close();
+        return $tableau;
+    }
+
+    public static function inserer(object $unVol) {
+        try {
+            $connexion = ConnexionBD::getInstance();
+        } catch (Exception $e) {
+            throw new Exception("Impossible d'obtenir la connexion à la BD");
+        }
+
+        $requete = $connexion->prepare("INSERT INTO Vol VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+        $tableauInfos = [$unVol->getId(), 
+            $unVol->getAirline(), 
+            $unVol->getFlightNumber(), 
+            $unVol->getAircraftModel(), 
+            $unVol->getDepartureDate(), 
+            $unVol->getDepartureTime(), 
+            $unVol->getDepartureAirport(), 
+            $unVol->getDepartureCode(), 
+            $unVol->getArrivalDate(), 
+            $unVol->getArrivalTime(), 
+            $unVol->getArrivalAirport(), 
+            $unVol->getArrivalCode(), 
+            $unVol->getDuration(), 
+            $unVol->getStops(), 
+            $unVol->getStopDetails(), 
+            $unVol->getPrice()
+        ];
     }
 }
