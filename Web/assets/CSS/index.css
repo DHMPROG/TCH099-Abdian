@@ -116,7 +116,7 @@ body {
     justify-content: flex-end;
     gap: 10px;
     padding: 10px 20px;
-    background:url(../assets/img/Rectangle\ 2.png);
+    background:url(../img/Rectangle\ 2.png);
     background-size: cover;
     background-position: top 40%;
     border-radius: 0 0 8px 8px;
@@ -271,8 +271,37 @@ main{
     flex-wrap: nowrap;
     align-content: center;
 }
-
-@media screen {
+@media (max-width: 1000px) {
+    .scroll-left, .scroll-right {
+      font-size: 20px;
+      padding: 8px 12px;
+      display: none;
+    }
     
-}
+  }
 
+.scroll-buttons {
+    width: 100%;
+  }
+  
+  .scroll-left, .scroll-right {
+    position: absolute;
+    top: 75%;
+    background-color: rgba(0,0,0);
+    color: white;
+    padding: 10px 10px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 50%;
+    z-index: 1000;
+    user-select: none;
+  }
+  
+  .scroll-left {
+    left: 10px;
+  }
+  
+  .scroll-right {
+    right: 10px;
+  }
+  

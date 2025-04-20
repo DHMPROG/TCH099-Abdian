@@ -21,16 +21,26 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Satoshi:wght@400;700&display=swap"
     />
-    <link rel="stylesheet" href="assets/CSS/header.css" />
-    <link rel="stylesheet" href="assets/CSS/footer.css" />
-    <link rel="stylesheet" href="assets/CSS/pageSelectionSiege.css" />
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./assets/CSS/header.css" />
+    <link rel="stylesheet" href="./assets/CSS/footer.css" />
+    <link rel="stylesheet" href="./assets/CSS/pageSelectionSiege.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
 
   <body>
     <header>
       <nav class="barre-du-haut">
-        <img class="abdian-logo-2-icon" src="assets/img/Abidan_logo.png" alt="Logo" href="index.html">
+        <a href="index.html">
+          <img
+            class="abdian-logo-2-icon"
+            src="assets/img/Abidan_logo.png"
+            alt="Logo"
+          />
+        </a>
 
         <div class="navigation">
           <a href="index.html" class="bouton">Accueil</a>
@@ -79,161 +89,731 @@
       <div class="content-wrapper">
         <!-- Côté gauche : Plan des sièges -->
         <div class="seat-map-container">
-          <div class="airplane-shape">
-            <div class="seat-map">
-              <div class="row-numbers">
-                <div class="row-number">1</div>
-                <div class="row-number">2</div>
-                <div class="row-number">3</div>
-                <div class="row-number">4</div>
-                <div class="row-number">5</div>
-                <div class="exit-row-label">
-                  <i class="fas fa-door-open"></i>
-                  <span>Sortie de secours</span>
-                </div>
-                <div class="row-number">6</div>
-                <div class="row-number">7</div>
-                <div class="row-number">8</div>
-                <div class="row-number">9</div>
-                <div class="row-number">10</div>
-                <div class="row-number">11</div>
-                <div class="row-number">12</div>
-                <div class="row-number">13</div>
-                <div class="exit-row-label">
-                  <i class="fas fa-door-open"></i>
-                  <span>Sortie de secours</span>
-                </div>
-                <div class="row-number">14</div>
-                <div class="row-number">15</div>
-                <div class="row-number">16</div>
-                <div class="row-number">17</div>
-                <div class="row-number">18</div>
-                <div class="exit-row-label">
-                  <i class="fas fa-door-open"></i>
-                  <span>Sortie de secours</span>
-                </div>
-                <div class="row-number">19</div>
-                <div class="row-number">20</div>
-                <div class="row-number">21</div>
-                <div class="row-number">22</div>
-                <div class="row-number">23</div>
-                <div class="row-number">24</div>
-              </div>
-              <div class="seats-grid">
-                <!-- Rangée 1 -->
-                <div class="seat-row" data-row="1">
-                  <div class="seat available economy-seat" data-seat="1A"></div>
-                  <div class="seat available economy-seat" data-seat="1B"></div>
-                  <div class="aisle"></div>
-                  <div class="seat available economy-seat" data-seat="1C"></div>
-                  <div class="seat available economy-seat" data-seat="1D"></div>
-                </div>
-                <!-- Rangée 2 -->
-                <div class="seat-row" data-row="2">
-                  <div class="seat available economy-seat" data-seat="2A"></div>
-                  <div class="seat available economy-seat" data-seat="2B"></div>
-                  <div class="aisle"></div>
-                  <div class="seat unavailable" data-seat="2C"></div>
-                  <div class="seat unavailable" data-seat="2D"></div>
-                </div>
-                <!-- Rangée 3 -->
-                <div class="seat-row" data-row="3">
-                  <div class="seat unavailable" data-seat="3A"></div>
-                  <div class="seat available economy-seat" data-seat="3B"></div>
-                  <div class="aisle"></div>
-                  <div class="seat available economy-seat" data-seat="3C"></div>
-                  <div class="seat available economy-seat" data-seat="3D"></div>
-                </div>
-                <!-- Rangée 4 -->
-                <div class="seat-row" data-row="4">
-                  <div class="seat premium selected" data-seat="4A">
-                    <i class="fas fa-check"></i>
+          <div class="airplane">
+            <div class="airplane-shape">
+              <div class="seat-map">
+                <div class="row-numbers">
+                  <!-- Business Class Rows -->
+                  <div class="row-number">1</div>
+                  <div class="row-number">2</div>
+                  <div class="row-number">3</div>
+                  <div class="row-number">4</div>
+                  <div class="row-number">5</div>
+                  <div class="row-number">6</div>
+                  <div class="row-number">7</div>
+                  <div class="row-number">8</div>
+                  <div class="exit-row-label">
+                    <i class="fas fa-door-open"></i>
+                    <span>Sortie de secours</span>
                   </div>
-                  <div class="seat available economy-seat" data-seat="4B"></div>
-                  <div class="aisle"></div>
-                  <div class="seat available economy-seat" data-seat="4C"></div>
-                  <div class="seat available economy-seat" data-seat="4D"></div>
+                  <div class="row-number">9</div>
+                  <div class="row-number">10</div>
+                  <div class="row-number">11</div>
+                  <div class="row-number">12</div>
+                  <div class="row-number">13</div>
+                  <div class="row-number">14</div>
+                  <div class="row-number">15</div>
+                  <div class="exit-row-label">
+                    <i class="fas fa-door-open"></i>
+                    <span>Sortie de secours</span>
+                  </div>
+                  <div class="row-number">16</div>
+                  <div class="row-number">17</div>
+                  <div class="row-number">18</div>
+                  <div class="row-number">19</div>
+                  <div class="row-number">20</div>
+                  <div class="row-number">21</div>
+                  <div class="row-number">22</div>
+                  <div class="row-number">23</div>
+                  <div class="row-number">24</div>
+                  <div class="exit-row-label">
+                    <i class="fas fa-door-open"></i>
+                    <span>Sortie de secours</span>
+                  </div>
                 </div>
-                <!-- Rangée 5 -->
-                <div class="seat-row" data-row="5">
-                  <div class="seat available economy-seat" data-seat="5A"></div>
-                  <div class="seat available economy-seat" data-seat="5B"></div>
-                  <div class="aisle"></div>
-                  <div class="seat available economy-seat" data-seat="5C"></div>
-                  <div class="seat available economy-seat" data-seat="5D"></div>
-                </div>
-                <!-- Séparateur de sortie -->
-                <div class="exit-row-separator"></div>
-                <!-- Rangée 6 -->
-                <div class="seat-row" data-row="6">
-                  <div class="seat occupied business-seat" data-seat="6A"></div>
-                  <div class="seat occupied business-seat" data-seat="6B"></div>
-                  <div class="seat occupied business-seat" data-seat="6C"></div>
-                  <div class="aisle"></div>
-                  <div class="seat unavailable" data-seat="6D"></div>
-                  <div class="seat occupied business-seat" data-seat="6E"></div>
-                </div>
-                <!-- Rangée 7 -->
-                <div class="seat-row" data-row="7">
-                  <div class="seat occupied business-seat" data-seat="7A"></div>
-                  <div class="seat occupied business-seat" data-seat="7B"></div>
-                  <div class="seat unavailable" data-seat="7C"></div>
-                  <div class="aisle"></div>
-                  <div class="seat occupied business-seat" data-seat="7D"></div>
-                  <div class="seat occupied business-seat" data-seat="7E"></div>
-                </div>
-                <!-- Rangées supplémentaires (8-24) seraient ajoutées ici suivant le même modèle -->
-                <div class="seat-row" data-row="8">
-                  <div class="seat occupied business-seat" data-seat="8A"></div>
-                  <div class="seat occupied business-seat" data-seat="8B"></div>
-                  <div class="seat unavailable" data-seat="8C"></div>
-                  <div class="aisle"></div>
-                  <div class="seat occupied business-seat" data-seat="8D"></div>
-                  <div class="seat occupied business-seat" data-seat="8E"></div>
-                </div>
+                <div class="seats-grid">  
+                  <!-- Business Class Rows: 1 to 8 -->
+                  <div class="seat-row" data-row="1">
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="1A"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="1B"
+                    ></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="1C"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="1D"
+                    ></div>
+                  </div>
+                  <div class="seat-row" data-row="2">
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="2A"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="2B"
+                    ></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="2C"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="2D"
+                    ></div>
+                  </div>
+                  <div class="seat-row" data-row="3">
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="3A"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="3B"
+                    ></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="3C"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="3D"
+                    ></div>
+                  </div>
+                  <div class="seat-row" data-row="4">
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="4A"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="4B"
+                    ></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="4C"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="4D"
+                    ></div>
+                  </div>
+                  <div class="seat-row" data-row="5">
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="5A"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="5B"
+                    ></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="5C"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="5D"
+                    ></div>
+                  </div>
+                  <div class="seat-row" data-row="6">
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="6A"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="6B"
+                    ></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="6C"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="6D"
+                    ></div>
+                  </div>
+                  <div class="seat-row" data-row="7">
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="7A"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="7B"
+                    ></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="7C"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="7D"
+                    ></div>
+                  </div>
+                  <div class="seat-row" data-row="8">
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="8A"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="8B"
+                    ></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="8C"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available business-seat premium"
+                      data-seat="8D"
+                    ></div>
+                  </div>
+                  <div class="exit-row-separator"></div>
 
-                <div class="seat-row" data-row="9">
-                  <div class="seat occupied business-seat" data-seat="9A"></div>
-                  <div class="seat occupied business-seat" data-seat="9B"></div>
-                  <div class="seat unavailable" data-seat="9C"></div>
-                  <div class="aisle"></div>
-                  <div class="seat occupied business-seat" data-seat="9D"></div>
-                  <div class="seat occupied business-seat" data-seat="9E"></div>
-                </div> 
-                
-              <!-- Rangée 10 -->
-              <div class="seat-row" data-row="10">
-                <div class="seat available economy-seat" data-seat="10A"></div>
-                <div class="seat available economy-seat" data-seat="10B"></div>
-                <div class="aisle"></div>
-                <div class="seat available economy-seat" data-seat="10C"></div>
-                <div class="seat available economy-seat" data-seat="10D"></div>
-              </div>
-              <!-- Rangée 11 -->
-              <div class="seat-row" data-row="11">
-                <div class="seat available economy-seat" data-seat="11A"></div>
-                <div class="seat available economy-seat" data-seat="11B"></div>
-                <div class="aisle"></div>
-                <div class="seat available economy-seat" data-seat="11C"></div>
-                <div class="seat available economy-seat" data-seat="11D"></div>
-              </div>
-              <!-- Rangée 12 -->
-              <div class="seat-row" data-row="12">
-                <div class="seat available economy-seat" data-seat="12A"></div>
-                <div class="seat available economy-seat" data-seat="12B"></div>
-                <div class="aisle"></div>
-                <div class="seat available economy-seat" data-seat="12C"></div>
-                <div class="seat available economy-seat" data-seat="12D"></div>
-              </div>
-              <!-- Rangée 13 -->
-              <div class="seat-row" data-row="13">
-                <div class="seat available economy-seat" data-seat="13A"></div>
-                <div class="seat available economy-seat" data-seat="13B"></div>
-                <div class="aisle"></div>
-                <div class="seat available economy-seat" data-seat="13C"></div>
-                <div class="seat available economy-seat" data-seat="13D"></div>
-              </div>
-                
+                  <!-- Economy Class Rows: 9 to 24 -->
+                  <div class="seat-row" data-row="9">
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="9A"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="9B"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="9C"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="9D"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="9E"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="9F"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="9G"
+                    ></div>
+                  </div>
+                  <div class="seat-row" data-row="10">
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="10A"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="10B"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="10C"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="10D"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="10E"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="10F"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="10G"
+                    ></div>
+                  </div>
+                  <div class="seat-row" data-row="11">
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="11A"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="11B"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="11C"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="11D"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="11E"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="11F"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="11G"
+                    ></div>
+                  </div>
+                  <div class="seat-row" data-row="12">
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="12A"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="12B"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="12C"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="12D"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="12E"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="12F"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="12G"
+                    ></div>
+                  </div>
+                  <div class="seat-row" data-row="13">
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="13A"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="13B"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="13C"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="13D"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="13E"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="13F"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="13G"
+                    ></div>
+                  </div>
+                  <div class="seat-row" data-row="14">
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="14A"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="14B"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="14C"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="14D"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="14E"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="14F"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="14G"
+                    ></div>
+                  </div>
+                  <div class="seat-row" data-row="15">
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="15A"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="15B"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="15C"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="15D"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="15E"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="15F"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="15G"
+                    ></div>
+                  </div>
+
+                  <div class="exit-row-separator"></div>
+
+                  <div class="seat-row" data-row="16">
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="16A"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="16B"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="16C"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="16D"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="16E"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="16F"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="16G"
+                    ></div>
+                  </div>
+                  <div class="seat-row" data-row="17">
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="17A"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="17B"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="17C"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="17D"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="17E"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="17F"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="17G"
+                    ></div>
+                  </div>
+                  <div class="seat-row" data-row="18">
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="18A"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="18B"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="18C"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="18D"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="18E"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="18F"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="18G"
+                    ></div>
+                  </div>
+                  <div class="seat-row" data-row="19">
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="19A"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="19B"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="19C"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="19D"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="19E"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="19F"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="19G"
+                    ></div>
+                  </div>
+                  <div class="seat-row" data-row="20">
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="20A"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="20B"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="20C"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="20D"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="20E"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="20F"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="20G"
+                    ></div>
+                  </div>
+                  <div class="seat-row" data-row="21">
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="21A"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="21B"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="21C"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="21D"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="21E"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="21F"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="21G"
+                    ></div>
+                  </div>
+                  <div class="seat-row" data-row="22">
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="22A"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="22B"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="22C"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="22D"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="22E"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="22F"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="22G"
+                    ></div>
+                  </div>
+                  <div class="seat-row" data-row="23">
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="23A"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="23B"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="23C"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="23D"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="23E"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="23F"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="23G"
+                    ></div>
+                  </div>
+                  <div class="seat-row" data-row="24">
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="24A"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="24B"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="24C"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="24D"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="24E"
+                    ></div>
+                    <div class="aisle"></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="24F"
+                    ></div>
+                    <div
+                      class="seat available economy-seat"
+                      data-seat="24G"
+                    ></div>
+                  </div>
+
+                  <div class="exit-row-separator"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -269,7 +849,10 @@
           <div class="cabin-selection">
             <div class="cabin-option economy active" id="economy">
               <div class="cabin-icon">
-                <img src="" alt="Sièges en classe économique" />
+                <img
+                  src="./assets/img/Sieges Avion Economy.png"
+                  alt="Sièges en classe économique"
+                />
               </div>
               <div class="cabin-details">
                 <h3>
@@ -299,7 +882,10 @@
 
             <div class="cabin-option business" id="business">
               <div class="cabin-icon">
-                <img src="" alt="Sièges en classe affaires" />
+                <img
+                  src="./assets/img/Sieges avion Business.png"
+                  alt="Sièges en classe affaires"
+                />
               </div>
               <div class="cabin-details">
                 <h3>
@@ -404,7 +990,7 @@
         </div>
       </div>
     </footer>
-    
-    <script src="./Scripts/pageSelectionSiege.js"></script>
+
+    <script src="./assets/Scripts/pageSelectionSiege.js"></script>
   </body>
 </html>
