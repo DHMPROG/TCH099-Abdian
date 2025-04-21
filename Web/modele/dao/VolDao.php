@@ -82,7 +82,7 @@ class VolDAO implements DAO {
         return $tableau;
     }
 
-    public static function inserer(object $unVol) {
+    public static function inserer(object $unVol): bool {
         try {
             $connexion = ConnexionBD::getInstance();
         } catch (Exception $e) {
@@ -91,7 +91,8 @@ class VolDAO implements DAO {
 
         $requete = $connexion->prepare("INSERT INTO Vol VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-        $tableauInfos = [$unVol->getId(), 
+        $tableauInfos = [
+            $unVol->getId(), 
             $unVol->getAirline(), 
             $unVol->getFlightNumber(), 
             $unVol->getAircraftModel(), 
@@ -109,10 +110,56 @@ class VolDAO implements DAO {
             $unVol->getPrice()
         ];
 
-        return $requete->execute($tableauInfos);
+        $resultat = $requete->execute($tableauInfos);
+        $requete->closeCursor();
+        ConnexionBD::close();
+        return $resultat;
+    }
+    public static function modifier(object $unVol): bool {
+        try {
+            $connexion = ConnexionBD::getInstance();
+        } catch (Exception $e) {
+            throw new Exception("Impossible d'obtenir la connexion à la BD");
+        }
+
+        $requete = $connexion->prepare("UPDATE Vol SET airline = ?, flightNumber = ?, aircraftModele = ?, departureDate = ?, departureTime = ?, departureAirport = ?, departureCode = ?, arrivalDate = ?, arrivalTime = ?, arrivalAirport = ?, arrivalCode = ?, duration = ?, stops = ?, stopDetails = ?, price = ? WHERE id = ?");
+
+        $tableauInfos = [
+            $unVol->getAirline(),
+            $unVol->getFlightNumber(),
+            $unVol->getAircraftModel(),
+            $unVol->getDepartureDate(),
+            $unVol->getDepartureTime(),
+            $unVol->getDepartureAirport(),
+            $unVol->getDepartureCode(),
+            $unVol->getArrivalDate(),
+            $unVol->getArrivalTime(),
+            $unVol->getArrivalAirport(),
+            $unVol->getArrivalCode(),
+            $unVol->getDuration(),
+            $unVol->getStops(),
+            $unVol->getStopDetails(),
+            $unVol->getPrice(),
+            $unVol->getId()
+        ];
+
+        $resultat = $requete->execute($tableauInfos);
+        $requete->closeCursor();
+        ConnexionBD::close();
+        return $resultat;
     }
 
-    public static function modifier(object $unVol) {
-        
+    public static function supprimer(mixed $cles): bool {
+        try {
+            $connexion = ConnexionBD::getInstance();
+        } catch (Exception $e) {
+            throw new Exception("Impossible d'obtenir la connexion à la BD");
+        }
+
+        $requete = $connexion->prepare("DELETE FROM Vol WHERE id = ?");
+        $resultat = $requete->execute([$cles]);
+        $requete->closeCursor();
+        ConnexionBD::close();
+        return $resultat;
     }
 }
