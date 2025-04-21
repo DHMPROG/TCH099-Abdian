@@ -108,5 +108,11 @@ class VolDAO implements DAO {
             $unVol->getStopDetails(), 
             $unVol->getPrice()
         ];
+
+        return $requete->execute($tableauInfos);
+    }
+
+    public static function modifier(object $unVol) {
+        
     }
 }

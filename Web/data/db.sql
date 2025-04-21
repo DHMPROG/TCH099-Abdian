@@ -33,7 +33,7 @@ CREATE TABLE Vol (
 );
 
 
-CREATE TABLE Ppassager (
+CREATE TABLE Passager (
   id INT AUTO_INCREMENT PRIMARY KEY,
   id_utilisateur INT,
   prenom VARCHAR(50),
