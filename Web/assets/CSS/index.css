@@ -1,0 +1,307 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap');
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.popover-increment{
+    display: flex;
+    flex-direction: column;
+    width: 232px;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 16px;
+    position: relative;
+    background-color: #183c5a;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid;
+    border-color: #1111b3;
+    color: #fff;
+    font-size: 14px;
+}
+
+.popover-increment .row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 50px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+
+}
+.popover-increment .incrementer {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    flex: 0 0 auto;
+}    
+
+.popover-increment .bouton{
+    padding: 8px 16px;
+    background: skyblue;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+.popover-increment .bouton:hover {
+    background-color: darkblue;
+}
+.popover-increment .bouton:active {
+    background-color: #90F4FF;
+}
+.popover-increment .bouton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+.popover-increment .value {
+    position: relative;
+    width: 32px;
+    font-family: "Nunito Sans-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 18px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 16px;
+    }
+
+.aller{
+    background-color: #183c5a;
+    color: white;
+    padding: 20px 20px;
+    border-radius: 8px 0 0 8px;
+
+}
+.arrive{
+    background-color: #183c5a;
+    color: white;
+    padding: 20px 20px;
+    border-radius: 0 0 0 0;
+
+}
+.depart{
+    background-color: #183c5a;
+    color: white;
+    padding: 20px 20px;
+}
+.retour{
+    background-color: #183c5a;
+    color: white;
+    padding: 20px 20px;
+    border-radius: 0 8px 8px 0;
+}
+.recherche1{
+    display: flex;
+    align-items: center;
+    background-color: lightseagreen;
+    padding: 20px 20px;
+    border-radius: 8px;
+    color:white;
+
+}
+.recherche{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 10px 20px;
+    background:url(../img/Rectangle\ 2.png);
+    background-size: cover;
+    background-position: top 40%;
+    border-radius: 0 0 8px 8px;
+    @media (max-width: 768px) {
+        justify-content: space-around;
+    }
+
+}
+.recherche input{
+    padding: 10px 20px;
+    background-color: transparent;
+    color: white;
+    border-radius: 8px;
+    border: none;
+}
+.image-destinations{
+    color:white;
+    font-family: "Montserrat-ExtraBold", Helvetica;
+}
+.bora-bora-child {
+    position: absolute;
+    top: 0rem;
+    left: 0rem;
+    border-radius: 15px;
+    width: 26.5rem;
+    height: 20.875rem;
+    object-fit: cover;
+}
+.bora-bora1 {
+    position: absolute;
+    top: 16.313rem;
+    left: 2.063rem;
+    font-weight: 800;
+    text-shadow: 0px 4px 7.5px rgba(0, 0, 0, 0.67);
+    color:white;
+    font-family: "Montserrat-ExtraBold", Helvetica;
+   
+}
+.bora-bora {
+    position: absolute;
+    top: 0rem;
+    left: 0rem;
+    width: 26.5rem;
+    height: 20.875rem;
+    border-radius: 5px;
+}
+.paris1 {
+    position: absolute;
+    top: 16.375rem;
+    left: 2.438rem;
+    font-weight: 800;
+    text-shadow: 0px 4px 7.5px rgba(0, 0, 0, 0.67);
+    color:white;
+    font-family: "Montserrat-ExtraBold", Helvetica;
+}
+.paris {
+    position: absolute;
+    top: 0rem;
+    left: 28.063rem;
+    width: 26.5rem;
+    height: 20.875rem;
+}
+.berne1 {
+    position: absolute;
+    top: 16.313rem;
+    left: 2.438rem;
+    font-weight: 800;
+    text-shadow: 0px 4px 7.5px rgba(0, 0, 0, 0.67);
+    color:white;
+    font-family: "Montserrat-ExtraBold", Helvetica;
+}
+.berne {
+    position: absolute;
+    top: 0rem;
+    left: 56.125rem;
+    width: 26.5rem;
+    height: 20.875rem;
+}
+.alger2 {
+    margin: 0;
+}
+.alger1 {
+    position: absolute;
+    top: 16.375rem;
+    left: 2.313rem;
+    font-weight: 800;
+    display: inline-block;
+    width: 8.938rem;
+    height: 3rem;
+    text-shadow: 0px 4px 7.5px rgba(0, 0, 0, 0.67);
+    color:white;
+    font-family: "Montserrat-ExtraBold", Helvetica;
+}
+.alger {
+    position: absolute;
+    top: 0rem;
+    left: 84.875rem;
+    width: 26.5rem;
+    height: 20.875rem;
+}
+.tokyo1 {
+    position: absolute;
+    top: 16.375rem;
+    left: 2.313rem;
+    font-weight: 800;
+    display: inline-block;
+    width: 9.875rem;
+    height: 3rem;
+    text-shadow: 0px 4px 7.5px rgba(0, 0, 0, 0.67);
+    color:white;
+    font-family: "Montserrat-ExtraBold", Helvetica;
+}
+.tokyo {
+    position: absolute;
+    top: 0rem;
+    left: 113.625rem;
+    width: 26.5rem;
+    height: 20.875rem;
+}
+.image-destinations {
+    position: relative;
+    height: 20.875rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    text-align: left;
+    font-size: var(--font-size-21xl);
+    color: var(--color-white);
+    font-family: var(--font-montserrat);
+}
+.nombre-de-passagers{
+    color: white;
+    text-shadow: 0px 4px 7.5px rgba(0, 0, 0, 0.98); 
+    font-family: "Montserrat-ExtraBold", Helvetica;
+    font-size: 16px;
+    font-weight: 40;
+}
+
+main{
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    flex-direction: column;
+    align-content: flex-end;
+    align-items: stretch;
+}
+.nb-passagers{
+    display: flex;
+     align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+}
+@media (max-width: 1000px) {
+    .scroll-left, .scroll-right {
+      font-size: 20px;
+      padding: 8px 12px;
+      display: none;
+    }
+    
+  }
+
+.scroll-buttons {
+    width: 100%;
+  }
+  
+  .scroll-left, .scroll-right {
+    position: absolute;
+    top: 75%;
+    background-color: rgba(0,0,0);
+    color: white;
+    padding: 10px 10px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 50%;
+    z-index: 1000;
+    user-select: none;
+  }
+  
+  .scroll-left {
+    left: 10px;
+  }
+  
+  .scroll-right {
+    right: 10px;
+  }
+  
