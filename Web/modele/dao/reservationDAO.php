@@ -28,12 +28,13 @@ class ReservationDAO implements DAO {
         if ($requete->rowCount() != 0) {
             $enr = $requete->fetch();
             $reservation = new Reservation(
+                $enr['id'],
                 $enr['id_passager'],
                 $enr['id_vol'],
                 $enr['id_siege'],
                 $enr['statut']
             );
-            $reservation->setId($enr['id']);
+            
         }
 
         $requete->closeCursor();
@@ -59,12 +60,12 @@ class ReservationDAO implements DAO {
 
         foreach ($requete as $enr) {
             $reservation = new Reservation(
+                $enr['id'],
                 $enr['id_passager'],
                 $enr['id_vol'],
                 $enr['id_siege'],
                 $enr['statut']
             );
-            $reservation->id = $enr['id'];
             $reservations[] = $reservation;
         }
 
@@ -96,12 +97,12 @@ class ReservationDAO implements DAO {
 
         foreach ($requete as $enr) {
             $reservation = new Reservation(
+                $enr['id'],
                 $enr['id_passager'],
                 $enr['id_vol'],
                 $enr['id_siege'],
                 $enr['statut']
             );
-            $reservation->id = $enr['id'];
             $reservations[] = $reservation;
         }
 

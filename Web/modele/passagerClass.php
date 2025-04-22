@@ -17,6 +17,7 @@ class Passager implements JsonSerializable
 
     // Constructor
     public function __construct(
+        $id,
         $id_utilisateur,
         $prenom,
         $deuxieme_prenom,
@@ -29,6 +30,7 @@ class Passager implements JsonSerializable
         $urgence_email,
         $urgence_telephone
     ) {
+        $this->id = $id; // ID will be set when inserted into the database
         $this->id_utilisateur = $id_utilisateur;
         $this->prenom = $prenom;
         $this->deuxieme_prenom = $deuxieme_prenom;

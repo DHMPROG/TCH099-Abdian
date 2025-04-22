@@ -9,8 +9,9 @@ class Reservation implements JsonSerializable
     private $date_reservation;
     private $statut;
 
-    public function __construct($id_passager, $id_vol, $id_siege, $statut = 'confirmée')
+    public function __construct($id,$id_passager, $id_vol, $id_siege, $statut = 'confirmée')
     {
+        $this->id = $id;
         $this->id_passager = $id_passager;
         $this->id_vol = $id_vol;
         $this->id_siege = $id_siege;

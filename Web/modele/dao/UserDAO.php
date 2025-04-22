@@ -195,4 +195,60 @@ class UserDAO implements DAO {
 
         return $requete->execute();
     }
+    /**
+     * Recherche un utilisateur par email
+     * @param string $email
+     * @return Utilisateur|null
+     */
+    static public function findByEmail(string $email): ?Utilisateur {
+        try {
+            $connexion = ConnexionBD::getInstance();
+        } catch (Exception $e) {
+            throw new Exception("Impossible d'obtenir la connexion à la BD");
+        }
+
+        $requete = $connexion->prepare(
+            "SELECT * FROM Utilisateur WHERE email = :email"
+        );
+        $requete->bindParam(':email', $email, PDO::PARAM_STR);
+        $requete->execute();
+
+        if ($requete->rowCount() != 0) {
+            $enr = $requete->fetch();
+            $user = new Utilisateur(
+                $enr['prenom'],
+                $enr['nom'],
+                $enr['email'],
+                $enr['motDePasse'],
+                $enr['motDePasse'], // Assuming motDePasseEnClair is not stored in DB
+                $enr['telephone']
+            );
+            $user->setId($enr['id']);
+            return $user;
+        }
+
+        return null; // Retourne null si aucun utilisateur trouvé
+    }
+
+    /**
+     * Vérifie si un utilisateur existe par email
+     * @param string $email
+     * @return bool
+     */
+    static public function existsByEmail(string $email): bool {
+        try {
+            $connexion = ConnexionBD::getInstance();
+        } catch (Exception $e) {
+            throw new Exception("Impossible d'obtenir la connexion à la BD");
+        }
+
+        $requete = $connexion->prepare(
+            "SELECT COUNT(*) as count FROM Utilisateur WHERE email = :email"
+        );
+        $requete->bindParam(':email', $email, PDO::PARAM_STR);
+        $requete->execute();
+
+        $result = $requete->fetch();
+        return $result['count'] > 0;
+    }
 }

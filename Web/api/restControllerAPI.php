@@ -1,103 +1,132 @@
 <?php
-// Inclusion des classes nécessaires pour la gestion des produits
-include_once "../modele/dao/VolDAO.class.php";
-include_once "../modele/Vol.class.php";
+include_once __DIR__ . '/../Modele/VolDAO.php';
+include_once __DIR__ . '/../Modele/VolClass.php';
 
 class RestControllerVols {
-    // attributs privés
     private $requestMethod;
     private $idVol;
 
-    // Constructeur de la classe
     public function __construct($requestMethod, $idVol) {
         $this->requestMethod = $requestMethod;
         $this->idVol = $idVol;
     }
-    
-  
 
-    // Vérification de la validité des données du produit
-    private function validateProduct($data) {
-        return !empty($data['name']) && 
-               !empty($data['category']) && 
-               !empty($data['description']) && 
-               isset($data['price']) && is_numeric($data['price']) && $data['price'] > 0 &&
-               (!isset($data['quantity']) || is_int($data['quantity']));
+    public function processRequest(): array {
+        switch ($this->requestMethod) {
+            case 'GET':
+                if (isset($_GET['depart']) && isset($_GET['arrivee'])) {
+                    return $this->getVolsParDepartEtArrivee($_GET['depart'], $_GET['arrivee']);
+                } 
+                elseif ($this->idVol) {
+                    return $this->getVol($this->idVol);
+                } else {
+                    return $this->getAllVols();
+                }
+            case 'POST':
+                return $this->createVolFromRequest();
+            case 'PUT':
+                if ($this->idVol) {
+                    return $this->updateVolFromRequest($this->idVol);
+                }
+                return $this->unprocessableEntityResponse();
+            case 'DELETE':
+                if ($this->idVol) {
+                    return $this->deleteVolFromRequest($this->idVol);
+                }
+                return $this->unprocessableEntityResponse();
+            default:
+                return $this->responseJson(405, ["message" => "Method Not Allowed"]);
+        }
     }
 
-    // Génération des réponses HTTP standardisées
-    private function responseJson($statusCode, $data) {
+    private function getAllVols(): array {
+        $vols = VolDAO::chercherTous();
+        return $this->responseJson(200, $vols);
+    }
+
+    private function getVol($id): array {
+        $vol = VolDAO::chercher($id);
+        if (!$vol) return $this->notFoundResponse();
+        return $this->responseJson(200, $vol);
+    }
+    private function getVolsParDepartEtArrivee(string $depart, string $arrivee): array {
+        $vols = VolDAO::chercherParAeroports($depart, $arrivee);
+        if (empty($vols)) {
+            return $this->notFoundResponse();
+        }
+        return $this->responseJson(200, $vols);
+    }
+
+    private function createVolFromRequest(): array {
+        $data = json_decode(file_get_contents('php://input'), true);
+        if (!$this->validateVol($data)) return $this->unprocessableEntityResponse();
+
+        $vol = new Vol(
+            $data['id'], $data['airline'], $data['flightNumber'], $data['aircraftModele'],
+            $data['departureDate'], $data['departureTime'], $data['departureAirport'], $data['departureCode'],
+            $data['arrivalDate'], $data['arrivalTime'], $data['arrivalAirport'], $data['arrivalCode'],
+            $data['duration'], $data['stops'], $data['stopDetails'], $data['price']
+        );
+
+        $result = VolDAO::inserer($vol);
+        return $result ? $this->responseJson(201, ["message" => "Vol created"]) : $this->serverErrorResponse();
+    }
+
+    private function updateVolFromRequest($id): array {
+        $data = json_decode(file_get_contents('php://input'), true);
+        if (!$this->validateVol($data)) return $this->unprocessableEntityResponse();
+
+        $vol = new Vol(
+            $id, $data['airline'], $data['flightNumber'], $data['aircraftModele'],
+            $data['departureDate'], $data['departureTime'], $data['departureAirport'], $data['departureCode'],
+            $data['arrivalDate'], $data['arrivalTime'], $data['arrivalAirport'], $data['arrivalCode'],
+            $data['duration'], $data['stops'], $data['stopDetails'], $data['price']
+        );
+
+        $result = VolDAO::modifier($vol);
+        return $result ? $this->responseJson(200, ["message" => "Vol updated"]) : $this->serverErrorResponse();
+    }
+
+    private function deleteVolFromRequest($id): array {
+        $result = VolDAO::supprimer($id);
+        return $result ? $this->responseJson(200, ["message" => "Vol deleted"]) : $this->serverErrorResponse();
+    }
+
+    private function validateVol($data): bool {
+        return isset($data['id'], $data['airline'], $data['flightNumber'], $data['aircraftModele'],
+            $data['departureDate'], $data['departureTime'], $data['departureAirport'], $data['departureCode'],
+            $data['arrivalDate'], $data['arrivalTime'], $data['arrivalAirport'], $data['arrivalCode'],
+            $data['duration'], $data['stops'], $data['price']);
+    }
+
+    private function responseJson($statusCode, $data): array {
         return [
             'status_code_header' => "HTTP/1.1 $statusCode " . $this->getStatusMessage($statusCode),
             'body' => json_encode($data)
         ];
     }
 
-    // Réponse 404 : Ressource non trouvée
-    private function notFoundResponse() {
-        return $this->responseJson(404, ["message" => "Resource not found"]);
+    private function notFoundResponse(): array {
+        return $this->responseJson(404, ["message" => "Vol not found"]);
     }
 
-    // Réponse 422 : Données invalides
-    private function unprocessableEntityResponse() {
+    private function unprocessableEntityResponse(): array {
         return $this->responseJson(422, ["message" => "Invalid input"]);
     }
 
-    // Réponse 500 : Erreur serveur
-    private function serverErrorResponse() {
+    private function serverErrorResponse(): array {
         return $this->responseJson(500, ["message" => "Internal server error"]);
     }
 
-    // Correspondance des codes d'état HTTP avec leurs messages
-    private function getStatusMessage($code) {
+    private function getStatusMessage($code): string {
         $statusMessages = [
             200 => "OK",
             201 => "Created",
             404 => "Not Found",
+            405 => "Method Not Allowed",
             422 => "Unprocessable Entity",
             500 => "Internal Server Error"
         ];
         return $statusMessages[$code] ?? "Unknown Status";
     }
-
-    public function processRequest():array {
-        switch ($this->requestMethod) {
-            case "GET":
-                if (1==1) {} else {}
-                break;
-            case "POST":
-                break;
-            case "PUT":
-                if (1==1) {} else {}
-                break;
-            case "DELETE":
-                if (1==1) {}
-            
-                break;
-            default:
-               
-
-        }
-
-        return $reponse;
-
-    }
-    public function getAllProducts() {
-       
-    }
-    public function getProduct($productId):array{
-       
-    }
-
-    public function createProductFromRequest() {
-  
-    }
-
-    public function updateProductFromRequest($id) {
-       
-    }
-
-    public function deleteProductFromRequest($id) {
-    }
-
 }
