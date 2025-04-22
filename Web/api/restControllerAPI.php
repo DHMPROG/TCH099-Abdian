@@ -14,7 +14,10 @@ class RestControllerVols {
     public function processRequest(): array {
         switch ($this->requestMethod) {
             case 'GET':
-                if (isset($_GET['depart']) && isset($_GET['arrivee'])) {
+                if (isset($_GET['depart']) && isset($_GET['arrivee']) && isset($_GET['date'])) {
+                    return $this->getVolsParDepartArriveeEtDate($_GET['depart'], $_GET['arrivee'], $_GET['date']);
+                }
+                elseif (isset($_GET['depart']) && isset($_GET['arrivee'])) {
                     return $this->getVolsParDepartEtArrivee($_GET['depart'], $_GET['arrivee']);
                 } 
                 elseif ($this->idVol) {
@@ -57,6 +60,13 @@ class RestControllerVols {
         return $this->responseJson(200, $vols);
     }
 
+    private function getVolsParDepartArriveeEtDate(string $depart, string $arrivee, string $date): array {
+        $vols = VolDAO::chercherParAeroportEtDate($depart, $arrivee, $date);
+        if (empty($vols)) {
+            return $this->notFoundResponse();
+        }
+        return $this->responseJson(200, $vols);
+    }
     private function createVolFromRequest(): array {
         $data = json_decode(file_get_contents('php://input'), true);
         if (!$this->validateVol($data)) return $this->unprocessableEntityResponse();
