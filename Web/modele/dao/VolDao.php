@@ -51,6 +51,37 @@ class VolDAO implements DAO {
         return self::chercherAvecFiltre("");
     }
 
+    public static function chercherParAeroports(string $departureAirport, string $arrivalAirport): array {
+        try {
+            $connexion = ConnexionBD::getInstance();
+        } catch (Exception $e) {
+            throw new Exception("Impossible d'obtenir la connexion à la BD");
+        }
+
+        $tableau = [];
+
+        $requete = $connexion->prepare("SELECT * FROM Vol WHERE departureAirport = ? AND arrivalAirport = ?");
+        $requete->execute([$departureAirport, $arrivalAirport]);
+
+        foreach ($requete as $enr) {
+            $unVol = new Vol($enr["id"], $enr["airline"], 
+            $enr["flightNumber"], $enr["aircraftModele"], 
+            $enr["departureDate"], $enr["departureTime"], 
+            $enr["departureAirport"], $enr["departureCode"], 
+            $enr["arrivalDate"], $enr["arrivalTime"], 
+            $enr["arrivalAirport"], $enr["arrivalCode"], 
+            $enr["duration"], $enr["stops"], 
+            $enr["stopDetails"], $enr["price"]
+            );
+
+            array_push($tableau, $unVol);
+        }
+
+        $requete->closeCursor();
+        ConnexionBD::close();
+        return $tableau;
+    }
+
     public static function chercherAvecFiltre(string $filtre): array {
         try {
             $connexion = ConnexionBD::getInstance();

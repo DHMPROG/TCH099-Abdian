@@ -1,7 +1,7 @@
 <?php 
 
 
-class Vol {
+class Vol implements JsonSerializable {
     // ✅ Propriétés
     private int $id;
     private string $airline;
@@ -57,68 +57,6 @@ class Vol {
         $this->price = $price;
     }
 
-    public static function getVolsByDepartureAndArrival(PDO $pdo, string $departureCode, string $arrivalCode): array {
-        $sql = "SELECT * FROM Vol WHERE departure_code = ? AND arrival_code = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$departureCode, $arrivalCode]);
-    
-        $vols = [];
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $vols[] = new Vol(
-                $row['id'],
-                $row['airline'],
-                $row['flight_number'],
-                $row['aircraftModele'],
-                $row['departure_date'],
-                $row['departure_time'],
-                $row['departure_airport'],
-                $row['departure_code'],
-                $row['arrival_date'],
-                $row['arrival_time'],
-                $row['arrival_airport'],
-                $row['arrival_code'],
-                $row['duration'],
-                $row['stops'],
-                $row['stop_details'],
-                $row['price']
-            );
-        }
-    
-        return $vols;
-    }
-
-    public static function getVolsByDepartureArrivalAndDate(PDO $pdo, string $departureCode, string $arrivalCode, string $date): array {
-        $sql = "SELECT * FROM Vol WHERE departure_code = ? AND arrival_code = ? AND departure_date = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$departureCode, $arrivalCode, $date]);
-    
-        $vols = [];
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $vols[] = new Vol(
-                $row['id'],
-                $row['airline'],
-                $row['flight_number'],
-                $row['aircraftModele'],
-                $row['departure_date'],
-                $row['departure_time'],
-                $row['departure_airport'],
-                $row['departure_code'],
-                $row['arrival_date'],
-                $row['arrival_time'],
-                $row['arrival_airport'],
-                $row['arrival_code'],
-                $row['duration'],
-                $row['stops'],
-                $row['stop_details'],
-                $row['price']
-            );
-        }
-    
-        return $vols;
-    }
-    
-
-
     // ✅ Getters (tu peux ajouter des setters si tu veux modifier les données)
     public function getId(): int { return $this->id; }
     public function getAirline(): string { return $this->airline; }
@@ -136,6 +74,28 @@ class Vol {
     public function getStops(): string { return $this->stops; }
     public function getStopDetails(): ?string { return $this->stopDetails; }
     public function getPrice(): float { return $this->price; }
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'airline' => $this->airline,
+            'flightNumber' => $this->flightNumber,
+            'aircraftModele' => $this->aircraftModele,
+            'departureDate' => $this->departureDate,
+            'departureTime' => $this->departureTime,
+            'departureAirport' => $this->departureAirport,
+            'departureCode' => $this->departureCode,
+            'arrivalDate' => $this->arrivalDate,
+            'arrivalTime' => $this->arrivalTime,
+            'arrivalAirport' => $this->arrivalAirport,
+            'arrivalCode' => $this->arrivalCode,
+            'duration' => $this->duration,
+            'stops' => $this->stops,
+            'stopDetails' => $this->stopDetails,
+            'price' => $this->price,
+        ];
+    }
+
 }
 
 
