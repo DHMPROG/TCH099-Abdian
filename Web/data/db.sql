@@ -33,7 +33,7 @@ CREATE TABLE Vol (
 );
 
 
-CREATE TABLE Ppassager (
+CREATE TABLE Passager (
   id INT AUTO_INCREMENT PRIMARY KEY,
   id_utilisateur INT,
   prenom VARCHAR(50),
@@ -56,6 +56,18 @@ CREATE TABLE Siege (
   numero_siege VARCHAR(10),
   classe VARCHAR(20),
   statut ENUM('libre', 'réservé') DEFAULT 'libre'
+);
+
+CREATE TABLE Reservation (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_passager INT,
+  id_vol INT,
+  id_siege INT,
+  date_reservation DATETIME DEFAULT CURRENT_TIMESTAMP,
+  statut ENUM('confirmée', 'annulée') DEFAULT 'confirmée',
+  FOREIGN KEY (id_passager) REFERENCES Passager(id),
+  FOREIGN KEY (id_vol) REFERENCES Vol(id),
+  FOREIGN KEY (id_siege) REFERENCES Siege(id)
 );
 
 CREATE TABLE Paiement (
