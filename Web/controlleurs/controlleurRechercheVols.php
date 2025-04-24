@@ -1,8 +1,7 @@
 <?php
 // filepath: c:\Users\amine\OneDrive\Documents\GitHub\TCH099-Abdian\Web\controlleurs\controlleurRechercheVols.php
-
-include_once("controlleurs/controleur.abstract.php");
-include_once("modele/dao/VolDao.php");
+include_once(__DIR__ . "/controlleur.abstract.php");
+include_once(__DIR__ . "/../modele/dao/VolDao.php");
 
 class RechercherVols extends Controleur {
     // ******************* Attributs
@@ -22,10 +21,10 @@ class RechercherVols extends Controleur {
     // ******************* Méthode executerAction
     public function executerAction(): string {
         // Vérifier si les critères de recherche sont fournis
-        if (isset($_POST['departureAirport'], $_POST['arrivalAirport'], $_POST['departureDate'])) {
-            $departureAirport = $_POST['departureAirport'];
-            $arrivalAirport = $_POST['arrivalAirport'];
-            $departureDate = $_POST['departureDate'];
+        if (isset($_GET['departureAirport'], $_GET['arrivalAirport'], $_GET['departureDate'])) {
+            $departureAirport = $_GET['departureAirport'];
+            $arrivalAirport = $_GET['arrivalAirport'];
+            $departureDate = $_GET['departureDate'];
 
             // Rechercher les vols correspondant aux critères
             $this->tabVols = VolDAO::chercherParAeroportsEtDate($departureAirport, $arrivalAirport, $departureDate);

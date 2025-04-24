@@ -1,11 +1,10 @@
 <?php
 // filepath: c:\Users\amine\OneDrive\Documents\GitHub\TCH099-Abdian\Web\controlleurs\controlleurSInscrire.php
 
-
-include_once("controlleurs/controleur.abstract.php");
-include_once("modele/dao/UserDAO.php");
-include_once("modele/roleClass.php");
-include_once("modele/UserClass.php");
+include_once(__DIR__ . "/controlleur.abstract.php");
+include_once(__DIR__ . "/../modele/dao/UserDAO.php");
+include_once(__DIR__ . "/../modele/roleClass.php");
+include_once(__DIR__ . "/../modele/UserClass.php");
 
 class SeInscrire extends Controleur
 {

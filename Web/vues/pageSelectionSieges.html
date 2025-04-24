@@ -25,9 +25,9 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="./assets/CSS/header.css" />
-    <link rel="stylesheet" href="./assets/CSS/footer.css" />
-    <link rel="stylesheet" href="./assets/CSS/pageSelectionSiege.css" />
+    <link rel="stylesheet" href="../assets/CSS/header.css" />
+    <link rel="stylesheet" href="../assets/CSS/footer.css" />
+    <link rel="stylesheet" href="../assets/CSS/pageSelectionSiege.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
 
@@ -850,7 +850,7 @@
             <div class="cabin-option economy active" id="economy">
               <div class="cabin-icon">
                 <img
-                  src="./assets/img/Sieges Avion Economy.png"
+                  src="../assets/img/Sieges Avion Economy.png"
                   alt="Sièges en classe économique"
                 />
               </div>
@@ -883,7 +883,7 @@
             <div class="cabin-option business" id="business">
               <div class="cabin-icon">
                 <img
-                  src="./assets/img/Sieges avion Business.png"
+                  src="../assets/img/Sieges avion Business.png"
                   alt="Sièges en classe affaires"
                 />
               </div>
@@ -955,7 +955,7 @@
           <img
             class="abdian-logo-1-icon"
             alt=""
-            src="./assets/img/Abidan_logo.png"
+            src="../assets/img/Abidan_logo.png"
           />
 
           <div class="abdian-les-meilleures">

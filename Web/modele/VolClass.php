@@ -74,26 +74,8 @@ class Vol implements JsonSerializable {
     public function getStops(): string { return $this->stops; }
     public function getStopDetails(): ?string { return $this->stopDetails; }
     public function getPrice(): float { return $this->price; }
-    public function jsonSerialize(): array
-    {
-        return [
-            'id' => $this->id,
-            'airline' => $this->airline,
-            'flightNumber' => $this->flightNumber,
-            'aircraftModele' => $this->aircraftModele,
-            'departureDate' => $this->departureDate,
-            'departureTime' => $this->departureTime,
-            'departureAirport' => $this->departureAirport,
-            'departureCode' => $this->departureCode,
-            'arrivalDate' => $this->arrivalDate,
-            'arrivalTime' => $this->arrivalTime,
-            'arrivalAirport' => $this->arrivalAirport,
-            'arrivalCode' => $this->arrivalCode,
-            'duration' => $this->duration,
-            'stops' => $this->stops,
-            'stopDetails' => $this->stopDetails,
-            'price' => $this->price,
-        ];
+    public function jsonSerialize(): array {
+        return get_object_vars($this);
     }
 
 }

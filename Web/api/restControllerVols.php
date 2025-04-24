@@ -1,6 +1,6 @@
 <?php
-include_once __DIR__ . '/../Modele/VolDAO.php';
-include_once __DIR__ . '/../Modele/VolClass.php';
+include_once __DIR__ . '/../modele/VolDAO.php';
+include_once __DIR__ . '/../modele/VolClass.php';
 
 class RestControllerVols {
     private $requestMethod;
@@ -61,7 +61,7 @@ class RestControllerVols {
     }
 
     private function getVolsParDepartArriveeEtDate(string $depart, string $arrivee, string $date): array {
-        $vols = VolDAO::chercherParAeroportEtDate($depart, $arrivee, $date);
+        $vols = VolDAO::chercherParAeroportsEtDate($depart, $arrivee, $date);
         if (empty($vols)) {
             return $this->notFoundResponse();
         }
@@ -110,6 +110,7 @@ class RestControllerVols {
     }
 
     private function responseJson($statusCode, $data): array {
+        header('Content-Type: application/json');
         return [
             'status_code_header' => "HTTP/1.1 $statusCode " . $this->getStatusMessage($statusCode),
             'body' => json_encode($data)

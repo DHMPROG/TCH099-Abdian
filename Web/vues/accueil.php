@@ -15,9 +15,9 @@
 	rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
   />
-	<link rel="stylesheet" href="./CSS/index.css" />
-	<link rel="stylesheet" href="./CSS/header.css"/>
-	<link rel="stylesheet" href="./CSS/footer.css" />
+	<link rel="stylesheet" href="../CSS/index.css" />
+	<link rel="stylesheet" href="../CSS/header.css"/>
+	<link rel="stylesheet" href="../CSS/footer.css" />
 
 
 
@@ -26,14 +26,14 @@
 <body>
 	<header>
 		<nav class="barre-du-haut">
-		<a href="index.html"><img class="abdian-logo-2-icon" src="assets/img/Abidan_logo.png" alt="Logo"></a>
+		<a href="index.html"><img class="abdian-logo-2-icon" src="../assets/img/Abidan_logo.png" alt="Logo"></a>
 
 		<div class="navigation">
 			<a href="index.html" class="bouton">Accueil</a>
 			<a href="destinations.html" class="bouton">Destinations</a>
 			<a href="contact.html" class="bouton">Contact</a>
 			<a href="Page de Connexion.html" class="bouton se-connecter">
-				<img class="generic-avatar-icon" src="assets/img/Generic avatar.png" alt="Avatar">
+				<img class="generic-avatar-icon" src="../assets/img/Generic avatar.png" alt="Avatar">
 				Se connecter
 			</a>
 		</div>
@@ -68,7 +68,7 @@
 				<input type="date" name="date_retour" class="date-picker">
 			</div>
 			<div class="nb-passagers">
-				<img class="person-solid-icon" alt="" src="assets/img/person solid.png">
+				<img class="person-solid-icon" alt="" src="../assets/img/person solid.png">
 				<div class="nombre-de-passagers">Nombre de Passagers</div>
 				<div class="popover-increment">
 					<div class="row">
@@ -104,29 +104,29 @@
 		<div class="page-daccueil">
 			<div class="image-destinations">
 				<div class="bora-bora">
-					<img class="bora-bora-child" alt="" src="assets/img/Rectangle 11.png">
+					<img class="bora-bora-child" alt="" src="../assets/img/Rectangle 11.png">
 
 					<div class="bora-bora1">BORA BORA</div>
 				</div>
 				<div class="paris">
-					<img class="bora-bora-child" alt="" src="assets/img/Rectangle 14.jpg">
+					<img class="bora-bora-child" alt="" src="../assets/img/Rectangle 14.jpg">
 
 					<div class="paris1">PARIS</div>
 				</div>
 				<div class="berne">
-					<img class="bora-bora-child" alt="" src="assets/img/Rectangle 13.png">
+					<img class="bora-bora-child" alt="" src="../assets/img/Rectangle 13.png">
 
 					<div class="berne1">BERNE</div>
 				</div>
 				<div class="alger">
-					<img class="bora-bora-child" alt="" src="assets/img/Rectangle 12.png">
+					<img class="bora-bora-child" alt="" src="../assets/img/Rectangle 12.png">
 
 					<div class="alger1">
 						<p class="sitemap">ALGER</p>
 					</div>
 				</div>
 				<div class="tokyo">
-					<img class="bora-bora-child" alt="" src="assets/img/Rectangle 15.png">
+					<img class="bora-bora-child" alt="" src="../assets/img/Rectangle 15.png">
 
 					<div class="tokyo1">TOKYO</div>
 				</div>
@@ -140,7 +140,7 @@
 	<footer>
 		<div class="group">
 			<div class="abdian-les-meilleures-destina-wrapper">
-				<img class="abdian-logo-1-icon" alt="" src="./assets/img/Abidan_logo.png">
+				<img class="abdian-logo-1-icon" alt="" src="../assets/img/Abidan_logo.png">
 
 				<div class="abdian-les-meilleures">Abdian, les meilleures destinations au meilleur prix</div>
 			</div>
