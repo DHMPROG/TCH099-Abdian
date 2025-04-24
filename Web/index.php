@@ -1,6 +1,8 @@
 <?php
 include_once __DIR__ ."/controlleurs/controleurManufacture.class.php";
 
+
+
 try {
     // Obtenir l'action à accomplir
     $action = isset($_GET['action']) ? $_GET['action'] : "";

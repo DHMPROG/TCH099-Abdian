@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__ . '/../modele/VolDAO.php';
+include_once __DIR__ . '/../modele/dao/VolDAO.php';
 include_once __DIR__ . '/../modele/VolClass.php';
 
 class RestControllerVols {
@@ -113,7 +113,7 @@ class RestControllerVols {
         header('Content-Type: application/json');
         return [
             'status_code_header' => "HTTP/1.1 $statusCode " . $this->getStatusMessage($statusCode),
-            'body' => json_encode($data)
+            'body' => $data
         ];
     }
 

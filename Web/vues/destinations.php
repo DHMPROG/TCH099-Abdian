@@ -16,21 +16,9 @@
 </head>
 
 <body>
-    <header>
-		<nav class="barre-du-haut">
-		<a href="index.html"><img class="abdian-logo-2-icon" src="../assets/img/Abidan_logo.png" alt="Logo"></a>
-
-		<div class="navigation">
-			<a href="index.html" class="bouton">Accueil</a>
-			<a href="destinations.html" class="bouton">Destinations</a>
-			<a href="contact.html" class="bouton">Contact</a>
-			<a href="Page de Connexion.html" class="bouton se-connecter">
-				<img class="generic-avatar-icon" src="../assets/img/Generic avatar.png" alt="Avatar">
-				Se connecter
-			</a>
-		</div>
-	</nav>
-  </header>
+    <?php
+	include_once('inclusions/header.php');
+	?>
 
     <main>
         <div class="page-daccueil">

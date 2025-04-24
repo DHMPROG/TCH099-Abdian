@@ -41,7 +41,7 @@ class SeConnecter extends Controleur
             }
 
             // Vérification du mot de passe
-            if (!password_verify($_POST['mot_passe'], $unUtilisateur->getMotDePasse())) {
+            if (!$unUtilisateur->verifyPassword($_POST['mot_passe'])) {
                 array_push($this->messagesErreur, "Mot de passe incorrect.");
                 return "connexion.php";
             }

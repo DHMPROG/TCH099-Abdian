@@ -60,7 +60,7 @@ class VolDAO implements DAO {
 
         $tableau = [];
 
-        $requete = $connexion->prepare("SELECT * FROM Vol WHERE departureAirport = ? AND arrivalAirport = ?");
+        $requete = $connexion->prepare("SELECT * FROM Vol WHERE departureCode = ? AND arrivalCode = ?");
         $requete->execute([$departureAirport, $arrivalAirport]);
 
         foreach ($requete as $enr) {
@@ -91,7 +91,7 @@ class VolDAO implements DAO {
 
         $tableau = [];
 
-        $requete = $connexion->prepare("SELECT * FROM Vol WHERE departureAirport = ? AND arrivalAirport = ? AND departureDate = ?");
+        $requete = $connexion->prepare("SELECT * FROM Vol WHERE departureCode = ? AND arrivalCode = ? AND departureDate = ?");
         $requete->execute([$departureAirport, $arrivalAirport, $departureDate]);
 
         foreach ($requete as $enr) {

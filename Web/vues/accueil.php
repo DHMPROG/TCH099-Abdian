@@ -12,11 +12,10 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito Sans:wght@400&display=swap" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Satoshi:wght@400;700&display=swap" />
 	<link
-	rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  />
+		rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 	<link rel="stylesheet" href="../CSS/index.css" />
-	<link rel="stylesheet" href="../CSS/header.css"/>
+	<link rel="stylesheet" href="../CSS/header.css" />
 	<link rel="stylesheet" href="../CSS/footer.css" />
 
 
@@ -24,36 +23,28 @@
 </head>
 
 <body>
-	<header>
-		<nav class="barre-du-haut">
-		<a href="index.html"><img class="abdian-logo-2-icon" src="../assets/img/Abidan_logo.png" alt="Logo"></a>
-
-		<div class="navigation">
-			<a href="index.html" class="bouton">Accueil</a>
-			<a href="destinations.html" class="bouton">Destinations</a>
-			<a href="contact.html" class="bouton">Contact</a>
-			<a href="Page de Connexion.html" class="bouton se-connecter">
-				<img class="generic-avatar-icon" src="../assets/img/Generic avatar.png" alt="Avatar">
-				Se connecter
-			</a>
-		</div>
-	</nav>
-  </header>
+	<?php
+	include_once('inclusions/header.php');
+	?>
 
 	<main>
 		<form class="recherche" action="pageRechercheVols.html" method="GET">
 			<div class="aller">
-				<div class="aller-child"></div>
-				<div class="tab">
-					<b class="de">De</b>
-					<input type="text" name="depart" class="text_area" placeholder="Ville de Départ" required>
+				<div class="aller-child">
+					<div class="tab">
+						<b class="de">De</b>
+						<input type="text" name="depart" class="text_area" placeholder="Ville de Départ" required autocomplete="off">
+						<div class="suggestions" id="suggestions-depart"></div>
+					</div>
 				</div>
+				
 			</div>
 			<div class="arrive">
 				<div class="arrive-child"></div>
 				<div class="tab1">
 					<b class="b">À</b>
-					<input type="text" name="arrivee" class="text_area" placeholder="Ville d'Arrivée" required>
+					<input type="text" name="arrivee" class="text_area" placeholder="Ville d'Arrivée" required autocomplete="off">
+					<div class="suggestions" id="suggestions-arrivee"></div>
 				</div>
 			</div>
 			<div class="depart">
@@ -83,8 +74,8 @@
 						<div class="label2">Enfants:</div>
 						<div class="incrementer">
 							<button type="button" class="bouton minus-btn" onclick="updateValue(false, '#enfant', 1)">-</button>
-							<div class="value", id="enfant">1</div>
-							<button type="button" class="bouton plus-btn"onclick="updateValue(true,'#enfant', 1)">+</button>
+							<div class="value" , id="enfant">1</div>
+							<button type="button" class="bouton plus-btn" onclick="updateValue(true,'#enfant', 1)">+</button>
 						</div>
 					</div>
 					<div class="row">
@@ -137,76 +128,109 @@
 			</div>
 
 	</main>
-	<footer>
-		<div class="group">
-			<div class="abdian-les-meilleures-destina-wrapper">
-				<img class="abdian-logo-1-icon" alt="" src="../assets/img/Abidan_logo.png">
+	<?php
+	include_once('inclusions/footer.php');
+	?>
+	<script>
+		function updateValue(isIncrement, idName, indexButton) {
+			const valueElement = document.querySelector(idName);
+			let currentValue = parseInt(valueElement.textContent, 10) || 0;
+			// Use the idName directly
+			if (!valueElement) return console.log('Id non trouvé'); // Ensure the element exists
+			if (valueElement) {
+				currentValue += isIncrement ? 1 : -1;
+				valueElement.textContent = currentValue;
+				document.getElementsByClassName('minus-btn')[indexButton].disabled = false;
+			}
+			if (currentValue <= 0) {
+				document.getElementsByClassName('minus-btn')[indexButton].disabled = true;
+				currentValue += isIncrement ? 1 : 0; // Prevent negative values
+				valueElement.textContent = currentValue;
+			}
+		}
 
-				<div class="abdian-les-meilleures">Abdian, les meilleures destinations au meilleur prix</div>
-			</div>
-			<div class="legal-terms-container">
-				<p class="legal">
-					<b>Legal</b>
-				</p>
-				<p class="legal">
-					<b>&nbsp;</b>
-				</p>
-				<p class="legal">Terms & Conditions</p>
-				<p class="legal">Privacy Policy</p>
-				<p class="sitemap">Sitemap</p>
-			</div>
-			<div class="company-about-us-container">
-				<p class="legal">
-					<b>Company</b>
-				</p>
-				<p class="legal">
-					<b>&nbsp;</b>
-				</p>
-				<p class="legal">About Us</p>
-				<p class="legal">Blog</p>
-				<p class="legal">Careers</p>
-				<p class="sitemap">Contact Us</p>
-			</div>
-			<div class="group1">
+		function allerAGauche() {
+			const container = document.querySelector('.image-destinations');
+			container.scrollBy({
+				left: -300, // distance à défiler en px
+				behavior: 'smooth'
+			});
+		}
 
-				<img class="group-icon" alt="" src="../Web/assets/img/Group.png">
+		function scrollRight() {
+			const container = document.querySelector('.image-destinations');
+			container.scrollBy({
+				left: 300, // distance à défiler en px
+				behavior: 'smooth'
+			});
+		}
 
-			</div>
-		</div>
-</footer>
 
-<script>
-function updateValue(isIncrement, idName, indexButton) {
-    const valueElement = document.querySelector(idName);
-	let currentValue = parseInt(valueElement.textContent, 10) || 0;
-	 // Use the idName directly
-	if (!valueElement) return console.log('Id non trouvé'); // Ensure the element exists
-    if (valueElement) {
-        currentValue += isIncrement ? 1 : -1;
-        valueElement.textContent = currentValue;
-		document.getElementsByClassName('minus-btn')[indexButton].disabled = false;
-    }
-	if (currentValue <= 0) {
-		document.getElementsByClassName('minus-btn')[indexButton].disabled = true;
-		currentValue += isIncrement ? 1 : 0; // Prevent negative values
-		valueElement.textContent = currentValue;
-	}
-}
-function allerAGauche() {
-    const container = document.querySelector('.image-destinations');
-    container.scrollBy({
-      left: -300, // distance à défiler en px
-      behavior: 'smooth'
-    });
-  }
-function scrollRight() {
-    const container = document.querySelector('.image-destinations');
-    container.scrollBy({
-      left: 300, // distance à défiler en px
-      behavior: 'smooth'
-    });
-  }
-</script>
+		const aeroports = [{
+				nom: "Montréal-Trudeau",
+				code: "YUL"
+			},
+			{
+				nom: "Paris Charles-de-Gaulle",
+				code: "CDG"
+			},
+			{
+				nom: "Toronto Pearson",
+				code: "YYZ"
+			},
+			{
+				nom: "Newark Liberty",
+				code: "EWR"
+			},
+			{
+				nom: "Londres Heathrow",
+				code: "LHR"
+			},
+			{
+				nom: "Francfort",
+				code: "FRA"
+			},
+			{
+				nom: "Amsterdam Schiphol",
+				code: "AMS"
+			}
+		];
+
+		function setupAutocomplete(inputName, suggestionDivId) {
+			const input = document.querySelector(`input[name="${inputName}"]`);
+			const suggestionBox = document.getElementById(suggestionDivId);
+
+			input.addEventListener("input", () => {
+				const value = input.value.toLowerCase();
+				suggestionBox.innerHTML = "";
+
+				if (value.trim().length === 0) return;
+
+				const matches = aeroports.filter(a =>
+					a.nom.toLowerCase().includes(value) || a.code.toLowerCase().includes(value)
+				);
+
+				matches.forEach(a => {
+					const item = document.createElement("div");
+					item.textContent = `${a.nom} (${a.code})`;
+					item.onclick = () => {
+						input.value = a.code  + ' - ' + a.nom;
+						suggestionBox.innerHTML = "";
+					};
+					suggestionBox.appendChild(item);
+				});
+			});
+
+			document.addEventListener("click", (e) => {
+				if (!input.contains(e.target) && !suggestionBox.contains(e.target)) {
+					suggestionBox.innerHTML = "";
+				}
+			});
+		}
+
+		setupAutocomplete("depart", "suggestions-depart");
+		setupAutocomplete("arrivee", "suggestions-arrivee");
+	</script>
 </body>
 
 </html>

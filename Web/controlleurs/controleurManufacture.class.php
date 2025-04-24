@@ -20,7 +20,7 @@ class ManufactureControleur {
                 return new RechercherVols();
             case "seConnecter":
                 return new SeConnecter();
-            case "sInscrire":
+            case "seInscrire":
                 return new SeInscrire();
             case "accueil":
             case "":
