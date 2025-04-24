@@ -72,7 +72,11 @@ include_once __DIR__ . "/modele/dao/VolDAO.php";
         $vols = VolDAO::chercherParAeroports($dep, $arr);
         echo "<h3>Vols de $dep à $arr :</h3><ul>";
         foreach ($vols as $v) {
-            echo "<li>{$v->getId()} - {$v->getAirline()} - {$v->getDepartureDate()} {$v->getDepartureTime()}</li>";
+            $vol_id = $v->getId();
+            $vol_airline = $v->getAirline();
+            $vol_departure_date = $v->getDepartureDate();
+            $vol_departure_time = $v->getDepartureTime();
+            echo "<li>{$vol_id} - {$vol_airline} - {$vol_departure_date} {$vol_departure_time}</li>";
         }
         echo "</ul>";
     }
