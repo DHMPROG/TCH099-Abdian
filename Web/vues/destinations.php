@@ -5,9 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Destinations - Abdian</title>
-    <link rel="stylesheet" href="./assets/CSS/header.css"/>
-    <link rel="stylesheet" href="./assets/CSS/footer.css" />
-    <link rel="stylesheet" href="./assets/CSS/pageDestination.css" />
+    <link rel="stylesheet" href="../CSS/header.css"/>
+    <link rel="stylesheet" href="../CSS/footer.css" />
+    <link rel="stylesheet" href="../CSS/pageDestination.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" />
@@ -16,43 +16,31 @@
 </head>
 
 <body>
-    <header>
-		<nav class="barre-du-haut">
-		<a href="index.html"><img class="abdian-logo-2-icon" src="assets/img/Abidan_logo.png" alt="Logo"></a>
-
-		<div class="navigation">
-			<a href="index.html" class="bouton">Accueil</a>
-			<a href="destinations.html" class="bouton">Destinations</a>
-			<a href="contact.html" class="bouton">Contact</a>
-			<a href="Page de Connexion.html" class="bouton se-connecter">
-				<img class="generic-avatar-icon" src="assets/img/Generic avatar.png" alt="Avatar">
-				Se connecter
-			</a>
-		</div>
-	</nav>
-  </header>
+    <?php
+	include_once('inclusions/header.php');
+	?>
 
     <main>
         <div class="page-daccueil">
             <div class="image-destinations">
                 <div class="bora-bora image-destinations-child">
-                    <img class="bora-bora-child" alt="" src="assets/img/Rectangle 11.png" />
+                    <img class="bora-bora-child" alt="" src="../assets/img/Rectangle 11.png" />
                     <h1 class="bora-bora1">BORA BORA</h1>
                 </div>
                 <div class="paris image-destinations-child">
-                    <img class="bora-bora-child" alt="" src="assets/img/Rectangle 14.jpg" />
+                    <img class="bora-bora-child" alt="" src="../assets/img/Rectangle 14.jpg" />
                     <h1 class="paris1">PARIS</h1>
                 </div>
                 <div class="berne image-destinations-child">
-                    <img class="bora-bora-child" alt="" src="assets/img/Rectangle 13.png" />
+                    <img class="bora-bora-child" alt="" src="../assets/img/Rectangle 13.png" />
                     <h1 class="berne1">BERNE</h1>
                 </div>
                 <div class="alger image-destinations-child">
-                    <img class="bora-bora-child" alt="" src="assets/img/Rectangle 12.png" />
+                    <img class="bora-bora-child" alt="" src="../assets/img/Rectangle 12.png" />
                     <h1 class="alger1">ALGER</h1>
                 </div>
                 <div class="tokyo image-destinations-child">
-                    <img class="bora-bora-child" alt="" src="assets/img/Rectangle 15.png" />
+                    <img class="bora-bora-child" alt="" src="../assets/img/Rectangle 15.png" />
                     <h1 class="tokyo1">TOKYO</h1>
                 </div>
             </div>
@@ -61,7 +49,7 @@
 	<footer>
 		<div class="group">
 			<div class="abdian-les-meilleures-destina-wrapper">
-				<img class="abdian-logo-1-icon" alt="" src="./assets/img/Abidan_logo.png">
+				<img class="abdian-logo-1-icon" alt="" src="../assets/img/Abidan_logo.png">
 
 				<div class="abdian-les-meilleures">Abdian, les meilleures destinations au meilleur prix</div>
 			</div>

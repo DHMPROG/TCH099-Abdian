@@ -11,11 +11,11 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito Sans:wght@400&display=swap" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Satoshi:wght@400;700&display=swap" />
-	<link rel="stylesheet" href="./assets/CSS/header.css"/>
-	<link rel="stylesheet" href="./assets/CSS/footer.css" />
-    <link rel="stylesheet" href="./assets/CSS/pageFormulaire.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="./assets/Scripts/pageFormulaire.js"></script>
+	<link rel="stylesheet" href="../CSS/header.css"/>
+	<link rel="stylesheet" href="../CSS/footer.css" />
+    <link rel="stylesheet" href="../CSS/pageFormulaire.css">
+
+    <script src="../Scripts/pageFormulaire.js"></script>
 
 
 </head>
@@ -23,14 +23,14 @@
 <body>
 	<header>
 		<nav class="barre-du-haut">
-      <a href="index.html"><img class="abdian-logo-2-icon" src="assets/img/Abidan_logo.png" alt="Logo"></a>
+		<button href="index.html"><img class="abdian-logo-2-icon" src="../assets/img/Abidan_logo.png" alt="Logo"></button>
 
 		<div class="navigation">
 			<a href="index.html" class="bouton">Accueil</a>
 			<a href="destinations.html" class="bouton">Destinations</a>
 			<a href="contact.html" class="bouton">Contact</a>
 			<a href="Page de Connexion.html" class="bouton se-connecter">
-				<img class="generic-avatar-icon" src="assets/img/Generic avatar.png" alt="Avatar">
+				<img class="generic-avatar-icon" src="../assets/img/Generic avatar.png" alt="Avatar">
 				Se connecter
 			</a>
 		</div>
@@ -212,7 +212,7 @@
 	<footer>
 		<div class="group">
 			<div class="abdian-les-meilleures-destina-wrapper">
-				<img class="abdian-logo-1-icon" alt="" src="./assets/img/Abidan_logo.png">
+				<img class="abdian-logo-1-icon" alt="" src="../assets/img/Abidan_logo.png">
 
 				<div class="abdian-les-meilleures">Abdian, les meilleures destinations au meilleur prix</div>
 			</div>
@@ -246,73 +246,6 @@
 			</div>
 		</div>
 </footer>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const selectedFlights = JSON.parse(localStorage.getItem('selectedFlights'));
-    const searchCriteria = JSON.parse(localStorage.getItem('searchCriteria'));
-    
-    if (!selectedFlights || !searchCriteria) {
-        window.location.href = 'index.html';
-        return;
-    }
-
-    // Afficher les détails du vol
-    document.getElementById('flightDetails').textContent = 
-        `${selectedFlights.aller.departure_airport} → ${selectedFlights.aller.arrival_airport}`;
-    
-    if (selectedFlights.retour) {
-        document.getElementById('returnFlightDetails').textContent = 
-            `${selectedFlights.retour.departure_airport} → ${selectedFlights.retour.arrival_airport}`;
-    }
-
-    const passengerForm = document.getElementById('passengerForm');
-    const passengersContainer = document.getElementById('passengersContainer');
-    
-    // Créer les formulaires pour chaque passager
-    for (let i = 0; i < searchCriteria.passengers; i++) {
-        const passengerDiv = document.createElement('div');
-        passengerDiv.className = 'passenger-form';
-        passengerDiv.innerHTML = `
-            <h3>Passager ${i + 1}</h3>
-            <div class="form-group">
-                <label for="nom${i}">Nom</label>
-                <input type="text" id="nom${i}" required>
-            </div>
-            <div class="form-group">
-                <label for="prenom${i}">Prénom</label>
-                <input type="text" id="prenom${i}" required>
-            </div>
-            <div class="form-group">
-                <label for="dateNaissance${i}">Date de naissance</label>
-                <input type="date" id="dateNaissance${i}" required>
-            </div>
-            <div class="form-group">
-                <label for="passeport${i}">Numéro de passeport</label>
-                <input type="text" id="passeport${i}" required>
-            </div>
-        `;
-        passengersContainer.appendChild(passengerDiv);
-    }
-
-    passengerForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const passengers = [];
-        for (let i = 0; i < searchCriteria.passengers; i++) {
-            passengers.push({
-                nom: document.getElementById(`nom${i}`).value,
-                prenom: document.getElementById(`prenom${i}`).value,
-                dateNaissance: document.getElementById(`dateNaissance${i}`).value,
-                passeport: document.getElementById(`passeport${i}`).value
-            });
-        }
-
-        localStorage.setItem('passengers', JSON.stringify(passengers));
-        window.location.href = 'pageSelectionSieges.html';
-    });
-});
-</script>
 
 </body>
 

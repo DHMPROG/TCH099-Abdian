@@ -1,8 +1,8 @@
 <?php
 
-require_once 'ConnexionBD.php';
+require_once 'connexionBD.class.php';
 require_once 'DAO.interface.php';
-require_once '../modele/UserClass.php';
+require_once(__DIR__ . "/../UserClass.php");
 
 class UserDAO implements DAO {
 

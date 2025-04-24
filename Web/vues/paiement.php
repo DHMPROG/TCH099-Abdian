@@ -11,10 +11,10 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito Sans:wght@400&display=swap" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Satoshi:wght@400;700&display=swap" />
-	<link rel="stylesheet" href="./assets/CSS/pagePayement.css" />
-	<link rel="stylesheet" href="./assets/CSS/header.css"/>
-	<link rel="stylesheet" href="./assets/CSS/footer.css" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" href="../CSS/pagePayement.css" />
+	<link rel="stylesheet" href="../CSS/header.css"/>
+	<link rel="stylesheet" href="../CSS/footer.css" />
+
 
 
 
@@ -22,21 +22,9 @@
 </head>
 
 <body>
-	<header>
-		<nav class="barre-du-haut">
-		<a href="index.html"><img class="abdian-logo-2-icon" src="assets/img/Abidan_logo.png" alt="Logo"></a>
-
-		<div class="navigation">
-			<a href="index.html" class="bouton">Accueil</a>
-			<a href="destinations.html" class="bouton">Destinations</a>
-			<a href="contact.html" class="bouton">Contact</a>
-			<a href="Page de Connexion.html" class="bouton se-connecter">
-				<img class="generic-avatar-icon" src="assets/img/Generic avatar.png" alt="Avatar">
-				Se connecter
-			</a>
-		</div>
-	</nav>
-  </header>
+	<?php
+	include_once('inclusions/header.php');
+	?>
 <main>
     <div class="container">
         <div class="payment-section">
@@ -137,7 +125,7 @@
 	<footer>
 		<div class="group">
 			<div class="abdian-les-meilleures-destina-wrapper">
-				<img class="abdian-logo-1-icon" alt="" src="./assets/img/Abidan_logo.png">
+				<img class="abdian-logo-1-icon" alt="" src="../assets/img/Abidan_logo.png">
 
 				<div class="abdian-les-meilleures">Abdian, les meilleures destinations au meilleur prix</div>
 			</div>
@@ -171,7 +159,7 @@
 			</div>
 		</div>
 </footer>
-<script src="./Scripts/pagePayement.js"></script>
+<script src="../Scripts/pagePayement.js"></script>
 
 </body>
 

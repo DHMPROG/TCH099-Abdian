@@ -10,6 +10,7 @@ class Utilisateur implements JsonSerializable
     private string $motDePasseEnClair;
     private string $telephone;
     private DateTime $dateInscription;
+    private Role $role;
 
     public function __construct(
         string $prenom,
@@ -103,6 +104,18 @@ class Utilisateur implements JsonSerializable
         $this->telephone = $telephone;
     }
 
+    public function getRole(): Role
+    {
+        return $this->role;
+    }
+    public function setRole(Role $role): void
+    {
+        if (in_array($role->getRoleName(), ['Client', 'Admin'])) {
+            $this->role = $role;
+        } else {
+            throw new InvalidArgumentException("Invalid role.");
+        }
+    }
     // Method to verify password
     public function verifyPassword(string $password): bool
     {

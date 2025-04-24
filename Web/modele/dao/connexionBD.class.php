@@ -1,10 +1,6 @@
 <?php
+// ConnexionBD.php
 
-// Classe qui gère la connexion à la base de données
-
-// ************ INCLUSIONS ************
-
-// configBD.interface.php contient mot de passe et nom d'utilisateur avec les constantes BD_HOTE, BD_NOM, BD_UTILISATEUR et BD_MOT_PASSE
 include_once("configBD.interface.php");
 
 class ConnexionBD {
@@ -14,23 +10,25 @@ class ConnexionBD {
 
 	public static function getInstance(): PDO {
 		if (self::$instance === null) {
-			$configuration = "mysql:host = " . ConfigBD::BD_HOTE . "; dbname = " . ConfigBD::BD_NOM;
-			$utilisateur = ConfigBD::BD_UTILISATEUR;
-			$motPasse = ConfigBD::BD_MOT_PASSE;
+			$dsn = "mysql:host=" . ConfigBD::BD_HOTE . ";dbname=" . ConfigBD::BD_NOM . ";charset=utf8";
 
-			self::$instance = new PDO($configuration, $utilisateur, $motPasse);
+			try {
+				self::$instance = new PDO($dsn, ConfigBD::BD_UTILISATEUR, ConfigBD::BD_MOT_PASSE);
+				self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Bon réflexe pour debug
 
-			// S'assurer que les transactions se font avec les caractères UTF-8
-			self::$instance->exec("SET character_set_results = 'utf8'");
-			self::$instance->exec("SET character_set_client = 'utf8'");
-			self::$instance->exec("SET character_set_connectin = 'utf8'");
+				// Encodage UTF-8
+				self::$instance->exec("SET character_set_results = 'utf8'");
+				self::$instance->exec("SET character_set_client = 'utf8'");
+				self::$instance->exec("SET character_set_connection = 'utf8'");
 
+			} catch (PDOException $e) {
+				die("Erreur de connexion à la BD : " . $e->getMessage());
+			}
 		}
-		// Maintenant que nous sommes certains qu'elle existe, on la retourne
 		return self::$instance;
 	}
 
-	// Fonction qui libère la connexion PDO (garbage collector)
-	public static function close(): void {self::$instance = null;}
-
+	public static function close(): void {
+		self::$instance = null;
+	}
 }
