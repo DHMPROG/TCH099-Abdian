@@ -49,7 +49,7 @@
 			</div>
 			<div class="depart">
 				<div class="depart-child">
-					<b class="dpart">Départ</b>
+					<b class="depart">Départ</b>
 					<input type="date" name="date_depart" class="date-picker" required>
 				</div>
 			</div>

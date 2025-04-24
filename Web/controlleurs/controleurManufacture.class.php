@@ -25,6 +25,8 @@ class ManufactureControleur {
             case "accueil":
             case "":
                 return new ControleurAccueil();
+            case "contact":
+                return new ControleurCont
             default:
                 throw new Exception("Action inconnue : " . $action);
         }
