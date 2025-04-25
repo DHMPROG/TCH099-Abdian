@@ -9,29 +9,19 @@
   <link rel="stylesheet" href="../CSS/footer.css" />
   <link rel="stylesheet" href="../CSS/pageVols.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  
 
 </head>
 
 <body>
-  <header>
-    <nav class="barre-du-haut">
-      <a href="index.html"><img class="abdian-logo-2-icon" src="assets/img/Abidan_logo.png" alt="Logo"></a>
-
-      <div class="navigation">
-        <a href="index.html" class="bouton">Accueil</a>
-        <a href="destinations.html" class="bouton">Destinations</a>
-        <a href="contact.html" class="bouton">Contact</a>
-        <a href="Page de Connexion.html" class="bouton se-connecter">
-          <img class="generic-avatar-icon" src="assets/img/Generic avatar.png" alt="Avatar">
-          Se connecter
-        </a>
-      </div>
-    </nav>
-  </header>
+  <?php
+  include_once('inclusions/header.php');
+  ?>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <?php
   include_once __DIR__ . "/../modele/dao/connexionBD.class.php";
   include_once __DIR__ . "/../modele/VolClass.php";
-  include_once __DIR__ . "/../modele/dao/VolDAO.php";
+  include_once __DIR__ . "/../modele/dao/VolDao.php";
 
   $depart = isset($_GET['depart']) ? substr(htmlspecialchars($_GET['depart']), 0, 3) : null;
   $arrivee = isset($_GET['arrivee']) ? substr(htmlspecialchars($_GET['arrivee']), 0, 3) : null;
@@ -47,7 +37,9 @@
     <div class="container">
       <div class="page-header">
         <h1>Résultats des vols</h1>
-        <p>New York (JFK) vers Londres (LHR) • 12 Octobre 2023</p>
+        <p>
+          <?php echo "{$vols[0]->getDepartureAirport()} ({$depart}) vers {$vols[0]->getArrivalAirport()} ({$arrivee}) - {$vols[0]->getDepartureDate()}" ?>
+        </p>
       </div>
 
       <div class="search-bar">
@@ -59,7 +51,7 @@
               </div>
               <div>
                 <div class="label">De</div>
-                <div class="value"><?php echo $vols->getDepartureAirport?></div>
+                <div class="value"><?php echo $vols[0]->getDepartureAirport() ?></div>
               </div>
             </div>
 
@@ -73,7 +65,7 @@
               </div>
               <div>
                 <div class="label">Vers</div>
-                <div class="value"><?php echo $vols->getArrivalAirport?></div>
+                <div class="value"><?php echo $vols[0]->getArrivalAirport() ?></div>
               </div>
             </div>
 
@@ -83,7 +75,7 @@
               </div>
               <div>
                 <div class="label">Départ</div>
-                <div class="value"><?php echo $vols->getDepartureDate ?></div>
+                <div class="value"><?php echo $vols[0]->getDepartureDate() ?></div>
               </div>
             </div>
 
@@ -218,24 +210,82 @@
           <div class="flights-list-wrapper">
             <div class="flights-list">
               <?php if (!empty($vols)): ?>
-                <?php foreach ($vols as $vol): ?>
-                  <div class="flight-card" data-stops="<?php echo $vol->getStops(); ?>">
-                    <div class="flight-info">
-                      <span class="flight-id"><?php echo $vol->getId(); ?></span>
-                      <span class="flight-airline"><?php echo $vol->getAirline(); ?></span>
-                      <span
-                        class="flight-route"><?php echo "{$vol->getDepartureCode()} → {$vol->getArrivalCode()}"; ?></span>
-                      <span
-                        class="flight-time"><?php echo "{$vol->getDepartureDate()} {$vol->getDepartureTime()}"; ?></span>
+                <div class="flights-list-wrapper">
+                  <?php foreach ($vols as $vol): ?>
+                    <div class="flight-card" data-flight-id="<?php echo $vol->getId(); ?>"
+                      data-stops="<?php echo $vol->getStops(); ?>">
+                      <div class="flight-card-header">
+                        <div class="airline-info">
+                          <img src="https://via.placeholder.com/50" alt="<?php echo $vol->getAirline(); ?>"
+                            class="airline-logo">
+                          <div>
+                            <div class="airline-name"><?php echo $vol->getAirline(); ?></div>
+                            <div class="flight-number"><?php echo $vol->getFlightNumber(); ?></div>
+                          </div>
+                        </div>
+
+                        <div class="flight-details">
+                          <div class="route-info">
+                            <div class="airport-time">
+                              <div class="time"><?php echo $vol->getDepartureTime(); ?></div>
+                              <div class="code"><?php echo $vol->getDepartureCode(); ?></div>
+                              <div class="airport"><?php echo $vol->getDepartureAirport(); ?></div>
+                            </div>
+
+                            <div class="flight-path">
+                              <div class="duration"><?php echo $vol->getDuration(); ?></div>
+                              <div class="path-line">
+                                <div class="line"></div>
+                                <i class="fas fa-plane plane-icon"></i>
+                                <div class="line"></div>
+                              </div>
+                              <div class="stops-info">
+                                <?php if ((int) $vol->getStops() === 0): ?>
+                                  <span class="nonstop">Sans escale</span>
+                                <?php else: ?>
+                                  <span class="with-stops">
+                                    <?php echo $vol->getStops(); ?>
+                                    <?php echo ((int) $vol->getStops() === 1) ? 'escale' : 'escales'; ?>
+                                    <i class="fas fa-info-circle info-icon"></i>
+                                    <span class="tooltip"><?php echo $vol->getStopDetails(); ?></span>
+                                  </span>
+                                <?php endif; ?>
+                              </div>
+                            </div>
+
+                            <div class="airport-time">
+                              <div class="time"><?php echo $vol->getArrivalTime(); ?></div>
+                              <div class="code"><?php echo $vol->getArrivalCode(); ?></div>
+                              <div class="airport"><?php echo $vol->getArrivalAirport(); ?></div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="price-info">
+                          <div class="price"><?php echo number_format($vol->getPrice(), 2); ?> €</div>
+                          <button class="btn btn-primary select-btn">Sélectionner</button>
+                          <div class="per-person">Aller-retour par personne</div>
+                        </div>
+                      </div>
+
+                      <div class="flight-card-footer">
+                        <button class="details-toggle">
+                          <span>Détails du vol</span>
+                          <i class="fas fa-chevron-down toggle-icon"></i>
+                        </button>
+                        <div class="flight-details-content">
+                          <p>Modèle d'avion : <?php echo $vol->getAircraftModel(); ?></p>
+                          <p>Date départ : <?php echo $vol->getDepartureDate(); ?> / Arrivée :
+                            <?php echo $vol->getArrivalDate(); ?></p>
+                        </div>
+                      </div>
                     </div>
-                    <div class="flight-price">
-                      <span><?php echo $vol->getPrice(); ?> €</span>
-                    </div>
-                  </div>
-                <?php endforeach; ?>
+                  <?php endforeach; ?>
+                </div>
               <?php else: ?>
-                <p>Aucun vol trouvé pour cet itinéraire.</p>
+                <div class="no-results">Aucun vol ne correspond à vos critères. Veuillez ajuster vos filtres.</div>
               <?php endif; ?>
+
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 <?php
 include_once __DIR__ . "/modele/dao/connexionBD.class.php";
 include_once __DIR__ . "/modele/VolClass.php";
-include_once __DIR__ . "/modele/dao/VolDAO.php";
+include_once __DIR__ . "/modele/dao/VolDao.php";
 ?>
 
 <!DOCTYPE html>
