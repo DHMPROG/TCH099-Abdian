@@ -390,7 +390,9 @@ foreach ($currentFlights as $f) {
                       <span>$<?= $total ?></span>
                     </div>
                   </div>
-                  <button class="btn btn-primary btn-book">Continuer à réserver</button>
+                  <a href="index.php?action=formulaireVoyageur&vol_id=<?= $selected->getId() ?>">
+                    <button class="btn btn-primary btn-book">Continuer à réserver</button>
+                  </a>
                 </div>
               </div>
             <?php endif; ?>

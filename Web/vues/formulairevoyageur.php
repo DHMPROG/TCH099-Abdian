@@ -21,21 +21,16 @@
 </head>
 
 <body>
-	<header>
-		<nav class="barre-du-haut">
-		<button href="index.html"><img class="abdian-logo-2-icon" src="../assets/img/Abidan_logo.png" alt="Logo"></button>
+  <?php 
+  include_once('inclusions/header.php');
 
-		<div class="navigation">
-			<a href="index.html" class="bouton">Accueil</a>
-			<a href="destinations.html" class="bouton">Destinations</a>
-			<a href="contact.html" class="bouton">Contact</a>
-			<a href="Page de Connexion.html" class="bouton se-connecter">
-				<img class="generic-avatar-icon" src="../assets/img/Generic avatar.png" alt="Avatar">
-				Se connecter
-			</a>
-		</div>
-	</nav>
-  </header>
+  $vol_id = isset($_GET['vol_id']) ? (int)$_GET['vol_id'] : null;
+
+if ($vol_id) {
+  include_once __DIR__ . "/../modele/dao/VolDao.php";
+  $vol = VolDAO::chercher($vol_id); // À implémenter si ce n'est pas encore fait
+}
+  ?>
 
   <main class="main">
     <div class="container">
@@ -158,17 +153,16 @@
             <div class="airline-info">
               <img src="" alt="Hawaiian Airlines" class="airline-logo">
               <div>
-                <p class="airline-name">Hawaiian Airlines</p>
-                <p class="flight-number">FIG4312</p>
+                <p class="airline-name"><? echo $vol->getAirline(); ?></p>
+                <p class="flight-number"><? echo $vol->getFlightNumber(); ?></p>
               </div>
             </div>
             <div class="flight-time">
-              <p class="duration">16h 45m (+1d)</p>
-              <p class="time">7:00 AM - 4:15 PM</p>
-              <p class="location">2h 45m in HNL</p>
+              <p class="duration"><? echo $vol->getDuration(); ?></p>
+              <p class="time"><?echo "Départ : " . $vol->getDepartureTime() . " - " . " Arrivée : " . $vol->getArrivalTime(); ?></p>
             </div>
           </div>
-
+<!--
           <div class="flight-details">
             <div class="airline-info">
               <img src="" alt="Hawaiian Airlines" class="airline-logo">
@@ -183,19 +177,20 @@
               <p class="location">2h 45m in HNL</p>
             </div>
           </div>
+-->
 
           <div class="price-summary">
             <div class="price-row">
               <span>Subtotal</span>
-              <span>$503</span>
+              <span><? echo $vol->getPrice() . " $"; ?></span>
             </div>
             <div class="price-row">
               <span>Taxes and Fees</span>
-              <span>$121</span>
+              <span><? echo $vol->getPrice()*1.14975-$vol->getPrice() . " $"; ?></span>
             </div>
             <div class="price-row total">
               <span>Total</span>
-              <span>$624</span>
+              <span><? echo $vol->getPrice()*1.14975 . " $"; ?></span>
             </div>
           </div>
 
