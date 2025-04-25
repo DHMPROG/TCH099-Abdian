@@ -324,10 +324,12 @@ foreach ($currentFlights as $f) {
                       </div>
                     </div>
                     <div class="price-info">
-                      <div class="price"><?= number_format($f->getPrice(), 2) ?> $</div>
-                      <button class="btn btn-primary select-btn<?= $isSel ? ' selected' : '' ?>">
+                      <div class="price"><?= number_format($f->getPrice(), 2) ?> €</div>
+                      <a
+                        href="?<?= http_build_query(array_merge($_GET, ['select' => $f->getId()])) ?>"
+                        class="btn btn-primary select-btn<?= $isSel ? ' selected' : '' ?>">
                         <?= $isSel ? 'Sélectionné' : 'Sélectionner' ?>
-                      </button>
+                      </a>
                       <div class="per-person">Aller-retour par personne</div>
                     </div>
                   </div>
@@ -393,6 +395,7 @@ foreach ($currentFlights as $f) {
               </div>
             <?php endif; ?>
           </div>
+
 
         </div>
       </div>
