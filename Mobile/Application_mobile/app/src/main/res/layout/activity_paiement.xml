@@ -1,0 +1,161 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@drawable/bg_gradient">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <ImageView
+            android:layout_width="342dp"
+            android:layout_height="94dp"
+            android:layout_gravity="end"
+            android:layout_marginBottom="24dp"
+            android:src="@drawable/abdian_logo" />
+
+        <!-- Bloc des détails de la transaction -->
+        <LinearLayout
+            android:id="@+id/transactionDetailsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="@color/white"
+            android:layout_marginBottom="24dp"
+            android:elevation="4dp">
+
+            <TextView
+                android:id="@+id/textViewTransactionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Détails de la transaction"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:id="@+id/textViewFlightDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vol sélectionné : -"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textViewPassengerCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre de passagers : -"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textViewTotalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Prix total : -"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <!-- Formulaire de paiement -->
+        <TextView
+            android:id="@+id/textViewHolderName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nom du titulaire"
+            android:textSize="16sp"
+            android:textColor="#424242"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/editTextHolderName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edittext_background"
+            android:hint="Entrez le nom"
+            android:inputType="textPersonName"
+            android:padding="14dp" />
+
+        <TextView
+            android:id="@+id/textViewCardNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Numéro de carte"
+            android:textColor="#424242"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/editTextCardNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="0000 0000 0000 0000"
+            android:inputType="number"
+            android:maxLength="19"
+            android:padding="14dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edittext_background"/>
+
+        <TextView
+            android:id="@+id/textViewExpiryDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Date d'expiration"
+            android:textColor="#424242"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/editTextExpiryDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="MM/AA"
+            android:inputType="text"
+            android:padding="14dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edittext_background"/>
+
+        <TextView
+            android:id="@+id/textViewSecurityCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Code de sécurité"
+            android:textColor="#424242"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/editTextSecurityCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/edittext_background"
+            android:hint="CVV"
+            android:inputType="numberPassword"
+            android:maxLength="3"
+            android:padding="14dp" />
+
+        <Button
+            android:id="@+id/buttonSoumettre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Payer maintenant"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:padding="16dp"
+            android:backgroundTint="@color/ocean_blue" />
+
+    </LinearLayout>
+</ScrollView>

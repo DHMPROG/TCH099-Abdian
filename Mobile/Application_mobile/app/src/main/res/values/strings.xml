@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Reservation_billet_avion</string>
+    <string name="_169_00">$169.00</string>
+
+        <string-array name="classe_options">
+            <item>Économique</item>
+            <item>Business</item>
+            <item>Première classe</item>
+        </string-array>
+
+</resources>
