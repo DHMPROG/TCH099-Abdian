@@ -7,7 +7,6 @@ class Utilisateur implements JsonSerializable
     private string $nom;
     private string $email;
     private string $motDePasse;
-    private string $motDePasseEnClair;
     private string $telephone;
     private DateTime $dateInscription;
     private Role $role;
@@ -17,14 +16,12 @@ class Utilisateur implements JsonSerializable
         string $nom,
         string $email,
         string $motDePasse,
-        string $motDePasseEnClair,
         string $telephone
     ) {
         $this->prenom = $prenom;
         $this->nom = $nom;
         $this->email = $email;
         $this->motDePasse = password_hash($motDePasse, PASSWORD_BCRYPT);
-        $this->motDePasseEnClair = $motDePasseEnClair;
         $this->telephone = $telephone;
         $this->dateInscription = new DateTime();
     }
@@ -53,11 +50,6 @@ class Utilisateur implements JsonSerializable
     public function getMotDePasse(): string
     {
         return $this->motDePasse;
-    }
-
-    public function getMotDePasseEnClair(): string
-    {
-        return $this->motDePasseEnClair;
     }
 
     public function getTelephone(): string
@@ -94,11 +86,6 @@ class Utilisateur implements JsonSerializable
         $this->motDePasse = password_hash($motDePasse, PASSWORD_BCRYPT);
     }
 
-    public function setMotDePasseEnClair(string $motDePasseEnClair): void
-    {
-        $this->motDePasseEnClair = $motDePasseEnClair;
-    }
-
     public function setTelephone(string $telephone): void
     {
         $this->telephone = $telephone;
@@ -125,7 +112,7 @@ class Utilisateur implements JsonSerializable
     // Method to hash the password
     public function hashPassword(): void
     {
-        $this->motDePasse = password_hash($this->motDePasseEnClair, PASSWORD_BCRYPT);
+        $this->motDePasse = password_hash($this->motDePasse, PASSWORD_BCRYPT);
     }
 
     // __toString method

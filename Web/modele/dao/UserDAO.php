@@ -27,15 +27,10 @@ class UserDAO implements DAO {
 
         if ($requete->rowCount() != 0) {
             $enr = $requete->fetch();
-            $user = new Utilisateur(
-                $enr['prenom'],
-                $enr['nom'],
-                $enr['email'],
-                $enr['motDePasse'],
-                $enr['motDePasse'], // Assuming motDePasseEnClair is not stored in DB
-                $enr['telephone']
-            );
+            $user = new Utilisateur($enr['prenom'], $enr['nom'], $enr['email'], $enr['motDePasse'], // Assuming motDePasseEnClair is not stored in DB
+                $enr['telephone']);
             $user->setId($enr['id']);
+    
         }
 
         $requete->closeCursor();
@@ -60,14 +55,8 @@ class UserDAO implements DAO {
         $requete->execute();
 
         foreach ($requete as $enr) {
-            $user = new Utilisateur(
-                $enr['prenom'],
-                $enr['nom'],
-                $enr['email'],
-                $enr['motDePasse'],
-                $enr['motDePasse'], // Assuming motDePasseEnClair is not stored in DB
-                $enr['telephone']
-            );
+            $user = new Utilisateur($enr['prenom'], $enr['nom'], $enr['email'], $enr['motDePasse'], // Assuming motDePasseEnClair is not stored in DB
+            $enr['telephone']);
             $user->setId($enr['id']);
             $users[] = $user;
         }
@@ -99,14 +88,8 @@ class UserDAO implements DAO {
         $requete->execute();
 
         foreach ($requete as $enr) {
-            $user = new Utilisateur(
-                $enr['prenom'],
-                $enr['nom'],
-                $enr['email'],
-                $enr['motDePasse'],
-                $enr['motDePasse'], // Assuming motDePasseEnClair is not stored in DB
-                $enr['telephone']
-            );
+            $user = new Utilisateur($enr['prenom'], $enr['nom'], $enr['email'], $enr['motDePasse'], // Assuming motDePasseEnClair is not stored in DB
+                $enr['telephone']);
             $user->setId($enr['id']);
             $users[] = $user;
         }
@@ -215,14 +198,8 @@ class UserDAO implements DAO {
 
         if ($requete->rowCount() != 0) {
             $enr = $requete->fetch();
-            $user = new Utilisateur(
-                $enr['prenom'],
-                $enr['nom'],
-                $enr['email'],
-                $enr['motDePasse'],
-                $enr['motDePasse'], // Assuming motDePasseEnClair is not stored in DB
-                $enr['telephone']
-            );
+            $user = new Utilisateur($enr['prenom'], $enr['nom'], $enr['email'], $enr['motDePasse'], // Assuming motDePasseEnClair is not stored in DB
+            $enr['telephone']);
             $user->setId($enr['id']);
             return $user;
         }
