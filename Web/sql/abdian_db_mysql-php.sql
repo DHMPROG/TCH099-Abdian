@@ -238,7 +238,8 @@ INSERT INTO `Vol` (`id`, `airline`, `flightNumber`, `aircraftModele`, `departure
 (9, 'Air Transat', 'TS456', 'Airbus A330', '2025-07-10', '17:15:00', 'Montréal-Trudeau', 'YUL', '2025-07-11', '06:45:00', 'Barcelone El Prat', 'BCN', '7h30', 'Non', NULL, 580.00),
 (10, 'Lufthansa', 'LH493', 'Airbus A350', '2025-08-02', '21:00:00', 'Montréal-Trudeau', 'YUL', '2025-08-03', '10:10:00', 'Francfort', 'FRA', '7h10', 'Non', NULL, 690.00),
 (11, 'Royal Air Maroc', 'AT209', 'Boeing 787', '2025-09-05', '20:30:00', 'Montréal-Trudeau', 'YUL', '2025-09-06', '08:50:00', 'Casablanca Mohamed V', 'CMN', '7h20', 'Non', NULL, 720.00),
-(12, 'Air France', 'AF351', 'Boeing 777', '2025-10-01', '18:45:00', 'Montréal-Trudeau', 'YUL', '2025-10-02', '07:10:00', 'Lyon Saint-Exupéry', 'LYS', '6h25', 'Oui', 'Escale à Paris CDG', 630.00);
+(12, 'Air France', 'AF351', 'Boeing 777', '2025-10-01', '18:45:00', 'Montréal-Trudeau', 'YUL', '2025-10-02', '07:10:00', 'Lyon Saint-Exupéry', 'LYS', '6h25', 'Oui', 'Escale à Paris CDG', 630.00),
+(13, 'Air Canada', 'AC101', 'Airbus A330', '2025-06-15', '12:00:00', 'Montréal-Trudeau', 'YUL', '2025-06-16', '18:00:00', 'Paris Charles de Gaulle', 'CDG', '6h00', 'Non', NULL, 620.00);
 
 --
 -- Indexes for dumped tables

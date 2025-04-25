@@ -119,7 +119,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Trier les vols
 function sortFlights(sortBy) {
-  // ... garder le code existant (logique de tri)
+  currentSortBy = sortBy; // Mettre à jour le critère de tri actuel
+  currentFlights.sort((a, b) => {
+    switch (sortBy) {
+      case 'price':
+        return a.price - b.price;
+      case 'duration':
+        // Conversion de la durée en minutes pour la comparaison
+        const durationA = parseDuration(a.duration);
+        const durationB = parseDuration(b.duration);
+        return durationA - durationB;
+      case 'departure':
+        // Comparaison basée sur l'heure de départ (format HH:MM)
+        const [hoursA, minutesA] = a.departureTime.split(':').map(Number);
+        const [hoursB, minutesB] = b.departureTime.split(':').map(Number);
+        if (hoursA !== hoursB) {
+          return hoursA - hoursB;
+        }
+        return minutesA - minutesB;
+      case 'arrival':
+        // Comparaison basée sur l'heure d'arrivée (format HH:MM)
+        const [hoursArrA, minutesArrA] = a.arrivalTime.split(':').map(Number);
+        const [hoursArrB, minutesArrB] = b.arrivalTime.split(':').map(Number);
+        if (hoursArrA !== hoursArrB) {
+          return hoursArrA - hoursArrB;
+        }
+        return minutesArrA - minutesArrB;
+      default:
+        return 0;
+    }
+  });
+  renderFlights(currentFlights); // Réafficher les vols triés
+}
+
+// Fonction pour convertir la durée (HH:mm) en minutes
+function parseDuration(duration) {
+  const [hours, minutes] = duration.split('h ').map(part => parseInt(part) || 0);
+  return hours * 60 + minutes;
 }
 
 // Filtrer les vols
@@ -328,7 +364,11 @@ function setupPriceRangeSlider() {
 
 // Configurer les écouteurs d'événements pour le tri
 function setupSorting() {
-  // ... garder le code existant (écouteurs d'événements pour le tri)
+  sortBySelectors.forEach(selector => {
+    selector.addEventListener('change', function() {
+      sortFlights(this.value);
+    });
+  });
 }
 
 // Configurer les écouteurs d'événements
