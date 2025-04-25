@@ -282,7 +282,7 @@ main{
 }
 .suggestions {
 	position: static; /* ne flotte pas */
-	background-color: white;
+	/* background-color: white; */
 	border: 1px solid #ccc;
 	border-radius: 8px;
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
@@ -299,7 +299,7 @@ main{
 }
 
 .suggestions div:hover {
-	background-color: #f0f8ff;
+	/* background-color: #f0f8ff; */
 }
 @media (max-width: 1000px) {
     .scroll-left, .scroll-right {

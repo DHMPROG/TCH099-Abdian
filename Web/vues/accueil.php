@@ -24,11 +24,12 @@
 
 <body>
 	<?php
-	include_once('inclusions/header.php');
+	 include_once('inclusions/header.php');
 	?>
 
 	<main>
-		<form class="recherche" action="pageRechercheVols.html" method="GET">
+	<form class="recherche" action="index.php" method="GET">
+	<input type="hidden" name="action" value="rechercherVols">
 			<div class="aller">
 				<div class="aller-child">
 					<div class="tab">
@@ -49,7 +50,7 @@
 			</div>
 			<div class="depart">
 				<div class="depart-child">
-					<b class="dpart">Départ</b>
+					<b class="depart">Départ</b>
 					<input type="date" name="date_depart" class="date-picker" required>
 				</div>
 			</div>
@@ -214,7 +215,7 @@
 					const item = document.createElement("div");
 					item.textContent = `${a.nom} (${a.code})`;
 					item.onclick = () => {
-						input.value = a.code  + ' - ' + a.nom;
+						input.value = a.code;
 						suggestionBox.innerHTML = "";
 					};
 					suggestionBox.appendChild(item);
@@ -231,6 +232,8 @@
 		setupAutocomplete("depart", "suggestions-depart");
 		setupAutocomplete("arrivee", "suggestions-arrivee");
 	</script>
+
+
 </body>
 
 </html>

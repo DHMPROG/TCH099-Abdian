@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../../modele/dao/connexionBD.class.php';
 require_once __DIR__ . '/../../modele/VolClass.php';
-require_once __DIR__ . '/../../modele/dao/VolDAO.php';
+require_once __DIR__ . '/../../modele/dao/VolDao.php';
 require_once __DIR__ . '/../restControllerVols.php';
 
 header("Access-Control-Allow-Origin: *");
