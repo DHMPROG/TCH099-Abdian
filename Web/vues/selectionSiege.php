@@ -32,55 +32,61 @@
   </head>
 
   <body>
-    <header>
-      <nav class="barre-du-haut">
-        <a href="index.html">
-          <img
-            class="abdian-logo-2-icon"
-            src="assets/img/Abidan_logo.png"
-            alt="Logo"
-          />
-        </a>
+ <?php 
+  include_once('inclusions/header.php');
 
-        <div class="navigation">
-          <a href="index.html" class="bouton">Accueil</a>
-          <a href="destinations.html" class="bouton">Destinations</a>
-          <a href="contact.html" class="bouton">Contact</a>
-          <a href="Page de Connexion.html" class="bouton se-connecter">
-            <img
-              class="generic-avatar-icon"
-              src="assets/img/Generic avatar.png"
-              alt="Avatar"
-            />
-            Se connecter
-          </a>
-        </div>
-      </nav>
-    </header>
+  include_once __DIR__ . "/../modele/dao/VolDao.php";
+  include_once __DIR__ . "/../modele/VolClass.php";
+  include_once __DIR__ . "/../modele/dao/UserDAO.php";
+  $vol_id = isset($_GET['vol_id']) ? $_GET['vol_id'] : null;
+   
+  $vol = VolDAO::chercher($vol_id); 
+  if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $prenom = $_POST['prenom'] ?? '';
+    $deuxieme_prenom = $_POST['deuxieme-prenom'] ?? '';
+    $nom = $_POST['nom'] ?? '';
+    $date_naissance = $_POST['date-naissance'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $telephone = $_POST['telephone'] ?? '';
+    $recours = $_POST['recours'] ?? '';
+  
+    $urgence_prenom = $_POST['urgence-prenom'] ?? '';
+    $urgence_nom = $_POST['urgence-nom'] ?? '';
+    $urgence_email = $_POST['urgence-email'] ?? '';
+    $urgence_telephone = $_POST['urgence-telephone'] ?? '';
+    $same_as_passenger = isset($_POST['same-as-passenger']) ? true : false;
+   // Appel à la méthode chercher
+
+  }
+  ?>
 
     <main class="main-content">
       <!-- Panneau d'informations sur le vol -->
       <div class="flight-info-panel">
-        <div class="flight-route">
-          <div class="departure">
-            <h2>SFO</h2>
-            <p>Californie, États-Unis</p>
-          </div>
-          <div class="route-arrow">
-            <i class="fas fa-arrow-right"></i>
-          </div>
-          <div class="arrival">
-            <h2>NRT</h2>
-            <p>Tokyo, Japon</p>
-          </div>
+      <?php if ($vol): ?>
+    <div class="flight-route">
+        <div class="departure">
+            <h2><?php echo $vol->getDepartureCode(); ?></h2>
+            <p><?php echo $vol->getDepartureAirport(); ?></p>
         </div>
+        <div class="route-arrow">
+            <i class="fas fa-arrow-right"></i>
+        </div>
+        <div class="arrival">
+            <h2><?php echo $vol->getArrivalCode(); ?></h2>
+            <p><?php echo $vol->getArrivalAirport(); ?></p>
+        </div>
+    </div>
+<?php else: ?>
+    <p>Erreur : Les informations du vol ne sont pas disponibles.</p>
+<?php endif; ?>
         <div class="flight-date">
           <div class="departure-date">
-            <h3>25 Février | 7:00AM</h3>
+            <h3><?php echo $vol->getDepartureDate() . " | " . $vol->getDepartureTime() ?></h3>
             <p>Départ</p>
           </div>
           <div class="arrival-date">
-            <h3>21 Mars | 12:15PM</h3>
+            <h3><?php echo $vol->getArrivalDate() . " | " . $vol->getArrivalTime() ?></h3>
             <p>Arrivée</p>
           </div>
         </div>
@@ -932,7 +938,7 @@
             <div class="passenger-details">
               <div>
                 <h4>Passager 1</h4>
-                <p>Sofia Knowles</p>
+                <p><?php echo $prenom ." ". $nom ?></p>
               </div>
               <div>
                 <h4>Numéro de siège</h4>

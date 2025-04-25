@@ -81,7 +81,7 @@
   
   @media (min-width: 992px) {
     .form-container {
-      flex-direction: row;
+      flex-direction: column;
     }
     
     .passenger-info {

@@ -44,7 +44,6 @@ class SeInscrire extends Controleur
                 $_POST['nom'],
                 $_POST['email'],
                 $_POST['motDePasse'],
-                $_POST['motDePasse'], // Mot de passe en clair pour le hachage
                 $_POST['telephone'] ?? ""
             );
 

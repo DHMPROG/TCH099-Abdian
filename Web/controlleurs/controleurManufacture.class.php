@@ -9,6 +9,7 @@ include_once(__DIR__ . "/controlleurContact.php");
 include_once(__DIR__ . "/controlleurDestinations.php");
 include_once(__DIR__ . "/controlleurDeconnexion.php");
 include_once(__DIR__ . "/controlleurFormulaire.php");
+include_once(__DIR__ . "/controlleurSelectionSieges.php");
 
 
 class ManufactureControleur {
@@ -29,6 +30,7 @@ class ManufactureControleur {
             case "contact": return new ControleurContact();
             case "destinations": return new ControleurDestinations();
             case "formulaireVoyageur" : return new ControleurFormulaire();
+            case "selectionSieges" : return new ControleurSieges();
             default: throw new Exception("Action inconnue : " . $action);
         }
     }

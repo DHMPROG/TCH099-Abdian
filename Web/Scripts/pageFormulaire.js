@@ -139,80 +139,8 @@ document.addEventListener('DOMContentLoaded', function() {
       return isValid;
     }
   
-    // Gestion de la soumission du formulaire
-    submitFormBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      
-      if (validateForm()) {
-        // Préparer les données à envoyer
-        const formData = {
-          passenger: {
-            firstName: passengerForm.prenom.value,
-            middleName: passengerForm.deuxiemePrenom.value,
-            lastName: passengerForm.nom.value,
-            birthDate: passengerForm.dateNaissance.value,
-            email: passengerForm.email.value,
-            phone: passengerForm.telephone.value,
-            recourseNumber: passengerForm.recours.value
-          },
-          emergencyContact: {
-            firstName: emergencyForm.prenom.value,
-            lastName: emergencyForm.nom.value,
-            email: emergencyForm.email.value,
-            phone: emergencyForm.telephone.value,
-            sameAsPassenger: emergencyForm.sameAsPassenger.checked
-          },
-          baggage: {
-            count: baggageCount
-          }
-        };
-        
-        console.log('Formulaire soumis:', formData);
-        alert('Formulaire enregistré avec succès!');
-        
-        // Ici, vous pourriez envoyer les données à un serveur
-        // fetch('/api/booking', {
-        //   method: 'POST',
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //   },
-        //   body: JSON.stringify(formData),
-        // })
-        // .then(response => response.json())
-        // .then(data => {
-        //   console.log('Success:', data);
-        //   window.location.href = 'confirmation.html';
-        // })
-        // .catch(error => {
-        //   console.error('Error:', error);
-        // });
-      } else {
-        alert('Veuillez remplir tous les champs obligatoires correctement.');
-      }
-    });
-  
-    // Gestion des boutons de sélection de sièges
-    selectSeatsBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      if (validateForm()) {
-        console.log('Redirection vers la page de sélection des sièges');
-        alert('Redirection vers la page de sélection des sièges');
-        // window.location.href = 'select-seats.html';
-      } else {
-        alert('Veuillez remplir tous les champs obligatoires avant de sélectionner les sièges.');
-      }
-    });
-  
-    selectSeatsSideBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      if (validateForm()) {
-        console.log('Redirection vers la page de sélection des sièges');
-        alert('Redirection vers la page de sélection des sièges');
-        // window.location.href = 'select-seats.html';
-      } else {
-        alert('Veuillez remplir tous les champs obligatoires avant de sélectionner les sièges.');
-      }
-    });
+    
+ 
   
     // Ajouter l'année courante dans le footer
     const currentYear = new Date().getFullYear();
