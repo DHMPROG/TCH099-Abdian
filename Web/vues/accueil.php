@@ -167,35 +167,186 @@
 		}
 
 
-		const aeroports = [{
-				nom: "Montréal-Trudeau",
-				code: "YUL"
-			},
-			{
-				nom: "Paris Charles-de-Gaulle",
-				code: "CDG"
-			},
-			{
-				nom: "Toronto Pearson",
-				code: "YYZ"
-			},
-			{
-				nom: "Newark Liberty",
-				code: "EWR"
-			},
-			{
-				nom: "Londres Heathrow",
-				code: "LHR"
-			},
-			{
-				nom: "Francfort",
-				code: "FRA"
-			},
-			{
-				nom: "Amsterdam Schiphol",
-				code: "AMS"
-			}
-		];
+		const aeroports = [
+  {
+    "nom": "Montréal Trudeau",
+    "code": "YUL"
+  },
+  {
+    "nom": "Paris Charles-de-Gaulle",
+    "code": "CDG"
+  },
+  {
+    "nom": "Toronto Pearson",
+    "code": "YYZ"
+  },
+  {
+    "nom": "Newark Liberty",
+    "code": "EWR"
+  },
+  {
+    "nom": "Londres Heathrow",
+    "code": "LHR"
+  },
+  {
+    "nom": "Francfort",
+    "code": "FRA"
+  },
+  {
+    "nom": "Amsterdam Schiphol",
+    "code": "AMS"
+  },
+  {
+    "nom": "New York JFK",
+    "code": "JFK"
+  },
+  {
+    "nom": "Los Angeles International",
+    "code": "LAX"
+  },
+  {
+    "nom": "Chicago O'Hare",
+    "code": "ORD"
+  },
+  {
+    "nom": "Atlanta Hartsfield-Jackson",
+    "code": "ATL"
+  },
+  {
+    "nom": "Miami International",
+    "code": "MIA"
+  },
+  {
+    "nom": "San Francisco International",
+    "code": "SFO"
+  },
+  {
+    "nom": "Dallas/Fort Worth International",
+    "code": "DFW"
+  },
+  {
+    "nom": "Seattle-Tacoma International",
+    "code": "SEA"
+  },
+  {
+    "nom": "Boston Logan International",
+    "code": "BOS"
+  },
+  {
+    "nom": "Philadelphia International",
+    "code": "PHL"
+  },
+  {
+    "nom": "Denver International",
+    "code": "DEN"
+  },
+  {
+    "nom": "Houston George Bush Intercontinental",
+    "code": "IAH"
+  },
+  {
+	"nom": "Alger - Houari Boumédiène",
+	 "code": "ALG"
+  }
+,
+  {
+	"nom": "Tokyo Narita",
+	"code": "NRT"
+  },
+  {
+	"nom": "Tokyo Haneda",
+	"code": "HND"
+  },
+  {
+	"nom": "Osaka Kansai",
+	"code": "KIX"
+  },
+  {
+	"nom": "Séoul Incheon",
+	"code": "ICN"
+  },
+  {
+	"nom": "Pékin Capital",
+	"code": "PEK"
+  },
+  {
+	"nom": "Shanghai Pudong",
+	"code": "PVG"
+  },
+  {
+	"nom": "Hong Kong International",
+	"code": "HKG"
+  },
+  {
+	"nom": "Bangkok Suvarnabhumi",
+	"code": "BKK"
+  },
+  {
+	"nom": "Dubaï International",
+	"code": "DXB"
+  },
+  {
+	"nom": "Abou Dabi International",
+	"code": "AUH"
+  },
+  {
+	"nom": "Doha Hamad International",
+	"code": "DOH"
+  },
+  {
+	"nom": "Kuala Lumpur International",	
+	"code": "KUL"
+  },
+  {
+	"nom": "Singapour Changi",	
+	"code": "SIN"
+  },
+  {
+	"nom": "Jakarta Soekarno-Hatta",
+	"code": "CGK"
+  },
+  {
+    "nom": "Bora Bora Motu Mute",
+    "code": "BOB"
+  },
+  {
+    "nom": "Berne Belp",
+    "code": "BRN"
+  },
+  {
+	"nom": "Zurich",
+	"code": "ZRH"
+  },
+  {
+	"nom": "Genève",
+	"code": "GVA"
+  },
+  {
+	"nom": "Lausanne",
+	"code": "QLS"
+  },
+  {
+	"nom": "Lucerne",
+	"code": "LUZ"
+  },
+  {
+	"nom": "Lugano",
+	"code": "LUG"
+  },
+  {
+	"nom": "Bâle-Mulhouse",
+	"code": "BSL"
+  },
+  {
+	"nom": "Nice Côte d'Azur",
+	"code": "NCE"
+  },
+  {
+	"nom": "Marseille Provence",
+	"code": "MRS"
+  }
+ 
+];
 
 		function setupAutocomplete(inputName, suggestionDivId) {
 			const input = document.querySelector(`input[name="${inputName}"]`);
