@@ -18,30 +18,34 @@ class UserDAO implements DAO {
             throw new Exception("Impossible d'obtenir la connexion à la BD");
         }
 
-        $user = null;
         $requete = $connexion->prepare(
             "SELECT * FROM Utilisateur WHERE id = :id"
         );
         $requete->bindParam(':id', $id, PDO::PARAM_INT);
         $requete->execute();
 
-        if ($requete->rowCount() != 0) {
+        $user = null;
+        if ($requete->rowCount() !== 0) {
             $enr = $requete->fetch();
-            $user = new Utilisateur($enr['prenom'], $enr['nom'], $enr['email'], $enr['motDePasse'], // Assuming motDePasseEnClair is not stored in DB
-                $enr['telephone']);
+            // On passe directement le hash stocké en base
+            $user = new Utilisateur(
+                $enr['prenom'],
+                $enr['nom'],
+                $enr['email'],
+                $enr['mot_de_passe'],
+                $enr['telephone']
+            );
             $user->setId($enr['id']);
-    
         }
 
         $requete->closeCursor();
         ConnexionBD::close();
-
         return $user;
     }
 
     /**
      * Retourne tous les utilisateurs
-     * @return array
+     * @return Utilisateur[]
      */
     static public function chercherTous(): array {
         try {
@@ -55,22 +59,26 @@ class UserDAO implements DAO {
         $requete->execute();
 
         foreach ($requete as $enr) {
-            $user = new Utilisateur($enr['prenom'], $enr['nom'], $enr['email'], $enr['motDePasse'], // Assuming motDePasseEnClair is not stored in DB
-            $enr['telephone']);
+            $user = new Utilisateur(
+                $enr['prenom'],
+                $enr['nom'],
+                $enr['email'],
+                $enr['mot_de_passe'],
+                $enr['telephone']
+            );
             $user->setId($enr['id']);
             $users[] = $user;
         }
 
         $requete->closeCursor();
         ConnexionBD::close();
-
         return $users;
     }
 
     /**
      * Retourne les utilisateurs correspondant à un filtre
      * @param string $filtre
-     * @return array
+     * @return Utilisateur[]
      */
     static public function chercherAvecFiltre(string $filtre): array {
         try {
@@ -83,26 +91,30 @@ class UserDAO implements DAO {
         $requete = $connexion->prepare(
             "SELECT * FROM Utilisateur WHERE nom LIKE :filtre OR prenom LIKE :filtre"
         );
-        $filtre = "%$filtre%";
-        $requete->bindParam(':filtre', $filtre, PDO::PARAM_STR);
+        $like = "%{$filtre}%";
+        $requete->bindParam(':filtre', $like, PDO::PARAM_STR);
         $requete->execute();
 
         foreach ($requete as $enr) {
-            $user = new Utilisateur($enr['prenom'], $enr['nom'], $enr['email'], $enr['motDePasse'], // Assuming motDePasseEnClair is not stored in DB
-                $enr['telephone']);
+            $user = new Utilisateur(
+                $enr['prenom'],
+                $enr['nom'],
+                $enr['email'],
+                $enr['mot_de_passe'],
+                $enr['telephone']
+            );
             $user->setId($enr['id']);
             $users[] = $user;
         }
 
         $requete->closeCursor();
         ConnexionBD::close();
-
         return $users;
     }
 
     /**
      * Insère un nouvel utilisateur dans la base de données
-     * @param object $objet
+     * @param Utilisateur $objet
      * @return bool
      */
     static public function inserer(object $objet): bool {
@@ -112,21 +124,31 @@ class UserDAO implements DAO {
             throw new Exception("Impossible d'obtenir la connexion à la BD");
         }
 
-        $requete = $connexion->prepare(
-            "INSERT INTO Utilisateur (prenom, nom, email, motDePasse, telephone, dateInscription) 
-             VALUES (:prenom, :nom, :email, :motDePasse, :telephone, :dateInscription)"
-        );
+        // 1) On hash le mot de passe clair
+        $hash = $objet->hashPassword($objet->getMotDePasse());
 
-        $requete->bindParam(':prenom', $objet->getPrenom(), PDO::PARAM_STR);
-        $requete->bindParam(':nom', $objet->getNom(), PDO::PARAM_STR);
-        $requete->bindParam(':email', $objet->getEmail(), PDO::PARAM_STR);
-        $requete->bindParam(':motDePasse', $objet->getMotDePasse(), PDO::PARAM_STR);
-        $requete->bindParam(':telephone', $objet->getTelephone(), PDO::PARAM_STR);
-        $requete->bindParam(':dateInscription', $objet->getDateInscription()->format('Y-m-d H:i:s'), PDO::PARAM_STR);
+        $requete = $connexion->prepare(
+            "INSERT INTO Utilisateur 
+                (prenom, nom, email, mot_de_passe, telephone, date_inscription) 
+             VALUES 
+                (:prenom, :nom, :email, :mot_de_passe, :telephone, :date_inscription)"
+        );
+        $requete->bindParam(':prenom',          $objet->getPrenom(), PDO::PARAM_STR);
+        $requete->bindParam(':nom',             $objet->getNom(),    PDO::PARAM_STR);
+        $requete->bindParam(':email',           $objet->getEmail(),  PDO::PARAM_STR);
+        $requete->bindParam(':mot_de_passe',    $hash,               PDO::PARAM_STR);
+        $requete->bindParam(':telephone',       $objet->getTelephone(), PDO::PARAM_STR);
+        $requete->bindParam(
+            ':date_inscription', 
+            $objet->getDateInscription()->format('Y-m-d H:i:s'),
+            PDO::PARAM_STR
+        );
 
         $success = $requete->execute();
         if ($success) {
+            // MAJ de l'objet avec l'ID et le hash
             $objet->setId((int)$connexion->lastInsertId());
+            $objet->setMotDePasse($hash);
         }
 
         return $success;
@@ -134,7 +156,7 @@ class UserDAO implements DAO {
 
     /**
      * Met à jour un utilisateur existant
-     * @param object $objet
+     * @param Utilisateur $objet
      * @return bool
      */
     static public function modifier(object $objet): bool {
@@ -146,24 +168,26 @@ class UserDAO implements DAO {
 
         $requete = $connexion->prepare(
             "UPDATE Utilisateur 
-             SET prenom = :prenom, nom = :nom, email = :email, 
-                 motDePasse = :motDePasse, telephone = :telephone 
+             SET prenom = :prenom, 
+                 nom    = :nom, 
+                 email  = :email, 
+                 mot_de_passe = :mot_de_passe, 
+                 telephone    = :telephone 
              WHERE id = :id"
         );
-
-        $requete->bindParam(':id', $objet->getId(), PDO::PARAM_INT);
-        $requete->bindParam(':prenom', $objet->getPrenom(), PDO::PARAM_STR);
-        $requete->bindParam(':nom', $objet->getNom(), PDO::PARAM_STR);
-        $requete->bindParam(':email', $objet->getEmail(), PDO::PARAM_STR);
-        $requete->bindParam(':motDePasse', $objet->getMotDePasse(), PDO::PARAM_STR);
-        $requete->bindParam(':telephone', $objet->getTelephone(), PDO::PARAM_STR);
+        $requete->bindParam(':id',            $objet->getId(),       PDO::PARAM_INT);
+        $requete->bindParam(':prenom',        $objet->getPrenom(),   PDO::PARAM_STR);
+        $requete->bindParam(':nom',           $objet->getNom(),      PDO::PARAM_STR);
+        $requete->bindParam(':email',         $objet->getEmail(),    PDO::PARAM_STR);
+        $requete->bindParam(':mot_de_passe',  $objet->getMotDePasse(), PDO::PARAM_STR);
+        $requete->bindParam(':telephone',     $objet->getTelephone(), PDO::PARAM_STR);
 
         return $requete->execute();
     }
 
     /**
      * Supprime un utilisateur de la base de données
-     * @param object $objet
+     * @param Utilisateur $objet
      * @return bool
      */
     static public function supprimer(object $objet): bool {
@@ -173,11 +197,13 @@ class UserDAO implements DAO {
             throw new Exception("Impossible d'obtenir la connexion à la BD");
         }
 
-        $requete = $connexion->prepare("DELETE FROM Utilisateur WHERE id = :id");
+        $requete = $connexion->prepare(
+            "DELETE FROM Utilisateur WHERE id = :id"
+        );
         $requete->bindParam(':id', $objet->getId(), PDO::PARAM_INT);
-
         return $requete->execute();
     }
+
     /**
      * Recherche un utilisateur par email
      * @param string $email
@@ -196,15 +222,20 @@ class UserDAO implements DAO {
         $requete->bindParam(':email', $email, PDO::PARAM_STR);
         $requete->execute();
 
-        if ($requete->rowCount() != 0) {
+        if ($requete->rowCount() !== 0) {
             $enr = $requete->fetch();
-            $user = new Utilisateur($enr['prenom'], $enr['nom'], $enr['email'], $enr['motDePasse'], // Assuming motDePasseEnClair is not stored in DB
-            $enr['telephone']);
+            $user = new Utilisateur(
+                $enr['prenom'],
+                $enr['nom'],
+                $enr['email'],
+                $enr['mot_de_passe'],
+                $enr['telephone']
+            );
             $user->setId($enr['id']);
             return $user;
         }
 
-        return null; // Retourne null si aucun utilisateur trouvé
+        return null;
     }
 
     /**

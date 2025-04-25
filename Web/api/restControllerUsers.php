@@ -54,11 +54,10 @@ class RestControllerUsers {
             $data['nom'],
             $data['email'],
             $data['motDePasse'],
-            $data['motDePasse'],
             $data['telephone']
         );
 
-        $utilisateur->hashPassword();
+        $utilisateur->hashPassword($data['motDePasse']);
         $success = UserDAO::inserer($utilisateur);
 
         if ($success) {

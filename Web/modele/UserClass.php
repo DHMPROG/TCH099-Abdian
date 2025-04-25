@@ -21,7 +21,7 @@ class Utilisateur implements JsonSerializable
         $this->prenom = $prenom;
         $this->nom = $nom;
         $this->email = $email;
-        $this->motDePasse = password_hash($motDePasse, PASSWORD_BCRYPT);
+        $this->motDePasse = $motDePasse;
         $this->telephone = $telephone;
         $this->dateInscription = new DateTime();
     }
@@ -83,7 +83,7 @@ class Utilisateur implements JsonSerializable
 
     public function setMotDePasse(string $motDePasse): void
     {
-        $this->motDePasse = password_hash($motDePasse, PASSWORD_BCRYPT);
+        $this->motDePasse = $motDePasse;
     }
 
     public function setTelephone(string $telephone): void
@@ -110,9 +110,9 @@ class Utilisateur implements JsonSerializable
     }
 
     // Method to hash the password
-    public function hashPassword(): void
+    public function hashPassword(string $password): string
     {
-        $this->motDePasse = password_hash($this->motDePasse, PASSWORD_BCRYPT);
+       return password_hash($password ,PASSWORD_BCRYPT);
     }
 
     // __toString method
