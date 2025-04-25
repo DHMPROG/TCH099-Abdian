@@ -24,6 +24,8 @@ class SeConnecter extends Controleur
     // ******************* Méthode exécuter action
     public function executerAction(): string
     {
+        session_destroy();
+        session_start();
         // Vérifier si l'utilisateur est déjà connecté
         if ($this->acteur == "utilisateur") {
             array_push($this->messagesErreur, "Vous êtes déjà connecté.");
@@ -50,7 +52,7 @@ class SeConnecter extends Controleur
             $this->acteur = "utilisateur";
             $_SESSION['utilisateurConnecte'] = $unUtilisateur;
 
-            return "index.php";
+            return "accueil.php";
         }
 
         // Gestion des messages d'erreur via GET

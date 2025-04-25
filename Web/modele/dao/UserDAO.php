@@ -133,12 +133,12 @@ class UserDAO implements DAO {
              VALUES 
                 (:prenom, :nom, :email, :mot_de_passe, :telephone, :date_inscription)"
         );
-        $requete->bindParam(':prenom',          $objet->getPrenom(), PDO::PARAM_STR);
-        $requete->bindParam(':nom',             $objet->getNom(),    PDO::PARAM_STR);
-        $requete->bindParam(':email',           $objet->getEmail(),  PDO::PARAM_STR);
-        $requete->bindParam(':mot_de_passe',    $hash,               PDO::PARAM_STR);
-        $requete->bindParam(':telephone',       $objet->getTelephone(), PDO::PARAM_STR);
-        $requete->bindParam(
+        $requete->bindValue(':prenom',          $objet->getPrenom(), PDO::PARAM_STR);
+        $requete->bindValue(':nom',             $objet->getNom(),    PDO::PARAM_STR);
+        $requete->bindValue(':email',           $objet->getEmail(),  PDO::PARAM_STR);
+        $requete->bindValue(':mot_de_passe',    $hash,               PDO::PARAM_STR);
+        $requete->bindValue(':telephone',       $objet->getTelephone(), PDO::PARAM_STR);
+        $requete->bindValue(
             ':date_inscription', 
             $objet->getDateInscription()->format('Y-m-d H:i:s'),
             PDO::PARAM_STR
@@ -175,12 +175,12 @@ class UserDAO implements DAO {
                  telephone    = :telephone 
              WHERE id = :id"
         );
-        $requete->bindParam(':id',            $objet->getId(),       PDO::PARAM_INT);
-        $requete->bindParam(':prenom',        $objet->getPrenom(),   PDO::PARAM_STR);
-        $requete->bindParam(':nom',           $objet->getNom(),      PDO::PARAM_STR);
-        $requete->bindParam(':email',         $objet->getEmail(),    PDO::PARAM_STR);
-        $requete->bindParam(':mot_de_passe',  $objet->getMotDePasse(), PDO::PARAM_STR);
-        $requete->bindParam(':telephone',     $objet->getTelephone(), PDO::PARAM_STR);
+        $requete->bindValue(':id',            $objet->getId(),       PDO::PARAM_INT);
+        $requete->bindValue(':prenom',        $objet->getPrenom(),   PDO::PARAM_STR);
+        $requete->bindValue(':nom',           $objet->getNom(),      PDO::PARAM_STR);
+        $requete->bindValue(':email',         $objet->getEmail(),    PDO::PARAM_STR);
+        $requete->bindValue(':mot_de_passe',  $objet->getMotDePasse(), PDO::PARAM_STR);
+        $requete->bindValue(':telephone',     $objet->getTelephone(), PDO::PARAM_STR);
 
         return $requete->execute();
     }
@@ -200,7 +200,7 @@ class UserDAO implements DAO {
         $requete = $connexion->prepare(
             "DELETE FROM Utilisateur WHERE id = :id"
         );
-        $requete->bindParam(':id', $objet->getId(), PDO::PARAM_INT);
+        $requete->bindValue(':id', $objet->getId(), PDO::PARAM_INT);
         return $requete->execute();
     }
 
@@ -219,7 +219,7 @@ class UserDAO implements DAO {
         $requete = $connexion->prepare(
             "SELECT * FROM Utilisateur WHERE email = :email"
         );
-        $requete->bindParam(':email', $email, PDO::PARAM_STR);
+        $requete->bindValue(':email', $email, PDO::PARAM_STR);
         $requete->execute();
 
         if ($requete->rowCount() !== 0) {

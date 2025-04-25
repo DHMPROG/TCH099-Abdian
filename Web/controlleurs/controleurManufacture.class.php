@@ -7,6 +7,7 @@ include_once(__DIR__ . "/controlleurConnexion.php");
 include_once(__DIR__ . "/controlleurSInscrire.php");
 include_once(__DIR__ . "/controlleurContact.php");
 include_once(__DIR__ . "/controlleurDestinations.php");
+include_once(__DIR__ . "/controlleurDeconnexion.php");
 
 
 class ManufactureControleur {
@@ -20,6 +21,7 @@ class ManufactureControleur {
         switch ($action) {
             case "rechercherVols": return new RechercherVols();
             case "seConnecter": return new SeConnecter();
+            case 'deconnexion': return new SeDeconnecter();
             case "seInscrire": return new SeInscrire();
             case "accueil": return new ControleurAccueil();
             case "": return new ControleurAccueil();
