@@ -74,6 +74,10 @@ class Reservation implements JsonSerializable
             throw new InvalidArgumentException("Statut invalide.");
         }
     }
+    public function setDateReservation($date_reservation)
+    {
+        $this->date_reservation = $date_reservation;
+    }
     public function jsonSerialize(): array
     {
         return [

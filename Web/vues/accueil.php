@@ -24,12 +24,12 @@
 
 <body>
 	<?php
-	 include_once('inclusions/header.php');
+	include_once('inclusions/header.php');
 	?>
 
 	<main>
-	<form class="recherche" action="index.php" method="GET">
-	<input type="hidden" name="action" value="rechercherVols">
+		<form class="recherche" action="index.php" method="GET">
+			<input type="hidden" name="action" value="rechercherVols">
 			<div class="aller">
 				<div class="aller-child">
 					<div class="tab">
@@ -38,7 +38,7 @@
 						<div class="suggestions" id="suggestions-depart"></div>
 					</div>
 				</div>
-				
+
 			</div>
 			<div class="arrive">
 				<div class="arrive-child"></div>
@@ -57,37 +57,42 @@
 			<div class="retour">
 				<div class="retour-child"></div>
 				<b class="retour1">Retour</b>
-				<input type="date" name="date_retour" class="date-picker">
+				<input type="date" name="date_retour" class="date-picker" required>
 			</div>
 			<div class="nb-passagers">
 				<img class="person-solid-icon" alt="" src="../assets/img/person solid.png">
 				<div class="nombre-de-passagers">Nombre de Passagers</div>
 				<div class="popover-increment">
-					<div class="row">
+					<<div class="row">
 						<div class="label2">Adultes:</div>
 						<div class="incrementer">
-							<button type="button" class="bouton minus-btn" onclick="updateValue(false,'#adulte', 0)">-</button>
+							<button type="button" class="bouton minus-btn" onclick="updateValue(false,'#adulte', 'input-adulte')">-</button>
 							<div class="value" id="adulte">1</div>
-							<button type="button" class="bouton plus-btn" onclick="updateValue(true,'#adulte', 0)">+</button>
+							<button type="button" class="bouton plus-btn" onclick="updateValue(true,'#adulte', 'input-adulte')">+</button>
 						</div>
-					</div>
-					<div class="row">
-						<div class="label2">Enfants:</div>
-						<div class="incrementer">
-							<button type="button" class="bouton minus-btn" onclick="updateValue(false, '#enfant', 1)">-</button>
-							<div class="value" , id="enfant">1</div>
-							<button type="button" class="bouton plus-btn" onclick="updateValue(true,'#enfant', 1)">+</button>
-						</div>
-					</div>
-					<div class="row">
-						<div class="label2">Bébés:</div>
-						<div class="incrementer">
-							<button type="button" class="bouton minus-btn" onclick="updateValue(false,'#bebe', 2)">-</button>
-							<div class="value" id="bebe">1</div>
-							<button type="button" class="bouton plus-btn" onclick="updateValue(true,'#bebe', 2)">+</button>
-						</div>
-					</div>
+						<input type="hidden" name="nb_adultes" id="input-adulte" value="1">
 				</div>
+
+				<div class="row">
+					<div class="label2">Enfants:</div>
+					<div class="incrementer">
+						<button type="button" class="bouton minus-btn" onclick="updateValue(false,'#enfant', 'input-enfant')">-</button>
+						<div class="value" id="enfant">1</div>
+						<button type="button" class="bouton plus-btn" onclick="updateValue(true,'#enfant', 'input-enfant')">+</button>
+					</div>
+					<input type="hidden" name="nb_enfants" id="input-enfant" value="1">
+				</div>
+
+				<div class="row">
+					<div class="label2">Bébés:</div>
+					<div class="incrementer">
+						<button type="button" class="bouton minus-btn" onclick="updateValue(false,'#bebe', 'input-bebe')">-</button>
+						<div class="value" id="bebe">1</div>
+						<button type="button" class="bouton plus-btn" onclick="updateValue(true,'#bebe', 'input-bebe')">+</button>
+					</div>
+					<input type="hidden" name="nb_bebes" id="input-bebe" value="1">
+				</div>
+			</div>
 			</div>
 			<button type="submit" class="recherche1">
 				<b>Recherche</b>
@@ -167,186 +172,184 @@
 		}
 
 
-		const aeroports = [
-  {
-    "nom": "Montréal Trudeau",
-    "code": "YUL"
-  },
-  {
-    "nom": "Paris Charles-de-Gaulle",
-    "code": "CDG"
-  },
-  {
-    "nom": "Toronto Pearson",
-    "code": "YYZ"
-  },
-  {
-    "nom": "Newark Liberty",
-    "code": "EWR"
-  },
-  {
-    "nom": "Londres Heathrow",
-    "code": "LHR"
-  },
-  {
-    "nom": "Francfort",
-    "code": "FRA"
-  },
-  {
-    "nom": "Amsterdam Schiphol",
-    "code": "AMS"
-  },
-  {
-    "nom": "New York JFK",
-    "code": "JFK"
-  },
-  {
-    "nom": "Los Angeles International",
-    "code": "LAX"
-  },
-  {
-    "nom": "Chicago O'Hare",
-    "code": "ORD"
-  },
-  {
-    "nom": "Atlanta Hartsfield-Jackson",
-    "code": "ATL"
-  },
-  {
-    "nom": "Miami International",
-    "code": "MIA"
-  },
-  {
-    "nom": "San Francisco International",
-    "code": "SFO"
-  },
-  {
-    "nom": "Dallas/Fort Worth International",
-    "code": "DFW"
-  },
-  {
-    "nom": "Seattle-Tacoma International",
-    "code": "SEA"
-  },
-  {
-    "nom": "Boston Logan International",
-    "code": "BOS"
-  },
-  {
-    "nom": "Philadelphia International",
-    "code": "PHL"
-  },
-  {
-    "nom": "Denver International",
-    "code": "DEN"
-  },
-  {
-    "nom": "Houston George Bush Intercontinental",
-    "code": "IAH"
-  },
-  {
-	"nom": "Alger - Houari Boumédiène",
-	 "code": "ALG"
-  }
-,
-  {
-	"nom": "Tokyo Narita",
-	"code": "NRT"
-  },
-  {
-	"nom": "Tokyo Haneda",
-	"code": "HND"
-  },
-  {
-	"nom": "Osaka Kansai",
-	"code": "KIX"
-  },
-  {
-	"nom": "Séoul Incheon",
-	"code": "ICN"
-  },
-  {
-	"nom": "Pékin Capital",
-	"code": "PEK"
-  },
-  {
-	"nom": "Shanghai Pudong",
-	"code": "PVG"
-  },
-  {
-	"nom": "Hong Kong International",
-	"code": "HKG"
-  },
-  {
-	"nom": "Bangkok Suvarnabhumi",
-	"code": "BKK"
-  },
-  {
-	"nom": "Dubaï International",
-	"code": "DXB"
-  },
-  {
-	"nom": "Abou Dabi International",
-	"code": "AUH"
-  },
-  {
-	"nom": "Doha Hamad International",
-	"code": "DOH"
-  },
-  {
-	"nom": "Kuala Lumpur International",	
-	"code": "KUL"
-  },
-  {
-	"nom": "Singapour Changi",	
-	"code": "SIN"
-  },
-  {
-	"nom": "Jakarta Soekarno-Hatta",
-	"code": "CGK"
-  },
-  {
-    "nom": "Bora Bora Motu Mute",
-    "code": "BOB"
-  },
-  {
-    "nom": "Berne Belp",
-    "code": "BRN"
-  },
-  {
-	"nom": "Zurich",
-	"code": "ZRH"
-  },
-  {
-	"nom": "Genève",
-	"code": "GVA"
-  },
-  {
-	"nom": "Lausanne",
-	"code": "QLS"
-  },
-  {
-	"nom": "Lucerne",
-	"code": "LUZ"
-  },
-  {
-	"nom": "Lugano",
-	"code": "LUG"
-  },
-  {
-	"nom": "Bâle-Mulhouse",
-	"code": "BSL"
-  },
-  {
-	"nom": "Nice Côte d'Azur",
-	"code": "NCE"
-  },
-  {
-	"nom": "Marseille Provence",
-	"code": "MRS"
-  }
- 
-];
+		const aeroports = [{
+				"nom": "Montréal Trudeau",
+				"code": "YUL"
+			},
+			{
+				"nom": "Paris Charles-de-Gaulle",
+				"code": "CDG"
+			},
+			{
+				"nom": "Toronto Pearson",
+				"code": "YYZ"
+			},
+			{
+				"nom": "Newark Liberty",
+				"code": "EWR"
+			},
+			{
+				"nom": "Londres Heathrow",
+				"code": "LHR"
+			},
+			{
+				"nom": "Francfort",
+				"code": "FRA"
+			},
+			{
+				"nom": "Amsterdam Schiphol",
+				"code": "AMS"
+			},
+			{
+				"nom": "New York JFK",
+				"code": "JFK"
+			},
+			{
+				"nom": "Los Angeles International",
+				"code": "LAX"
+			},
+			{
+				"nom": "Chicago O'Hare",
+				"code": "ORD"
+			},
+			{
+				"nom": "Atlanta Hartsfield-Jackson",
+				"code": "ATL"
+			},
+			{
+				"nom": "Miami International",
+				"code": "MIA"
+			},
+			{
+				"nom": "San Francisco International",
+				"code": "SFO"
+			},
+			{
+				"nom": "Dallas/Fort Worth International",
+				"code": "DFW"
+			},
+			{
+				"nom": "Seattle-Tacoma International",
+				"code": "SEA"
+			},
+			{
+				"nom": "Boston Logan International",
+				"code": "BOS"
+			},
+			{
+				"nom": "Philadelphia International",
+				"code": "PHL"
+			},
+			{
+				"nom": "Denver International",
+				"code": "DEN"
+			},
+			{
+				"nom": "Houston George Bush Intercontinental",
+				"code": "IAH"
+			},
+			{
+				"nom": "Alger - Houari Boumédiène",
+				"code": "ALG"
+			},
+			{
+				"nom": "Tokyo Narita",
+				"code": "NRT"
+			},
+			{
+				"nom": "Tokyo Haneda",
+				"code": "HND"
+			},
+			{
+				"nom": "Osaka Kansai",
+				"code": "KIX"
+			},
+			{
+				"nom": "Séoul Incheon",
+				"code": "ICN"
+			},
+			{
+				"nom": "Pékin Capital",
+				"code": "PEK"
+			},
+			{
+				"nom": "Shanghai Pudong",
+				"code": "PVG"
+			},
+			{
+				"nom": "Hong Kong International",
+				"code": "HKG"
+			},
+			{
+				"nom": "Bangkok Suvarnabhumi",
+				"code": "BKK"
+			},
+			{
+				"nom": "Dubaï International",
+				"code": "DXB"
+			},
+			{
+				"nom": "Abou Dabi International",
+				"code": "AUH"
+			},
+			{
+				"nom": "Doha Hamad International",
+				"code": "DOH"
+			},
+			{
+				"nom": "Kuala Lumpur International",
+				"code": "KUL"
+			},
+			{
+				"nom": "Singapour Changi",
+				"code": "SIN"
+			},
+			{
+				"nom": "Jakarta Soekarno-Hatta",
+				"code": "CGK"
+			},
+			{
+				"nom": "Bora Bora Motu Mute",
+				"code": "BOB"
+			},
+			{
+				"nom": "Berne Belp",
+				"code": "BRN"
+			},
+			{
+				"nom": "Zurich",
+				"code": "ZRH"
+			},
+			{
+				"nom": "Genève",
+				"code": "GVA"
+			},
+			{
+				"nom": "Lausanne",
+				"code": "QLS"
+			},
+			{
+				"nom": "Lucerne",
+				"code": "LUZ"
+			},
+			{
+				"nom": "Lugano",
+				"code": "LUG"
+			},
+			{
+				"nom": "Bâle-Mulhouse",
+				"code": "BSL"
+			},
+			{
+				"nom": "Nice Côte d'Azur",
+				"code": "NCE"
+			},
+			{
+				"nom": "Marseille Provence",
+				"code": "MRS"
+			}
+
+		];
 
 		function setupAutocomplete(inputName, suggestionDivId) {
 			const input = document.querySelector(`input[name="${inputName}"]`);
@@ -382,6 +385,21 @@
 
 		setupAutocomplete("depart", "suggestions-depart");
 		setupAutocomplete("arrivee", "suggestions-arrivee");
+
+		function updateValue(isIncrement, displayId, inputId) {
+			const valueDiv = document.querySelector(displayId);
+			const inputHidden = document.getElementById(inputId);
+			let currentValue = parseInt(valueDiv.innerText);
+
+			if (isIncrement) {
+				currentValue++;
+			} else if (currentValue > 0) {
+				currentValue--;
+			}
+
+			valueDiv.innerText = currentValue;
+			inputHidden.value = currentValue;
+		}
 	</script>
 
 

@@ -41,23 +41,56 @@
   $vol_id = isset($_GET['vol_id']) ? $_GET['vol_id'] : null;
    
   $vol = VolDAO::chercher($vol_id); 
-  if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $prenom = $_POST['prenom'] ?? '';
-    $deuxieme_prenom = $_POST['deuxieme-prenom'] ?? '';
-    $nom = $_POST['nom'] ?? '';
-    $date_naissance = $_POST['date-naissance'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $telephone = $_POST['telephone'] ?? '';
-    $recours = $_POST['recours'] ?? '';
-  
-    $urgence_prenom = $_POST['urgence-prenom'] ?? '';
-    $urgence_nom = $_POST['urgence-nom'] ?? '';
-    $urgence_email = $_POST['urgence-email'] ?? '';
-    $urgence_telephone = $_POST['urgence-telephone'] ?? '';
-    $same_as_passenger = isset($_POST['same-as-passenger']) ? true : false;
    // Appel à la méthode chercher
 
-  }
+
+// Récupération du nombre de passagers depuis le lien
+$nb_adultes  = isset($_GET['nb_adultes'])  ? (int)$_GET['nb_adultes']  : 1;
+$nb_enfants  = isset($_GET['nb_enfants'])  ? (int)$_GET['nb_enfants']  : 0;
+$nb_bebes    = isset($_GET['nb_bebes'])    ? (int)$_GET['nb_bebes']    : 0;
+$totalPassagers = $nb_adultes + $nb_enfants + $nb_bebes;
+
+// Récupération des DAO et classes
+require_once __DIR__ . '/../modele/dao/PassagerDAO.php';
+require_once __DIR__ . '/../modele/dao/ReservationDAO.php';
+require_once __DIR__ . '/../modele/passagerClass.php';
+require_once __DIR__ . '/../modele/reservationClass.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+{
+    // 1. On récupère les données POST
+    $passengers = $_POST['passengers'];            // tableau des infos passager
+    $seatsRaw   = $_POST['seats']   ?? '';         // ex: "4A,4B,4C"
+    $selectedSeats = $seatsRaw === '' 
+                     ? [] 
+                     : explode(',', $seatsRaw);
+
+    // 2. Pour chaque passager : insert en base + réservation de siège
+    foreach ($passengers as $idx => $pData) {
+        // Créer l'objet Passager
+        $p = new Passager($pData['prenom'],$pData['deuxieme_prenom'],$pData['nom'],
+                          $pData['date_naissance'],$pData['email'],
+                          $pData['telephone'],$pData['urgence_prenom'],
+                          $pData['urgence_nom'],$pData['urgence_email'],
+                          $pData['urgence_telephone']);
+
+        // Insère le passager
+        PassagerDAO::inserer($p);
+        $passagerId = ConnexionBD::getInstance()->lastInsertId(); 
+
+        // Insère la réservation correspondante
+        $seat = $selectedSeats[$idx] ?? null;
+        $res = new Reservation((int)$passagerId,(int)$vol_id, $seat,date('Y-m-d H:i:s'));
+      
+
+        ReservationDAO::inserer($res);
+    }
+
+    // Rediriger vers page de confirmation
+    header('Location: confirmation.php');
+    exit;
+}
+
   ?>
 
     <main class="main-content">
@@ -95,6 +128,7 @@
       <div class="content-wrapper">
         <!-- Côté gauche : Plan des sièges -->
         <div class="seat-map-container">
+        <input type="hidden" name="seats" id="selectedSeatsInput" value="">
           <div class="airplane">
             <div class="airplane-shape">
               <div class="seat-map">
@@ -998,5 +1032,35 @@
     </footer>
 
     <script src="./assets/Scripts/pageSelectionSiege.js"></script>
+    <script>
+  (function(){
+    const maxSeats = <?= $totalPassagers ?>;
+    let selected = [];
+
+    document.querySelectorAll('.seat.available').forEach(seatEl => {
+      seatEl.addEventListener('click', () => {
+        const code = seatEl.dataset.seat;
+        const idx = selected.indexOf(code);
+
+        if (idx > -1) {
+          // déselection
+          selected.splice(idx, 1);
+          seatEl.classList.remove('selected');
+        } else {
+          if (selected.length >= maxSeats) {
+            alert(`Vous ne pouvez sélectionner que ${maxSeats} sièges.`);
+            return;
+          }
+          selected.push(code);
+          seatEl.classList.add('selected');
+        }
+
+        // mettre à jour le champ caché et l'affichage
+        document.getElementById('selectedSeatsInput').value = selected.join(',');
+        document.getElementById('selected-seat').textContent = selected.join(', ');
+      });
+    });
+  })();
+</script>
   </body>
 </html>

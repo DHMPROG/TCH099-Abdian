@@ -77,7 +77,7 @@ public class InscriptionActivity extends AppCompatActivity {
         String telephone = phoneEditText.getText().toString();
         String mdp =  motDePasseEditText.getText().toString();
 
-        Utilisateur utilisateur = new Utilisateur(nom, prenom, email, telephone, age , mdp);
+        Utilisateur utilisateur = new Utilisateur(nom, prenom, email, mdp, telephone, age);
 
         utilisateurViewModel.registreUtilisateur(utilisateur, new Callback() {
             @Override

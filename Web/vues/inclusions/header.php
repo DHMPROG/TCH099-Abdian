@@ -3,15 +3,6 @@
 $user = $_SESSION['utilisateurConnecte'] ?? null;
 ?>
 
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Mon site</title>
-    <!-- tes CSS/js -->
-</head>
-<body>
 <header>
     <nav class="barre-du-haut">
         <a href="index.php?action=accueil">

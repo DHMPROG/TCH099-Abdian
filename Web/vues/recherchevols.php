@@ -9,6 +9,10 @@ include_once __DIR__ . "/../modele/dao/VolDao.php";
 $depart      = isset($_GET['depart'])      ? substr(htmlspecialchars($_GET['depart']), 0, 3) : null;
 $arrivee     = isset($_GET['arrivee'])     ? substr(htmlspecialchars($_GET['arrivee']), 0, 3) : null;
 $date_depart = isset($_GET['date_depart']) ? htmlspecialchars($_GET['date_depart'])       : null;
+$date_retour = $_GET['date_retour'];
+$nb_adultes = $_GET['nb_adultes'];
+$nb_enfants = $_GET['nb_enfants'];
+$nb_bebes = $_GET['nb_bebes'];
 
 // Données initiales
 $flightData = [];
@@ -66,6 +70,55 @@ $selected = null;
 foreach ($currentFlights as $f) {
   if ($f->getId() === $selectedId) {
     $selected = $f;
+    break;
+  }
+}
+
+// --- recherche des vols retour ---
+$returnData = [];
+if ($depart && $arrivee && $date_retour) {
+  $returnData = VolDAO::chercherParAeroportsEtDate(
+    $arrivee,
+    $depart,
+    $date_retour
+  );
+}
+
+// filtrage des retours (même callback que pour $currentFlights)
+$currentReturnFlights = array_filter($returnData, function ($f) use ($priceMax, $airlines, $stops, $timeFilter) {
+  if ($f->getPrice() > $priceMax) return false;
+  if (!empty($airlines) && !in_array($f->getAirline(), $airlines, true)) return false;
+  if (!empty($stops)    && !in_array((string)$f->getStops(), $stops, true))    return false;
+  if ($timeFilter && preg_match('/^(\d+):/', $f->getDepartureTime(), $m)) {
+    list($hMin, $hMax) = explode('-', $timeFilter);
+    $h = (int)$m[1];
+    if ($h < (int)$hMin || $h >= (int)$hMax) return false;
+  }
+  return true;
+});
+
+// tri des retours
+usort($currentReturnFlights, function ($a, $b) use ($sortBy) {
+  switch ($sortBy) {
+    case 'price':
+      return $a->getPrice()     <=> $b->getPrice();
+    case 'duration':
+      return parseDuration($a->getDuration())
+        <=> parseDuration($b->getDuration());
+    case 'departure':
+      return strcmp($a->getDepartureTime(), $b->getDepartureTime());
+    case 'arrival':
+      return strcmp($a->getArrivalTime(),   $b->getArrivalTime());
+  }
+  return 0;
+});
+
+// sélection du vol retour
+$selectedReturnId = isset($_GET['selectReturn']) ? (int)$_GET['selectReturn'] : null;
+$selectedReturn   = null;
+foreach ($currentReturnFlights as $f) {
+  if ($f->getId() === $selectedReturnId) {
+    $selectedReturn = $f;
     break;
   }
 }
@@ -148,6 +201,17 @@ foreach ($currentFlights as $f) {
                   <?= !empty($currentFlights)
                     ? htmlspecialchars($currentFlights[0]->getDepartureDate())
                     : '' ?>
+                </div>
+              </div>
+            </div>
+            <div class="search-field">
+              <div class="icon-container">
+                <i class="fas fa-calendar"></i>
+              </div>
+              <div>
+                <div class="label">Retour</div>
+                <div class="value">
+                  <?= !empty($date_retour) ? htmlspecialchars($date_retour) : 'Pas de retour' ?>
                 </div>
               </div>
             </div>
@@ -324,7 +388,7 @@ foreach ($currentFlights as $f) {
                       </div>
                     </div>
                     <div class="price-info">
-                      <div class="price"><?= number_format($f->getPrice(), 2) ?> €</div>
+                      <div class="price"><?= number_format($f->getPrice(), 2) ?> $</div>
                       <a
                         href="?<?= http_build_query(array_merge($_GET, ['select' => $f->getId()])) ?>"
                         class="btn btn-primary select-btn<?= $isSel ? ' selected' : '' ?>">
@@ -344,53 +408,154 @@ foreach ($currentFlights as $f) {
                     </div>
                   </div>
                 </div>
+
               <?php endforeach; ?>
+              <?php if (!empty($currentReturnFlights)): ?>
+                <h2>Vols retour</h2>
+                <?php foreach ($currentReturnFlights as $f):
+                  $isReturnSel = $selectedReturn && $f->getId() === $selectedReturn->getId();
+                ?>
+                  <div class="flight-card<?= $isReturnSel ? ' selected' : '' ?>"
+                    data-flight-id="<?= $f->getId() ?>" data-stops="<?= $f->getStops() ?>">
+                    <div class="flight-card-header">
+                      <div class="airline-info">
+                        <img src="https://via.placeholder.com/50"
+                          alt="<?= htmlspecialchars($f->getAirline()) ?>"
+                          class="airline-logo">
+                        <div>
+                          <div class="airline-name"><?= htmlspecialchars($f->getAirline()) ?></div>
+                          <div class="flight-number"><?= htmlspecialchars($f->getFlightNumber()) ?></div>
+                        </div>
+                      </div>
+                      <div class="flight-details">
+                        <div class="route-info">
+                          <div class="airport-time">
+                            <div class="time"><?= htmlspecialchars($f->getDepartureTime()) ?></div>
+                            <div class="code"><?= htmlspecialchars($f->getDepartureCode()) ?></div>
+                            <div class="airport"><?= htmlspecialchars($f->getDepartureAirport()) ?></div>
+                          </div>
+                          <div class="flight-path">
+                            <div class="duration"><?= htmlspecialchars($f->getDuration()) ?></div>
+                            <div class="path-line">
+                              <div class="line"></div><i class="fas fa-plane plane-icon"></i>
+                              <div class="line"></div>
+                            </div>
+                            <div class="stops-info">
+                              <?php if ($f->getStops() === 0): ?>
+                                <span class="nonstop">Sans escale</span>
+                              <?php else: ?>
+                                <span class="with-stops">
+                                  <?= $f->getStops() ?> <?= $f->getStops() === 1 ? 'escale' : 'escales' ?>
+                                  <i class="fas fa-info-circle info-icon"></i>
+                                  <span class="tooltip"><?= htmlspecialchars($f->getStopDetails()) ?></span>
+                                </span>
+                              <?php endif; ?>
+                            </div>
+                          </div>
+                          <div class="airport-time">
+                            <div class="time"><?= htmlspecialchars($f->getArrivalTime()) ?></div>
+                            <div class="code"><?= htmlspecialchars($f->getArrivalCode()) ?></div>
+                            <div class="airport"><?= htmlspecialchars($f->getArrivalAirport()) ?></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="price-info">
+                        <div class="price"><?= number_format($f->getPrice(), 2) ?> $</div>
+                        <a href="?<?= http_build_query(array_merge($_GET, ['selectReturn' => $f->getId()])) ?>"
+                          class="btn btn-primary select-btn<?= $isReturnSel ? ' selected' : '' ?>">
+                          <?= $isReturnSel ? 'Sélectionné' : 'Sélectionner' ?>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                <?php endforeach; ?>
+
+              <?php endif; ?>
+
+
+
             </div>
-            <?php if ($selected):
-              $taxes = round($selected->getPrice() * 0.2);
-              $total = $selected->getPrice() + $taxes;
+            <?php if ($selected || $selectedReturn):
+              $priceAller  = $selected       ? $selected->getPrice()       : 0;
+              $priceRetour = $selectedReturn ? $selectedReturn->getPrice() : 0;
+              $taxes       = round(($priceAller + $priceRetour) * 0.2);
+              $total       = $priceAller + $priceRetour + $taxes;
             ?>
-              <div id="flightSummary" class="flight-summary" style="display: block;">
+              <div id="flightSummary" class="flight-summary" style="display:block;">
                 <h3>Résumé du vol</h3>
                 <div class="summary-content">
-                  <div class="summary-flight-info">
-                    <div class="summary-airline">
-                      <img src="https://via.placeholder.com/50"
-                        alt="<?= htmlspecialchars($selected->getAirline()) ?>"
-                        class="summary-logo">
-                      <div class="summary-airline-details">
-                        <div class="summary-airline-name"><?= htmlspecialchars($selected->getAirline()) ?></div>
-                        <div class="summary-flight-number"><?= htmlspecialchars($selected->getFlightNumber()) ?></div>
+                  <?php if ($selected): ?>
+                    <div class="summary-flight-info">
+                      <div class="summary-airline">
+                        <img src="https://via.placeholder.com/50"
+                          alt="<?= htmlspecialchars($selected->getAirline()) ?>"
+                          class="summary-logo">
+                        <div class="summary-airline-details">
+                          <div class="summary-airline-name"><?= htmlspecialchars($selected->getAirline()) ?></div>
+                          <div class="summary-flight-number"><?= htmlspecialchars($selected->getFlightNumber()) ?></div>
+                        </div>
+                      </div>
+                      <div class="summary-route">
+                        <div class="summary-time">
+                          <span><?= htmlspecialchars($selected->getDepartureTime()) ?></span> -
+                          <span><?= htmlspecialchars($selected->getArrivalTime()) ?></span>
+                        </div>
+                        <div class="summary-airports">
+                          <span><?= htmlspecialchars($selected->getDepartureCode()) ?></span> -
+                          <span><?= htmlspecialchars($selected->getArrivalCode()) ?></span>
+                        </div>
+                        <div class="summary-duration">
+                          <?= htmlspecialchars($selected->getDuration()) ?> •
+                          <?= $selected->getStops() === 0 ? 'Sans escale' : $selected->getStops() . ' escale' . ($selected->getStops() > 1 ? 's' : '') ?>
+                        </div>
                       </div>
                     </div>
-                    <div class="summary-route">
-                      <div class="summary-time">
-                        <span><?= htmlspecialchars($selected->getDepartureTime()) ?></span> - <span><?= htmlspecialchars($selected->getArrivalTime()) ?></span>
+                  <?php endif; ?>
+
+                  <?php if ($selectedReturn): ?>
+                    <div class="summary-flight-info return">
+                      <div class="summary-airline">
+                        <img src="https://via.placeholder.com/50"
+                          alt="<?= htmlspecialchars($selectedReturn->getAirline()) ?>"
+                          class="summary-logo">
+                        <div class="summary-airline-details">
+                          <div class="summary-airline-name"><?= htmlspecialchars($selectedReturn->getAirline()) ?></div>
+                          <div class="summary-flight-number"><?= htmlspecialchars($selectedReturn->getFlightNumber()) ?></div>
+                        </div>
                       </div>
-                      <div class="summary-airports">
-                        <span><?= htmlspecialchars($selected->getDepartureCode()) ?></span> - <span><?= htmlspecialchars($selected->getArrivalCode()) ?></span>
-                      </div>
-                      <div class="summary-duration">
-                        <?= htmlspecialchars($selected->getDuration()) ?> • <?= $selected->getStops() === 0 ? 'Sans escale' : $selected->getStops() . ' escale' . ($selected->getStops() > 1 ? 's' : '') ?>
+                      <div class="summary-route">
+                        <div class="summary-time">
+                          <span><?= htmlspecialchars($selectedReturn->getDepartureTime()) ?></span> -
+                          <span><?= htmlspecialchars($selectedReturn->getArrivalTime()) ?></span>
+                        </div>
+                        <div class="summary-airports">
+                          <span><?= htmlspecialchars($selectedReturn->getDepartureCode()) ?></span> -
+                          <span><?= htmlspecialchars($selectedReturn->getArrivalCode()) ?></span>
+                        </div>
+                        <div class="summary-duration">
+                          <?= htmlspecialchars($selectedReturn->getDuration()) ?> •
+                          <?= $selectedReturn->getStops() === 0 ? 'Sans escale' : $selectedReturn->getStops() . ' escale' . ($selectedReturn->getStops() > 1 ? 's' : '') ?>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="summary-divider"></div>
+                  <?php endif; ?>
+
                   <div class="price-details">
-                    <div class="price-line">
-                      <span>Prix du vol</span>
-                      <span>$<?= number_format($selected->getPrice(), 2) ?></span>
-                    </div>
-                    <div class="price-line">
-                      <span>Taxes &amp; Frais</span>
-                      <span>$<?= $taxes ?></span>
-                    </div>
-                    <div class="price-line total">
-                      <span>Total</span>
-                      <span>$<?= $total ?></span>
-                    </div>
+                    <div class="price-line"><span>Vol aller</span><span>$<?= number_format($priceAller, 2) ?></span></div>
+                    <div class="price-line"><span>Vol retour</span><span>$<?= number_format($priceRetour, 2) ?></span></div>
+                    <div class="price-line"><span>Taxes & Frais</span><span>$<?= $taxes ?></span></div>
+                    <div class="price-line total"><span>Total</span><span>$<?= number_format($total, 2) ?></span></div>
                   </div>
-                  <a href="index.php?action=formulaireVoyageur&vol_id=<?= $selected->getId() ?>">
+
+                  <a
+                    href="index.php?<?= http_build_query([
+                                      'action'    => 'formulaireVoyageur',
+                                      'vol_id'    => $selected      ? $selected->getId()      : '',
+                                      'retour_id' => $selectedReturn ? $selectedReturn->getId() : '',
+                                      'nb_adultes' => $nb_adultes,
+                                      'nb_enfants' => $nb_enfants,
+                                      'nb_bebes'   => $nb_bebes
+                                    ]) ?>">
                     <button class="btn btn-primary btn-book">Continuer à réserver</button>
                   </a>
                 </div>

@@ -13,7 +13,7 @@ public class Utilisateur {
     private String telephone;
 
     // Constructeur avec tous les paramètres
-    public Utilisateur(String email, String motDePasse, String nom, String prenom, int age, String telephone) {
+    public Utilisateur(String prenom, String nom,  String email, String motDePasse, String telephone, int age ) {
         this.email = email;
         this.motDePasse = motDePasse;  // Utilisation de "motDePasse"
         this.nom = nom;
