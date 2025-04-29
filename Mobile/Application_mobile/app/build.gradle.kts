@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId = "com.todoran.reservation_billet_avion"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
