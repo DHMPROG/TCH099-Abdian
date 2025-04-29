@@ -1,0 +1,31 @@
+<?php
+
+$DB_HOST="abdian-db";
+$MYSQL_ROOT_PASSWORD="root";
+$MYSQL_DATABASE="abdian-db";
+$MYSQL_USER="root";
+$MYSQL_PASSWORD="root";
+
+
+
+session_start();
+
+$hostname = getenv('AZURE_MYSQL_HOST');
+$username = getenv('AZURE_MYSQL_USERNAME');
+$password = "root";
+$database = getenv('AZURE_MYSQL_DBNAME');
+
+try {
+    $conn = new PDO(
+        "mysql:host=$hostname; dbname=$database",
+        $username,
+        $password,
+        array(
+            PDO::MYSQL_ATTR_SSL_CA => 'cert.pem',
+            PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        )
+    );
+    echo "Connexion réussie";
+} catch(PDOException $e) {echo "Connexion échouée: ".$e->getMessage();}
