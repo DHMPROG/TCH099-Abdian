@@ -6,6 +6,7 @@
     android:fillViewport="true"
     android:background="@drawable/bg_gradient">
 
+
     <LinearLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
@@ -13,14 +14,26 @@
         android:orientation="vertical"
         android:padding="24dp">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="4dp"
+            android:background="#B5DDFE"
+            android:titleTextColor="@android:color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <!-- Bloc des détails de la transaction -->
+
         <ImageView
             android:layout_width="342dp"
-            android:layout_height="94dp"
+            android:layout_height="93dp"
             android:layout_gravity="end"
             android:layout_marginBottom="24dp"
             android:src="@drawable/abdian_logo" />
 
-        <!-- Bloc des détails de la transaction -->
         <LinearLayout
             android:id="@+id/transactionDetailsContainer"
             android:layout_width="match_parent"

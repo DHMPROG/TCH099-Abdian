@@ -46,7 +46,7 @@ public class UtilisateurDepot {
 
 
         // Méthode pour effectuer l'inscription avec des paramètres
-        public static void registerUser(String prenom, String nom, String email, String motDePasse, String telephone, Callback callback) {
+        public static void registerUser(String prenom, String nom, String email, String motDePasse, String telephone,int age, Callback callback) {
             new Thread(() -> {
                 OkHttpClient client = new OkHttpClient();
 
@@ -56,6 +56,7 @@ public class UtilisateurDepot {
                         + "\"email\": \"" + email + "\","
                         + "\"motDePasse\": \"" + motDePasse + "\","
                         + "\"telephone\": \"" + telephone + "\""
+                        + "\"age\": " + age
                         + "}";
 
                 RequestBody body = RequestBody.create(json, MediaType.get("application/json; charset=utf-8"));

@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.todoran.reservation_billet_avion.ListeVolsSingleton;
 import com.todoran.reservation_billet_avion.Model.vol;
 import com.todoran.reservation_billet_avion.R;
 
@@ -112,6 +113,7 @@ public class AccueilActivity extends AppCompatActivity {
 
                             runOnUiThread(() -> {
                                 if (la_liste != null) {
+                                    ListeVolsSingleton.getInstance().setListeVols(la_liste);
                                     Intent intent = new Intent(AccueilActivity.this, PageSelection.class);
                                     intent.putExtra("depart", depart);
                                     intent.putExtra("destination", destination);
@@ -120,7 +122,7 @@ public class AccueilActivity extends AppCompatActivity {
                                     intent.putExtra("nbAdult", nbAdult);
                                     intent.putExtra("nbEnfant", nbEnfant);
                                     intent.putExtra("totalPassagers", totalPassagers);
-                                    intent.putExtra("liste", (Serializable) la_liste);
+
 
                                     startActivity(intent);
                                 } else {

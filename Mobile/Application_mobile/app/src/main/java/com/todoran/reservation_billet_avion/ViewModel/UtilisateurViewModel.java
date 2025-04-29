@@ -21,6 +21,6 @@ public class UtilisateurViewModel extends ViewModel {
         UtilisateurDepot.loginUser(email, password, callback);
     }
     public void registreUtilisateur(Utilisateur utilisateur, Callback callback){
-        UtilisateurDepot.registerUser(utilisateur.getPrenom(),utilisateur.getNom(), utilisateur.getEmail(), utilisateur.getMotDePasse(), utilisateur.getTelephone(), callback);
+        UtilisateurDepot.registerUser(utilisateur.getPrenom(),utilisateur.getNom(), utilisateur.getEmail(), utilisateur.getMotDePasse(), utilisateur.getTelephone(), utilisateur.getAge(),callback);
     }
 }
