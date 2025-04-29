@@ -1,8 +1,8 @@
 <?php
 
-require_once 'ConnexionBD.php';
-require_once 'DAO.interface.php';
-require_once '../modele/reservationClass.php';
+require_once __DIR__ . '/connexionBD.class.php';
+require_once __DIR__ . '/DAO.interface.php';
+require_once __DIR__ . '/../reservationClass.php';
 
 class ReservationDAO implements DAO {
 
@@ -130,11 +130,17 @@ class ReservationDAO implements DAO {
              VALUES (:id_passager, :id_vol, :id_siege, :date_reservation, :statut)"
         );
 
-        $requete->bindParam(':id_passager', $objet->getIdPassager(), PDO::PARAM_INT);
-        $requete->bindParam(':id_vol', $objet->getIdVol(), PDO::PARAM_INT);
-        $requete->bindParam(':id_siege', $objet->getIdSiege(), PDO::PARAM_INT);
-        $requete->bindParam(':date_reservation', $objet->getDateReservation(), PDO::PARAM_STR);
-        $requete->bindParam(':statut', $objet->getStatut(), PDO::PARAM_STR);
+        $idPassager = $objet->getIdPassager();
+        $idVol = $objet->getIdVol();
+        $idSiege = $objet->getIdSiege();
+        $dateReservation = $objet->getDateReservation();
+        $statut = $objet->getStatut();
+
+        $requete->bindParam(':id_passager', $idPassager, PDO::PARAM_INT);
+        $requete->bindParam(':id_vol', $idVol, PDO::PARAM_INT);
+        $requete->bindParam(':id_siege', $idSiege, PDO::PARAM_INT);
+        $requete->bindParam(':date_reservation', $dateReservation, PDO::PARAM_STR);
+        $requete->bindParam(':statut', $statut, PDO::PARAM_STR);
 
         $success = $requete->execute();
         if ($success) {

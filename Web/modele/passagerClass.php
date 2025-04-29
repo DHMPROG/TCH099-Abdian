@@ -10,10 +10,7 @@ class Passager implements JsonSerializable
     private $date_naissance;
     private $email;
     private $telephone;
-    private $urgence_prenom;
-    private $urgence_nom;
-    private $urgence_email;
-    private $urgence_telephone;
+
 
     // Constructor
     public function __construct(
@@ -23,10 +20,7 @@ class Passager implements JsonSerializable
         $date_naissance,
         $email,
         $telephone,
-        $urgence_prenom,
-        $urgence_nom,
-        $urgence_email,
-        $urgence_telephone
+
     ) {
         $this->id = null; 
         $this->id_utilisateur = null; 
@@ -36,16 +30,38 @@ class Passager implements JsonSerializable
         $this->date_naissance = $date_naissance;
         $this->email = $email;
         $this->telephone = $telephone;
-        $this->urgence_prenom = $urgence_prenom;
-        $this->urgence_nom = $urgence_nom;
-        $this->urgence_email = $urgence_email;
-        $this->urgence_telephone = $urgence_telephone;
     }
-
+    public static function withIds(
+        int $id,
+        int $id_utilisateur,
+        string $prenom,
+        string $deuxieme_prenom,
+        string $nom,
+        string $date_naissance,
+        string $email,
+        string $telephone,
+      
+    ): self {
+        $obj = new self(
+            $prenom,
+            $deuxieme_prenom,
+            $nom,
+            $date_naissance,
+            $email,
+            $telephone,
+        );
+        $obj->id = $id;
+        $obj->id_utilisateur = $id_utilisateur;
+        return $obj;
+    }
     // Getters and Setters
     public function getId()
     {
         return $this->id;
+    }
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     public function getIdUtilisateur()
@@ -118,46 +134,6 @@ class Passager implements JsonSerializable
         $this->telephone = $telephone;
     }
 
-    public function getUrgencePrenom()
-    {
-        return $this->urgence_prenom;
-    }
-
-    public function setUrgencePrenom($urgence_prenom)
-    {
-        $this->urgence_prenom = $urgence_prenom;
-    }
-
-    public function getUrgenceNom()
-    {
-        return $this->urgence_nom;
-    }
-
-    public function setUrgenceNom($urgence_nom)
-    {
-        $this->urgence_nom = $urgence_nom;
-    }
-
-    public function getUrgenceEmail()
-    {
-        return $this->urgence_email;
-    }
-
-    public function setUrgenceEmail($urgence_email)
-    {
-        $this->urgence_email = $urgence_email;
-    }
-
-    public function getUrgenceTelephone()
-    {
-        return $this->urgence_telephone;
-    }
-
-    public function setUrgenceTelephone($urgence_telephone)
-    {
-        $this->urgence_telephone = $urgence_telephone;
-    }
-
     public function jsonSerialize(): array
     {
         return [
@@ -168,11 +144,7 @@ class Passager implements JsonSerializable
             'nom' => $this->nom,
             'date_naissance' => $this->date_naissance,
             'email' => $this->email,
-            'telephone' => $this->telephone,
-            'urgence_prenom' => $this->urgence_prenom,
-            'urgence_nom' => $this->urgence_nom,
-            'urgence_email' => $this->urgence_email,
-            'urgence_telephone' => $this->urgence_telephone,
+            'telephone' => $this->telephone
         ];
     }
 }

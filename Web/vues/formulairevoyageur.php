@@ -24,7 +24,16 @@
   <?php
   include_once('inclusions/header.php');
 
+  $nbA = isset($_GET['nb_adultes']) ? (int)$_GET['nb_adultes'] : 0;
+  $nbE = isset($_GET['nb_enfants']) ? (int)$_GET['nb_enfants'] : 0;
+  $nbB = isset($_GET['nb_bebes'])   ? (int)$_GET['nb_bebes']   : 0;
+  $idx = 1;
+
   $vol_id = isset($_GET['vol_id']) ? (int)$_GET['vol_id'] : null;
+  $retour_id = isset($_GET['retour_id']) ? (int)$_GET['retour_id'] : null;
+  if ($retour_id) {
+    $vol_retour = VolDAO::chercher($retour_id);
+  }
 
   if ($vol_id) {
     include_once __DIR__ . "/../modele/dao/VolDao.php";
@@ -44,162 +53,183 @@
   <main class="main">
     <div class="container">
       <div class="form-container">
-        <section class="passenger-info">
-          <form action="index.php?action=selectionSieges&vol_id=<?= $vol->getId() ?>"  method="POST"id="form-passager">
-            <h2>Information passager</h2>
-            <p class="info-text">
-              Veuillez entrer les informations requises pour chaque voyageur et vous assurer
-              qu'elles correspondent exactement à celles figurant sur la pièce d'identité officielle
-              présentée à l'aéroport.
-            </p>
-
-            <div class="passenger-section">
-              <h3>Passager 1 (Adult)</h3>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="prenom">Prénom*</label>
-                  <input type="text" id="prenom" name="prenom"
-                    value="<?= $utilisateurConnecte ? htmlspecialchars($utilisateurConnecte->getPrenom()) : '' ?>" required>
-                </div>
-                <div class="form-group">
-                  <label for="deuxieme-prenom">Deuxième prénom</label>
-                  <input type="text" id="deuxieme-prenom" name="deuxieme-prenom">
-                </div>
-                <div class="form-group">
-                  <label for="nom">Nom*</label>
-                  <input type="text" id="nom" name="nom"
-                    value="<?= $utilisateurConnecte ? htmlspecialchars($utilisateurConnecte->getNom()) : '' ?>" required>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="date-naissance">Date de naissance*</label>
-                  <input type="date" id="date-naissance" name="date-naissance" required>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="email">Adresse email*</label>
-                  <input type="email" id="email" name="email"
-                    value="<?= $utilisateurConnecte ? htmlspecialchars($utilisateurConnecte->getEmail()) : '' ?>" required>
-                </div>
-                <div class="form-group">
-                  <label for="telephone">Numéro de téléphone*</label>
-                  <input type="tel" id="telephone" name="telephone"
-                    value="<?= $utilisateurConnecte ? htmlspecialchars($utilisateurConnecte->getTelephone()) : '' ?>" required>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="recours">Numéro de recours</label>
-                  <input type="text" id="recours" name="recours">
-                </div>
-              </div>
-            </div>
-
-            <section class="emergency-contact">
-              <h3>Contact d'urgence</h3>
-
-              <div class="form-row">
-                <div class="form-check">
-                  <input type="checkbox" id="same-as-passenger" name="same-as-passenger">
-                  <label for="same-as-passenger">Pareil au passager 1</label>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="urgence-prenom">Prénom*</label>
-                  <input type="text" id="urgence-prenom" name="urgence-prenom" required>
-                </div>
-                <div class="form-group">
-                  <label for="urgence-nom">Nom*</label>
-                  <input type="text" id="urgence-nom" name="urgence-nom" required>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="urgence-email">Adresse email*</label>
-                  <input type="email" id="urgence-email" name="urgence-email" required>
-                </div>
-                <div class="form-group">
-                  <label for="urgence-telephone">Numéro de téléphone*</label>
-                  <input type="tel" id="urgence-telephone" name="urgence-telephone" required>
-                </div>
-              </div>
-            </section>
-          </form>
-          <section class="baggage-info">
-          <h3>Information de bagage</h3>
-          <p class="info-text">
-            Chaque passager a droit à un bagage à main gratuit ainsi qu'à un article personnel.
-            Le premier bagage enregistré est également gratuit pour chaque passager. Les frais
-            pour un deuxième bagage enregistré sont annulés pour les membres du programme
-            de fidélité. Consultez la politique complète sur les bagages.
-          </p>
-
-          <div class="baggage-selection">
-            <div class="passenger-baggage">
-              <h4>Passager 1</h4>
-              <div class="baggage-counter">
-                <p>Bagages enregistrés</p>
-                <div class="counter">
-                  <button class="counter-btn minus-btn" type="button">-</button>
-                  <span class="counter-value">1</span>
-                  <button class="counter-btn plus-btn" type="button">+</button>
-                </div>
-              </div>
-            </div>
-            <div class="baggage-illustration">
-              <img src="../assets/img/bagages.png" alt="Illustration bagages" class="baggage-img">
-            </div>
-          </div>
-        </section>
-        </section>
-
-
-       
+        <div class="passenger-info">
+        <h2>Information passager</h2>
+        <p class="info-text">Veuillez entrer les informations requises pour chaque voyageur.</p>
+        <form id="form-passager" action="index.php?action=selectionSieges&vol_id=<?=$vol->getId() ?>&retour_id=<?=$vol_retour->getId() ?>" method="POST">
         
 
+          <?php for ($i = 0; $i < $nbA; $i++, $idx++): ?>
+            <div class="passenger-section">
+              <h3>Passager <?= $idx ?> (Adulte)</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="prenom-<?= $idx ?>">Prénom*</label>
+                  <input type="text" id="prenom-<?= $idx ?>" name="passengers[<?= $idx ?>][prenom]" required>
+                </div>
+                <div class="form-group">
+                  <label for="deuxieme-prenom-<?= $idx ?>">Deuxième prénom</label>
+                  <input type="text" id="deuxieme-prenom-<?= $idx ?>" name="passengers[<?= $idx ?>][deuxieme_prenom]">
+                </div>
+                <div class="form-group">
+                  <label for="nom-<?= $idx ?>">Nom*</label>
+                  <input type="text" id="nom-<?= $idx ?>" name="passengers[<?= $idx ?>][nom]" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="date-naissance-<?= $idx ?>">Date de naissance*</label>
+                  <input type="date" id="date-naissance-<?= $idx ?>" name="passengers[<?= $idx ?>][date_naissance]" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="email-<?= $idx ?>">Adresse email*</label>
+                  <input type="email" id="email-<?= $idx ?>" name="passengers[<?= $idx ?>][email]" required>
+                </div>
+                <div class="form-group">
+                  <label for="telephone-<?= $idx ?>">Numéro de téléphone*</label>
+                  <input type="tel" id="telephone-<?= $idx ?>" name="passengers[<?= $idx ?>][telephone]" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="recours-<?= $idx ?>">Numéro de recours</label>
+                  <input type="text" id="recours-<?= $idx ?>" name="passengers[<?= $idx ?>][recours]">
+                </div>
+              </div>
+            </div>
+          <?php endfor; ?>
+
+          <?php for ($i = 0; $i < $nbE; $i++, $idx++): ?>
+            <div class="passenger-section">
+              <h3>Passager <?= $idx ?> (Enfant)</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="prenom-<?= $idx ?>">Prénom*</label>
+                  <input type="text" id="prenom-<?= $idx ?>" name="passengers[<?= $idx ?>][prenom]" required>
+                </div>
+                <div class="form-group">
+                  <label for="nom-<?= $idx ?>">Nom*</label>
+                  <input type="text" id="nom-<?= $idx ?>" name="passengers[<?= $idx ?>][nom]" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="date-naissance-<?= $idx ?>">Date de naissance*</label>
+                  <input type="date" id="date-naissance-<?= $idx ?>" name="passengers[<?= $idx ?>][date_naissance]" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="recours-<?= $idx ?>">Numéro de recours</label>
+                  <input type="text" id="recours-<?= $idx ?>" name="passengers[<?= $idx ?>][recours]">
+                </div>
+              </div>
+            </div>
+          <?php endfor; ?>
+
+          <?php for ($i = 0; $i < $nbB; $i++, $idx++): ?>
+            <div class="passenger-section">
+              <h3>Passager <?= $idx ?> (Bébé)</h3>
+              <div class="form-row">
+              <div class="form-group">
+                  <label for="prenom-<?= $idx ?>">Prénom*</label>
+                  <input type="text" id="prenom-<?= $idx ?>" name="passengers[<?= $idx ?>][prenom]" required>
+                </div>
+                <div class="form-group">
+                  <label for="nom-<?= $idx ?>">Nom*</label>
+                  <input type="text" id="nom-<?= $idx ?>" name="passengers[<?= $idx ?>][nom]" required>
+                </div>
+                <div class="form-group">
+                  <label for="date-naissance-<?= $idx ?>">Date de naissance*</label>
+                  <input type="date" id="date-naissance-<?= $idx ?>" name="passengers[<?= $idx ?>][date_naissance]" required>
+                </div>
+              </div>
+            </div>
+          <?php endfor; ?>
+
+        </form>
+          <section class="baggage-info">
+            <h3>Information de bagage</h3>
+            <p class="info-text">
+              Chaque passager a droit à un bagage à main gratuit ainsi qu'à un article personnel.
+              Le premier bagage enregistré est également gratuit pour chaque passager. Les frais
+              pour un deuxième bagage enregistré sont annulés pour les membres du programme
+              de fidélité. Consultez la politique complète sur les bagages.
+            </p>
+
+            <div class="baggage-selection">
+              <div class="passenger-baggage">
+                <h4>Passager 1</h4>
+                <div class="baggage-counter">
+                  <p>Bagages enregistrés</p>
+                  <div class="counter">
+                    <button class="counter-btn minus-btn" type="button">-</button>
+                    <span class="counter-value">1</span>
+                    <button class="counter-btn plus-btn" type="button">+</button>
+                  </div>
+                </div>
+              </div>
+              <div class="baggage-illustration">
+                <img src="../assets/img/bagages.png" alt="Illustration bagages" class="baggage-img">
+              </div>
+            </div>
+          </section>
+        </section>
+      </div>
+
+
+
         <aside class="flight-summary">
-          <div class="flight-details">
+        <div class="flight-details">
+          <div class="airline-info">
+            <img src="" alt="<?= $vol->getAirline() ?>" class="airline-logo">
+            <div>
+              <p class="airline-name"><?= $vol->getAirline() ?> – <?= $vol->getDepartureAirport() ?> à <?= $vol->getArrivalAirport() ?></p>
+              <p class="flight-number"><?= $vol->getFlightNumber() ?></p>
+            </div>
+          </div>
+          <div class="flight-time">
+            <p class="duration"><?= $vol->getDuration() ?></p>
+            <p class="time">Départ : <?= $vol->getDepartureTime() ?> – Arrivée : <?= $vol->getArrivalTime() ?></p>
+          </div>
+        </div>
+
+        <?php if (isset($vol_retour)): ?>
+          <div class="flight-details return">
             <div class="airline-info">
-              <img src="" alt="Hawaiian Airlines" class="airline-logo">
+              <img src="" alt="<?= $vol_retour->getAirline() ?>" class="airline-logo">
               <div>
-                <p class="airline-name"><? echo $vol->getAirline() . ' - ' . $vol->getDepartureAirport() . " À " . $vol->getArrivalAirport(); ?></p>
-                <p class="flight-number"><? echo $vol->getFlightNumber(); ?></p>
+                <p class="airline-name"><?= $vol_retour->getAirline() ?> – <?= $vol_retour->getDepartureAirport() ?> à <?= $vol_retour->getArrivalAirport() ?></p>
+                <p class="flight-number"><?= $vol_retour->getFlightNumber() ?></p>
               </div>
             </div>
             <div class="flight-time">
-              <p class="duration"><? echo $vol->getDuration(); ?></p>
-              <p class="time"><? echo "Départ : " . $vol->getDepartureTime() . " - " . " Arrivée : " . $vol->getArrivalTime(); ?></p>
+              <p class="duration"><?= $vol_retour->getDuration() ?></p>
+              <p class="time">Départ : <?= $vol_retour->getDepartureTime() ?> – Arrivée : <?= $vol_retour->getArrivalTime() ?></p>
             </div>
           </div>
+        <?php endif; ?>
 
-
-          <div class="price-summary">
-            <div class="price-row">
-              <span>Subtotal</span>
-              <span><? echo $vol->getPrice() . " $"; ?></span>
-            </div>
-            <div class="price-row">
-              <span>Taxes and Fees</span>
-              <span><? echo $vol->getPrice() * 1.14 - $vol->getPrice() . " $"; ?></span>
-            </div>
-            <div class="price-row total">
-              <span>Total</span>
-              <span><? echo $vol->getPrice() * 1.14 . " $"; ?></span>
-            </div>
+        <div class="price-summary">
+          <div class="price-row">
+            <span>Subtotal</span>
+            <span><?= (($vol->getPrice() + ($vol_retour->getPrice() ?? 0)) * ($nbA + $nbE + $nbB)) ?> $</span>
           </div>
+          <div class="price-row">
+            <span>Taxes and Fees</span>
+            <span><?= round((($vol->getPrice() + ($vol_retour->getPrice() ?? 0)) * 1.14 - ($vol->getPrice() + ($vol_retour->getPrice() ?? 0))) * ($nbA + $nbE + $nbB)) ?> $</span>
+          </div>
+          <div class="price-row total">
+            <span>Total</span>
+            <span><?= round(($vol->getPrice() + ($vol_retour->getPrice() ?? 0)) * 1.14 * ($nbA + $nbE + $nbB)) ?> $</span>
+          </div>
+        </div>
 
-          <a id="soumettre"><button class="btn btn-outline select-seats" type="submit">Sélectionner sièges</button></a>
-        </aside>
-      </div>
+        <a id="soumettre"><button class="btn btn-outline select-seats" type="button">Sélectionner sièges</button></a>
+      </aside>
+      
 
       <div class="form-actions">
         <a href="index.php?action=selectionSieges&vol_id=<?= $vol->getId() ?>" id="soumettre"><button class="btn btn-primary" id="submitForm" type="submit">Enregistrer et fermer</button></a>
@@ -247,7 +277,7 @@
 </body>
 
 <script>
-  document.getElementById('soumettre').addEventListener('click', function (e) {
+  document.getElementById('soumettre').addEventListener('click', function(e) {
     e.preventDefault(); // empêche la redirection
     document.getElementById('form-passager').submit();
   });

@@ -174,3 +174,59 @@ document.addEventListener('DOMContentLoaded', function() {
     document.head.appendChild(style);
   });
   
+  window.departSelections = [];
+window.returnSelections = [];
+
+// Modif du handler du bouton « Vol suivant »
+$("#nextBtn").off("click").on("click", function () {
+  // Sauvegarde de la sélection courante
+  const selection = {
+    seat: selectedSeat,
+    cabin: selectedCabinClass,
+    price: (selectedCabinClass === "business"
+      ? window.basePrice + 150
+      : window.basePrice)
+  };
+  if (!window.isReturn) {
+    window.departSelections.push(selection);
+  } else {
+    window.returnSelections.push(selection);
+  }
+
+  // Envoie au serveur
+  AjaxRequest(
+    {
+      action: "saveSeatSelection",
+      flightId: window.vol_id,
+      seat: selectedSeat,
+      cabin: selectedCabinClass,
+      price: selection.price
+    },
+    function () {
+      if (!window.isReturn && window.returnFlightId) {
+        // passe à la sélection du vol retour
+        window.isReturn = true;
+        const url = new URL(window.location.href);
+        // swap vol_id et retour_id
+        const departId = url.searchParams.get("vol_id");
+        url.searchParams.set("vol_id", window.returnFlightId);
+        url.searchParams.set("retour_id", departId);
+        window.location.href = url.toString();
+      } else {
+        // toutes les sélections faites, redirige vers paiement
+        const params = new URLSearchParams();
+        params.set("action", "paiement");
+        params.set("vol_id", url.searchParams.get("vol_id"));
+        params.set("departSeats", JSON.stringify(window.departSelections));
+        params.set("returnSeats", JSON.stringify(window.returnSelections));
+        window.location.href = "index.php?" + params.toString();
+      }
+    }
+  );
+});
+
+
+
+
+
+

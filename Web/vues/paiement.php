@@ -22,6 +22,16 @@
 </head>
 
 <body>
+    <?php
+    $seat = $selectedSeats[$idx] ?? null;
+    $res  = new Reservation(
+        $passagerId,
+        $vol_id,
+        $seat,
+        date('Y-m-d H:i:s')
+    );
+    ReservationDAO::inserer($res);
+    ?>
 	<?php
 	include_once('inclusions/header.php');
 	?>

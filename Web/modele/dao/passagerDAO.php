@@ -1,8 +1,8 @@
 <?php
 
-require_once 'ConnexionBD.php';
-require_once 'DAO.interface.php';
-require_once '../modele/passagerClass.php';
+require_once __DIR__ . '/connexionBD.class.php';
+require_once __DIR__ . '/DAO.interface.php';
+require_once __DIR__ . '/../passagerClass.php';
 
 class PassagerDAO implements DAO {
 
@@ -27,7 +27,7 @@ class PassagerDAO implements DAO {
 
         if ($requete->rowCount() != 0) {
             $enr = $requete->fetch();
-            $passager = new Passager(
+            $passager = Passager::withIds(
                 $enr['id'],
                 $enr['id_utilisateur'],
                 $enr['prenom'],
@@ -35,11 +35,7 @@ class PassagerDAO implements DAO {
                 $enr['nom'],
                 $enr['date_naissance'],
                 $enr['email'],
-                $enr['telephone'],
-                $enr['urgence_prenom'],
-                $enr['urgence_nom'],
-                $enr['urgence_email'],
-                $enr['urgence_telephone']
+                $enr['telephone']
             );
         }
 
@@ -65,7 +61,7 @@ class PassagerDAO implements DAO {
         $requete->execute();
 
         foreach ($requete as $enr) {
-            $passager = new Passager(
+            $passager = Passager::withIds(
                 $enr['id'],
                 $enr['id_utilisateur'],
                 $enr['prenom'],
@@ -73,11 +69,7 @@ class PassagerDAO implements DAO {
                 $enr['nom'],
                 $enr['date_naissance'],
                 $enr['email'],
-                $enr['telephone'],
-                $enr['urgence_prenom'],
-                $enr['urgence_nom'],
-                $enr['urgence_email'],
-                $enr['urgence_telephone']
+                $enr['telephone']
             );
             $passagers[] = $passager;
         }
@@ -109,7 +101,7 @@ class PassagerDAO implements DAO {
         $requete->execute();
 
         foreach ($requete as $enr) {
-            $passager = new Passager(
+            $passager = Passager::withIds(
                 $enr['id'],
                 $enr['id_utilisateur'],
                 $enr['prenom'],
@@ -117,11 +109,7 @@ class PassagerDAO implements DAO {
                 $enr['nom'],
                 $enr['date_naissance'],
                 $enr['email'],
-                $enr['telephone'],
-                $enr['urgence_prenom'],
-                $enr['urgence_nom'],
-                $enr['urgence_email'],
-                $enr['urgence_telephone']
+                $enr['telephone']
             );
             $passagers[] = $passager;
         }
@@ -145,25 +133,29 @@ class PassagerDAO implements DAO {
         }
 
         $requete = $connexion->prepare(
-            "INSERT INTO Passager (id_utilisateur, prenom, deuxieme_prenom, nom, date_naissance, email, telephone, urgence_prenom, urgence_nom, urgence_email, urgence_telephone) 
-             VALUES (:id_utilisateur, :prenom, :deuxieme_prenom, :nom, :date_naissance, :email, :telephone, :urgence_prenom, :urgence_nom, :urgence_email, :urgence_telephone)"
+            "INSERT INTO Passager (id_utilisateur, prenom, deuxieme_prenom, nom, date_naissance, email, telephone) 
+             VALUES (:id_utilisateur, :prenom, :deuxieme_prenom, :nom, :date_naissance, :email, :telephone)"
         );
 
-        $requete->bindParam(':id_utilisateur', $objet->getIdUtilisateur(), PDO::PARAM_INT);
-        $requete->bindParam(':prenom', $objet->getPrenom(), PDO::PARAM_STR);
-        $requete->bindParam(':deuxieme_prenom', $objet->getDeuxiemePrenom(), PDO::PARAM_STR);
-        $requete->bindParam(':nom', $objet->getNom(), PDO::PARAM_STR);
-        $requete->bindParam(':date_naissance', $objet->getDateNaissance(), PDO::PARAM_STR);
-        $requete->bindParam(':email', $objet->getEmail(), PDO::PARAM_STR);
-        $requete->bindParam(':telephone', $objet->getTelephone(), PDO::PARAM_STR);
-        $requete->bindParam(':urgence_prenom', $objet->getUrgencePrenom(), PDO::PARAM_STR);
-        $requete->bindParam(':urgence_nom', $objet->getUrgenceNom(), PDO::PARAM_STR);
-        $requete->bindParam(':urgence_email', $objet->getUrgenceEmail(), PDO::PARAM_STR);
-        $requete->bindParam(':urgence_telephone', $objet->getUrgenceTelephone(), PDO::PARAM_STR);
+        $idUtilisateur = $objet->getIdUtilisateur();
+        $prenom = $objet->getPrenom();
+        $deuxiemePrenom = $objet->getDeuxiemePrenom();
+        $nom = $objet->getNom();
+        $dateNaissance = $objet->getDateNaissance();
+        $email = $objet->getEmail();
+        $telephone = $objet->getTelephone();
+
+        $requete->bindParam(':id_utilisateur', $idUtilisateur, PDO::PARAM_INT);
+        $requete->bindParam(':prenom', $prenom, PDO::PARAM_STR);
+        $requete->bindParam(':deuxieme_prenom', $deuxiemePrenom, PDO::PARAM_STR);
+        $requete->bindParam(':nom', $nom, PDO::PARAM_STR);
+        $requete->bindParam(':date_naissance', $dateNaissance, PDO::PARAM_STR);
+        $requete->bindParam(':email', $email, PDO::PARAM_STR);
+        $requete->bindParam(':telephone', $telephone, PDO::PARAM_STR);
 
         $success = $requete->execute();
         if ($success) {
-            $objet->id = (int)$connexion->lastInsertId();
+            $objet->setId((int)$connexion->lastInsertId());
         }
 
         return $success;
@@ -184,9 +176,7 @@ class PassagerDAO implements DAO {
         $requete = $connexion->prepare(
             "UPDATE Passager 
              SET id_utilisateur = :id_utilisateur, prenom = :prenom, deuxieme_prenom = :deuxieme_prenom, 
-                 nom = :nom, date_naissance = :date_naissance, email = :email, telephone = :telephone, 
-                 urgence_prenom = :urgence_prenom, urgence_nom = :urgence_nom, urgence_email = :urgence_email, 
-                 urgence_telephone = :urgence_telephone 
+                 nom = :nom, date_naissance = :date_naissance, email = :email, telephone = :telephone 
              WHERE id = :id"
         );
 
@@ -198,10 +188,6 @@ class PassagerDAO implements DAO {
         $requete->bindParam(':date_naissance', $objet->getDateNaissance(), PDO::PARAM_STR);
         $requete->bindParam(':email', $objet->getEmail(), PDO::PARAM_STR);
         $requete->bindParam(':telephone', $objet->getTelephone(), PDO::PARAM_STR);
-        $requete->bindParam(':urgence_prenom', $objet->getUrgencePrenom(), PDO::PARAM_STR);
-        $requete->bindParam(':urgence_nom', $objet->getUrgenceNom(), PDO::PARAM_STR);
-        $requete->bindParam(':urgence_email', $objet->getUrgenceEmail(), PDO::PARAM_STR);
-        $requete->bindParam(':urgence_telephone', $objet->getUrgenceTelephone(), PDO::PARAM_STR);
 
         return $requete->execute();
     }
